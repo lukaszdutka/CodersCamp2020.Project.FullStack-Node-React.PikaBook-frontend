@@ -24,7 +24,7 @@ function App() {
           <Route path="/registration" component={Registartion}></Route>
           <Route path="/search" exact component={Search}></Route>
           <Route path="/user/:id" exact component={User}></Route>
-          <Route path="/search/:id/basket" component={Basket}></Route>
+          <Route path="/user/:id/basket" component={Basket}></Route>
           <Route path="/me" component={Me}></Route>
           <Route component={Error}></Route>
         </Switch>
