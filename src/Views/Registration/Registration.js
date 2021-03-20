@@ -4,7 +4,8 @@ const Registration = () => {
   const [usernameInput, setUsernameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [error, setError] = useState();
+  const [locationInput, setLocationInput] = useState("");
+  const [creationStatus, setCreationStatus] = useState();
 
   const handleInputChange = (e) => {
     if (e.target.id === "registerUsername")
@@ -12,36 +13,40 @@ const Registration = () => {
     if (e.target.id === "registerEmail") return setEmailInput(e.target.value);
     if (e.target.id === "registerPassword")
       return setPasswordInput(e.target.value);
+    if (e.target.id === "registerLocation")
+      return setLocationInput(e.target.value);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createAccount(emailInput, passwordInput);
+    createAccount(usernameInput, emailInput, passwordInput);
     setUsernameInput("");
     setEmailInput("");
     setPasswordInput("");
+    setLocationInput("");
   };
 
-  const createAccount = (username, email, password) => {
-    fetch("https://pikabook-api.herokuapp.com/api/users", {
+  const createAccount = async (name, email, password, location) => {
+    let res = await fetch("https://pikabook-api.herokuapp.com/api/users", {
       method: "post",
       headers: {
         Accept: "application/json, text/plain, */*",
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        username: username,
-        email: email,
-        password: password,
+        name,
+        email,
+        password,
+        location,
       }),
-    })
-    .then((res) => {
-        if (res.ok) return res
-        setError(res)
-        throw new Error(res)
-      }) 
-      .then((res) => res.json())
-      .then((res) => console.log(res));
+    });
+    if (!res.ok) {
+      res = await res.text();
+      setCreationStatus(res);
+    } else {
+      res = await res.json();
+      setCreationStatus("Account successfully created");
+    }
   };
 
   return (
@@ -72,9 +77,16 @@ const Registration = () => {
           onChange={handleInputChange}
           required
         ></input>
+        <label htmlFor="registerLocation">Location:</label>
+        <input
+          type="text"
+          id="registerLocation"
+          value={locationInput}
+          onChange={handleInputChange}
+        ></input>
         <input type="submit" value="Create a new account"></input>
       </form>
-      <p>{error}</p>
+      <p>{creationStatus}</p>
     </div>
   );
 };

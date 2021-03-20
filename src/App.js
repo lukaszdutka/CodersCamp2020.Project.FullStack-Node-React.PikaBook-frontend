@@ -15,7 +15,7 @@ import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
 function App() {
-  const [accessToken, setAccessToken] = useState('');
+  const [accessToken, setAccessToken] = useState("");
 
   return (
     <BrowserRouter>
@@ -30,7 +30,10 @@ function App() {
               accessToken ? (
                 <Redirect to="/search" />
               ) : (
-                <Login setAccessToken={setAccessToken} />
+                <Login
+                  setAccessToken={setAccessToken}
+                  accessToken={accessToken}
+                />
               )
             }
           ></Route>
@@ -48,25 +51,43 @@ function App() {
             path="/search"
             exact
             render={() =>
-              accessToken ? <Search accessToken={accessToken} /> : <Redirect to="/" />
+              accessToken ? (
+                <Search accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
             }
           ></Route>
           <Route
             path="/user/:id"
             exact
             render={() =>
-              accessToken ? <User accessToken={accessToken}  /> : <Redirect to="/" />
+              accessToken ? (
+                <User accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
             }
           ></Route>
           <Route
             path="/user/:id/basket"
             render={() =>
-              accessToken ? <Basket accessToken={accessToken}  /> : <Redirect to="/" />
+              accessToken ? (
+                <Basket accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
             }
           ></Route>
           <Route
             path="/me"
-            render={() => (accessToken ? <Me accessToken={accessToken}  /> : <Redirect to="/" />)}
+            render={() =>
+              accessToken ? (
+                <Me accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
           ></Route>
           <Route render={() => <Error />}></Route>
         </Switch>
