@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-const Login = ({ accessToken }) => {
+const Login = ({ setAccessToken }) => {
 
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
@@ -31,11 +31,10 @@ const Login = ({ accessToken }) => {
     })
       .then((res) => {
         if (res.ok) return res
-        setError(res)
         throw new Error(res)
       }) 
       .then((res) => res.json())
-      .then((token) => accessToken(token));
+      .then((res) => console.log(res));
   };
 
   return (

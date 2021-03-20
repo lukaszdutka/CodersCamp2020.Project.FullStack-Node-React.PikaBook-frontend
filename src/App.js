@@ -15,7 +15,7 @@ import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
 function App() {
-  const [accessToken, setAccessToken] = useState('Ola');
+  const [accessToken, setAccessToken] = useState('');
 
   return (
     <BrowserRouter>
