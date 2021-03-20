@@ -15,7 +15,6 @@ const Login = ({ setAccessToken }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     logIn(emailInput, passwordInput);
-    localStorage.setItem('token', emailInput)
     setEmailInput("");
     setPasswordInput("");
   };
