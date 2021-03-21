@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useHistory } from "react-router-dom"
 
 const Registration = () => {
   const [usernameInput, setUsernameInput] = useState("");
@@ -6,6 +7,7 @@ const Registration = () => {
   const [passwordInput, setPasswordInput] = useState("");
   const [locationInput, setLocationInput] = useState("");
   const [creationStatus, setCreationStatus] = useState();
+  const history = useHistory();
 
   const handleInputChange = (e) => {
     if (e.target.id === "registerUsername")
@@ -18,6 +20,7 @@ const Registration = () => {
   };
 
   const handleSubmit = (e) => {
+    setCreationStatus("Request is being sent");
     e.preventDefault();
     createAccount(usernameInput, emailInput, passwordInput);
     setUsernameInput("");
@@ -46,6 +49,9 @@ const Registration = () => {
     } else {
       res = await res.json();
       setCreationStatus("Account successfully created");
+      setTimeout(() => {
+        history.push("/")
+      }, 2000)
     }
   };
 
