@@ -20,7 +20,7 @@ function App() {
   return (
     <BrowserRouter>
       <Header />
-      <Nav />
+      {accessToken && <Nav />}
       <main>
         <Switch>
           <Route
