@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useState } from "react";
