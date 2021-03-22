@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 const Login = ({ setAccessToken }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [error, setError] = useState();
   const [status, setStatus] = useState()
 
   const handleInputChange = (e) => {
@@ -32,7 +31,7 @@ const Login = ({ setAccessToken }) => {
     });
     if (!res.ok) {
       res = await res.text();
-      setError(res);
+      setStatus(res);
     } else {
       res = await res.json();
       setAccessToken(res);
@@ -61,7 +60,7 @@ const Login = ({ setAccessToken }) => {
         ></input>
         <input type="submit" value="Log in"></input>
       </form>
-      <p>{error}</p>
+      <div>{status}</div>
       <p>
         <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
       </p>
