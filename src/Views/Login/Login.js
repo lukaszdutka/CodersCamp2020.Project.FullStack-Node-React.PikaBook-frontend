@@ -42,7 +42,7 @@ const Login = ({ setAccessToken }) => {
       <h1>Welcome to Pikabook!</h1>
       <form onSubmit={handleSubmit}>
         <input
-          type="text"
+          type="email"
           id="loginEmail"
           placeholder="e-mail"
           value={emailInput}

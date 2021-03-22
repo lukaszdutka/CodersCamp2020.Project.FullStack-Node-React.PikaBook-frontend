@@ -22,7 +22,7 @@ const Registration = () => {
   const handleSubmit = (e) => {
     setCreationStatus("Request is being sent");
     e.preventDefault();
-    createAccount(usernameInput, emailInput, passwordInput);
+    createAccount(usernameInput, emailInput, passwordInput, locationInput);
     setUsernameInput("");
     setEmailInput("");
     setPasswordInput("");
@@ -69,7 +69,7 @@ const Registration = () => {
         ></input>
         <label htmlFor="registerEmail">E-mail:</label>
         <input
-          type="text"
+          type="email"
           id="registerEmail"
           value={emailInput}
           onChange={handleInputChange}
