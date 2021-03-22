@@ -5,6 +5,7 @@ const Login = ({ setAccessToken }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState();
+  const [status, setStatus] = useState()
 
   const handleInputChange = (e) => {
     if (e.target.id === "loginEmail") return setEmailInput(e.target.value);
@@ -14,6 +15,7 @@ const Login = ({ setAccessToken }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    setStatus('Wait...')
     logIn(emailInput, passwordInput);
     setEmailInput("");
     setPasswordInput("");
@@ -39,12 +41,12 @@ const Login = ({ setAccessToken }) => {
 
   return (
     <div>
-      <h1>Welcome to Pikabook!</h1>
+      <h1>Log in</h1>
       <form onSubmit={handleSubmit}>
         <input
           type="email"
           id="loginEmail"
-          placeholder="e-mail"
+          placeholder="E-mail"
           value={emailInput}
           onChange={handleInputChange}
           required
@@ -52,7 +54,7 @@ const Login = ({ setAccessToken }) => {
         <input
           type="password"
           id="loginPassword"
-          placeholder="password"
+          placeholder="Password"
           value={passwordInput}
           onChange={handleInputChange}
           required
@@ -61,7 +63,7 @@ const Login = ({ setAccessToken }) => {
       </form>
       <p>{error}</p>
       <p>
-        <Link to="/registration">Create a new account</Link>
+        <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
       </p>
     </div>
   );

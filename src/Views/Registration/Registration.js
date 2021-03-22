@@ -57,36 +57,36 @@ const Registration = () => {
 
   return (
     <div>
-      <h1>User registration</h1>
+      <h1>Register</h1>
       <form onSubmit={handleSubmit}>
-        <label htmlFor="registerUsername">Username:</label>
         <input
           type="text"
           id="registerUsername"
+          placeholder="Name"
           value={usernameInput}
           onChange={handleInputChange}
           required
         ></input>
-        <label htmlFor="registerEmail">E-mail:</label>
         <input
           type="email"
           id="registerEmail"
+          placeholder="E-mail"
           value={emailInput}
           onChange={handleInputChange}
           required
         ></input>
-        <label htmlFor="registerPassword">Password:</label>
         <input
           type="password"
           id="registerPassword"
+          placeholder="Password"
           value={passwordInput}
           onChange={handleInputChange}
           required
         ></input>
-        <label htmlFor="registerLocation">Location:</label>
         <input
           type="text"
           id="registerLocation"
+          placeholder="Location"
           value={locationInput}
           onChange={handleInputChange}
         ></input>
