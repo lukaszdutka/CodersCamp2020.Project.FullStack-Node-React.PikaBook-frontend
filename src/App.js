@@ -83,7 +83,7 @@ function App() {
             path="/me"
             render={() =>
               accessToken ? (
-                <Me accessToken={accessToken} />
+                <Me setAccessToken={setAccessToken} />
               ) : (
                 <Redirect to="/" />
               )
