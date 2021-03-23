@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import logo from '../../Images/pikabook.png';
+import Nav from "../Nav/Nav";
 
-const Header  = () => {
+const Header  = ({ accessToken }) => {
     return ( 
-        <div>
-            Header
+        <div className="header">
+            <img src={logo} alt="Pikabook" />
+            {accessToken && <Nav />}
         </div>
       );
 }

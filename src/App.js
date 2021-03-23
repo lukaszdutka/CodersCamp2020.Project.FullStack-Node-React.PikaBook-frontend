@@ -4,7 +4,6 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import { useState } from "react";
 
 import Header from "./Layout/Header/Header";
-import Nav from "./Layout/Nav/Nav";
 import Footer from "./Layout/Footer/Footer";
 import Login from "./Views/Login/Login";
 import Registartion from "./Views/Registration/Registration";
@@ -19,8 +18,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header />
-      {accessToken && <Nav />}
+      <Header accessToken={accessToken} />
       <main>
         <Switch>
           <Route

@@ -1,5 +1,41 @@
-// @import "./style/shared.scss"
+@import "./Shared/shared.scss";
 
 body {
   font-family: sans-serif;
+  background: $color-white;
+  font-size: 2rem;
+}
+
+.header {
+  background: $color-primary;
+  height: 100px;
+  padding: 25px;
+  text-align: center;
+  @include boxshadow;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  img {
+    height: 100%;
+  }
+}
+
+.nav {
+  //
+
+  .nav-item {
+    margin: 0 3vw;
+    padding: 5px;
+    border: none;
+
+    &:hover {
+      border-bottom: 2px solid $color-black;
+    }
+  }
+  
+  .is-active {
+    border-bottom: 2px solid $color-black;
+  }
 }
