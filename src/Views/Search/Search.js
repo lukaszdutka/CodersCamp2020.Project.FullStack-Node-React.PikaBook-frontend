@@ -1,37 +1,11 @@
 import { useState } from "react";
+import Book from "./Book";
 
-const Book = ({ data }) => {
-  const {
-    name,
-    author,
-    genres,
-    year,
-    publisher,
-    description,
-    ownerId,
-  } = data;
-
-  const authors = author.map((author, index) => {
-      if (author <= author.length) return author + ', '; 
-      return author
-  })
-
-  return (
-    <div>
-      <div className="bookData">
-        <h1>{name}</h1>
-        <p>{authors}</p>
-      </div>
-      <div className="userData"></div>
-        <p></p>
-    </div>
-  );
-};
-
-const Search = ({ accessToken }) => {
+const Search = () => {
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
-  const [books, setBooks] = useState("");
+  const [books, setBooks] = useState([]);
+  const [status, setStatus] = useState("Let's start searching!");
 
   const handleInputChange = (e) => {
     if (e.target.id === "searchTitle") return setSearchTitle(e.target.value);
@@ -40,8 +14,10 @@ const Search = ({ accessToken }) => {
   };
 
   const handleSubmit = (e) => {
+    setStatus("Searching...");
     e.preventDefault();
     searchBooks();
+    if (books.length === 0) setStatus("No books found");
   };
 
   const searchBooks = async () => {
@@ -54,14 +30,14 @@ const Search = ({ accessToken }) => {
     );
     if (!res.ok) {
       res = await res.text();
-      console.log(res);
+      status(res);
     } else {
       res = await res.json();
       setBooks(res);
     }
   };
 
-  const bookList = books.map(book => <Book key={book._id} data={book} />)
+  const bookList = books.map((book) => <Book key={book._id} data={book} />);
 
   return (
     <div>
@@ -82,9 +58,7 @@ const Search = ({ accessToken }) => {
         ></input>
         <input type="submit" value="Search"></input>
       </form>
-      <div>
-        {bookList}
-      </div>
+      <div>{bookList.length === 0 ? status : bookList}</div>
     </div>
   );
 };
