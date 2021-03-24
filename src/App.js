@@ -10,6 +10,10 @@ import Registartion from "./Views/Registration/Registration";
 import Search from "./Views/Search/Search";
 import User from "./Views/User/User";
 import Me from "./Views/Me/Me";
+import MeBooks from "./Views/Me/MeBooks";
+import MeBaskets from "./Views/Me/MeBaskets";
+import MeConversations from "./Views/Me/MeConversations";
+import MePokes from "./Views/Me/MePokes";
 import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
@@ -18,7 +22,10 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header accessToken={accessToken} />
+      <Header 
+        setAccessToken={setAccessToken}
+        accessToken={accessToken}
+       />
       <main>
         <Switch>
           <Route
@@ -79,9 +86,50 @@ function App() {
           ></Route>
           <Route
             path="/me"
+            exact
             render={() =>
               accessToken ? (
                 <Me accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/me/books"
+            render={() =>
+              accessToken ? (
+                <MeBooks accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/me/pokes"
+            render={() =>
+              accessToken ? (
+                <MePokes accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/me/conversations"
+            render={() =>
+              accessToken ? (
+                <MeConversations accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/me/basket"
+            render={() =>
+              accessToken ? (
+                <MeBaskets accessToken={accessToken} />
               ) : (
                 <Redirect to="/" />
               )

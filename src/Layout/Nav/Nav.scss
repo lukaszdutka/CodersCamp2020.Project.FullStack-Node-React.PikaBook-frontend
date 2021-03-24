@@ -1,0 +1,58 @@
+@import "../../Shared/shared.scss";
+
+.nav {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  .nav-item {
+    position: relative;
+    margin: 0 3vw;
+    transform: perspective(1px) translateZ(0);
+    
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 51%;
+      right: 51%;
+      bottom: -5px;
+      background: $color-black;
+      height: 2px;
+      @include transition-ease;
+    }
+
+    &:hover:not(.log-out):not(.img)::before{
+      left: 0;
+      right: 0;
+    }
+
+    img {
+      height: 50px;
+      transform: scale(0.8);
+      @include transition-ease;
+
+      &:hover {
+        transform: scale(1);
+      }
+    }
+  }
+
+  .log-out {
+    font-size: 1.5rem;
+    @include transition-ease;
+
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .is-active.nav-item:not(.img)::before {
+    left: 0;
+    right: 0;
+  }
+
+  .is-active.img {
+    //
+  }
+}

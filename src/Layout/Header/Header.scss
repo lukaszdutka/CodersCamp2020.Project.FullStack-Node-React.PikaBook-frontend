@@ -1,0 +1,17 @@
+@import "../../Shared/shared.scss";
+
+.header {
+  background: $color-primary;
+  height: 100px;
+  padding: 25px;
+  text-align: center;
+  @include boxshadow;
+
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+  img {
+    height: 100%;
+  }
+}
