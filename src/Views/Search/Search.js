@@ -16,7 +16,6 @@ const Search = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setStatus("Searching...");
-    searchMyBooks()
     searchBooks();
   };
 
