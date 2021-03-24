@@ -34,7 +34,7 @@ const Login = ({ setAccessToken }) => {
       setStatus(res);
     } else {
       res = await res.json();
-      setAccessToken(res);
+      setAccessToken(res.token);
     }
   };
 
