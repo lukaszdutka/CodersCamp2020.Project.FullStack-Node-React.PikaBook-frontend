@@ -5,7 +5,7 @@ const Me  = (accessToken) => {
     const [books, setBooks] = useState([]);
 
     const fetchBooks = async () => {
-        let res = await fetch('https://pikabook-api.herokuapp.com/api/me/books',  {
+        let res = await fetch('https://pikabook.herokuapp.com/api/me/books',  {
           headers: {
             'Authorization': 'Bearer ' + accessToken.token
           }

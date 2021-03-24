@@ -82,14 +82,11 @@ function App() {
           <Route
             path="/me"
             render={() => 
-              <Me 
-                accessToken={accessToken}
-              />
-              // accessToken ? (
-              //   <Me accessToken={accessToken} />
-              // ) : (
-              //   <Redirect to="/" />
-              // )
+              accessToken ? (
+                <Me accessToken={accessToken} />
+              ) : (
+                <Redirect to="/" />
+              )
             }
           ></Route>
           <Route render={() => <Error />}></Route>
