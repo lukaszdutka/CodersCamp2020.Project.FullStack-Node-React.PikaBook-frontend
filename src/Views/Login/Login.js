@@ -21,7 +21,7 @@ const Login = ({ setAccessToken }) => {
   };
 
   const logIn = async (email, password) => {
-    let res = await fetch("https://pikabook-api.herokuapp.com/api/auth", {
+    let res = await fetch("https://pikabook.herokuapp.com/api/auth", {
       method: "post",
       headers: {
         Accept: "application/json, text/plain, */*",

@@ -30,7 +30,7 @@ const Registration = () => {
   };
 
   const createAccount = async (name, email, password, location) => {
-    let res = await fetch("https://pikabook-api.herokuapp.com/api/users", {
+    let res = await fetch("https://pikabook.herokuapp.com/api/users", {
       method: "post",
       headers: {
         Accept: "application/json, text/plain, */*",

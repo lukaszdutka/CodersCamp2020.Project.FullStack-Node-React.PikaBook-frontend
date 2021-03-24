@@ -14,15 +14,15 @@ const Search = () => {
   };
 
   const handleSubmit = (e) => {
-    setStatus("Searching...");
     e.preventDefault();
+    setStatus("Searching...");
+    searchMyBooks()
     searchBooks();
-    if (books.length === 0) setStatus("No books found");
   };
 
   const searchBooks = async () => {
     let res = await fetch(
-      "https://pikabook-api.herokuapp.com/api/books?" +
+      "https://pikabook.herokuapp.com/api/books?" +
         new URLSearchParams({
           name: searchTitle,
           location: searchLocation,
@@ -34,6 +34,7 @@ const Search = () => {
     } else {
       res = await res.json();
       setBooks(res);
+      if (books.length === 0) setStatus("No books found");
     }
   };
 
