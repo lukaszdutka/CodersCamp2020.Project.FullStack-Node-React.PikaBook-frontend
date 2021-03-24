@@ -1,4 +1,4 @@
-@import "../../Shared/shared.scss";
+@import "../../Assets/shared.scss";
 
 .header {
   background: $color-primary;
@@ -8,10 +8,21 @@
   @include boxshadow;
 
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 
   img {
     height: 100%;
+    z-index: 99;
+    @include transition-ease;
+  }
+}
+
+@include mobile {
+
+  .header {
+    img {
+      height: 70%;
+    }
   }
 }

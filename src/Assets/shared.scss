@@ -31,3 +31,9 @@ a {
 @mixin dropshadow {
   filter: drop-shadow(1px 1px 3px $color-black);
 }
+
+@mixin mobile {
+  @media screen and (max-width: 768px) {
+    @content;
+  }
+}
