@@ -1,37 +1,23 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {NavLink} from 'react-router-dom';
-import poke from '../../Assets/Images/poke-new.png';
 
 import "./Nav.scss";
 
 const Nav  = ({ setAccessToken }) => {
 
-    const [open, setOpen] = useState(false);
-
     const handleLogOut = () => {
         setAccessToken("");
     }
 
-    const openBurger = () => {
-        setOpen(!open);
-    }
-
-    const hideBurger = () => {
-        setOpen(false);
-    }
-
     return ( 
         <div className="nav">
-            <NavLink className="nav-item img" activeClassName="is-active" to="/me/pokes" onClick={hideBurger}><img src={poke} alt="Notifications" /></NavLink>
-            <i className="fas fa-bars burger" onClick={openBurger}></i>
-            <div className="nav-items" style={ {transform: open ? "translate(-50%, -50%)" : "" } }>
-                <NavLink className="nav-item" activeClassName="is-active" to="/search" onClick={hideBurger}>Search</NavLink>
-                <NavLink className="nav-item" activeClassName="is-active" to="/me/conversations" onClick={hideBurger}>Messages</NavLink>
-                <NavLink className="nav-item" activeClassName="is-active" to="/me/basket" onClick={hideBurger}>Baskets</NavLink>
-                <NavLink className="nav-item" activeClassName="is-active" to="/me/books" onClick={hideBurger}>My books</NavLink>
-                
-                <NavLink className="nav-item log-out" to="/" onClick={handleLogOut}>LOG OUT</NavLink>
-            </div>
+            <NavLink className="nav-item" activeClassName="is-active" to="/search"><i class="fas fa-search"></i><span>Search</span></NavLink>
+            <NavLink className="nav-item" activeClassName="is-active" to="/me/conversations"><i class="fas fa-envelope"></i><span>Messages</span></NavLink>
+            <NavLink className="nav-item" activeClassName="is-active" to="/me/basket"><i class="fas fa-shopping-basket"></i><span>Baskets</span></NavLink>
+            <NavLink className="nav-item" activeClassName="is-active" to="/me" exact><i class="fas fa-user-circle"></i><span>My profile</span></NavLink>
+            <NavLink className="nav-item" activeClassName="is-active" to="/me/books"><i class="fas fa-book"></i><span>My books</span></NavLink>
+            <NavLink className="nav-item" activeClassName="is-active" to="/me/pokes"><div className="poke"></div></NavLink>
+            <NavLink className="nav-item log-out" to="/" onClick={handleLogOut}><i class="fas fa-power-off"></i></NavLink>
         </div>
       );
 }

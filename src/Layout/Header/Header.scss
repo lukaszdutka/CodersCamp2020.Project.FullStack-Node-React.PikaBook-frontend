@@ -2,27 +2,27 @@
 
 .header {
   background: $color-primary;
-  height: 100px;
+  width: 100%;
   padding: 25px;
   text-align: center;
+  margin: 0;
   @include boxshadow;
 
   display: flex;
+  flex-direction: column;
   justify-content: space-evenly;
   align-items: center;
 
-  img {
-    height: 100%;
-    z-index: 99;
-    @include transition-ease;
+  .img-logo {
+    height: 50px;
   }
 }
 
-@include mobile {
+// @include mobile {
 
-  .header {
-    img {
-      height: 70%;
-    }
-  }
-}
+//   .header {
+//     img {
+//       height: 70%;
+//     }
+//   }
+// }
