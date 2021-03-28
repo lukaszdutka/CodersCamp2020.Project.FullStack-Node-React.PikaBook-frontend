@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import Book from './Book'
+import AddBook from './AddBook'
 
 const Me  = (accessToken) => {
     const [books, setBooks] = useState([]);
@@ -22,8 +23,9 @@ const Me  = (accessToken) => {
     const bookList = books.map((book) => <Book key={book._id} data={book} />);
 
     return ( 
-        <div onLoad={fetchBooks}>
-            <div>{bookList.length === 0 ? "You have 0 books" : bookList}</div>
+        <div>
+            <div onLoad={fetchBooks} >{bookList.length === 0 ? "You have 0 books" : bookList}</div>
+            <div><AddBook></AddBook></div>
         </div>
       );
 }
