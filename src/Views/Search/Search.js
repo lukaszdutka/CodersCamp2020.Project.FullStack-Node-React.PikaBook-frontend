@@ -1,8 +1,8 @@
 import { useState } from "react";
-import Book from "../../Shared Components/BookMini";
-import fetchBooks from "../../Shared Functions/fetchBooks";
-import getPagination from "../../Shared Functions/getPagination";
-import Pagination from "../../Shared Components/Pagination";
+import Book from "../../SharedComponents/BookMini";
+import fetchBooks from "../../SharedFunctions/fetchBooks";
+import getPagination from "../../SharedFunctions/getPagination";
+import Pagination from "../../SharedComponents/Pagination";
 
 const Search = () => {
   const [searchTitle, setSearchTitle] = useState("");
