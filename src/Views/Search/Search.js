@@ -1,11 +1,16 @@
 import { useState } from "react";
-import Book from "./Book";
+import Book from "../../Shared Components/BookMini";
+import fetchBooks from "../../Shared Functions/fetchBooks";
+import getPagination from "../../Shared Functions/getPagination";
+import Pagination from "../../Shared Components/Pagination";
 
 const Search = () => {
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const [books, setBooks] = useState([]);
   const [status, setStatus] = useState("Let's start searching!");
+  const [page, setPage] = useState(1);
+  const onPageLimit = 10;
 
   const handleInputChange = (e) => {
     if (e.target.id === "searchTitle") return setSearchTitle(e.target.value);
@@ -13,31 +18,22 @@ const Search = () => {
       return setSearchLocation(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Searching...");
-    searchBooks();
-  };
-
-  const searchBooks = async () => {
-    let res = await fetch(
-      "https://pikabook.herokuapp.com/api/books?" +
-        new URLSearchParams({
-          name: searchTitle,
-          location: searchLocation,
-        })
+    setPage(1);
+    const res = await fetchBooks(
+      "https://pikabook.herokuapp.com/api/books?",
+      searchTitle,
+      searchLocation
     );
-    if (!res.ok) {
-      res = await res.text();
-      status(res);
-    } else {
-      res = await res.json();
-      setBooks(res);
-      if (books.length === 0) setStatus("No books found");
-    }
+    if (res.error) setStatus(res.error);
+    setBooks(res.books);
+    if (books.length === 0) setStatus("No books found");
   };
 
-  const bookList = books.map((book) => <Book key={book._id} data={book} />);
+  let bookList = getPagination(page, onPageLimit, books);
+  bookList = bookList.map((book) => <Book key={book._id} book={book} />);
 
   return (
     <div>
@@ -58,7 +54,16 @@ const Search = () => {
         ></input>
         <input type="submit" value="Search"></input>
       </form>
-      <div>{bookList.length === 0 ? status : bookList}</div>
+      <div>{books.length === 0 ? status : `${books.length} book(s) found`}</div>
+      <div>{bookList}</div>
+      {books.length > onPageLimit && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          list={books}
+          limit={onPageLimit}
+        />
+      )}
     </div>
   );
 };
