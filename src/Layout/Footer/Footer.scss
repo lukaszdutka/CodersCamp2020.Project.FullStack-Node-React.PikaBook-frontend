@@ -2,23 +2,28 @@
 
 footer {
   padding: 25px;
+  padding-top: 100px;
   width: 100%;
-  font-size: 1.5rem;
+  font-size: 2rem;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-evenly;
-  align-items: stretch;
-  border-top: 50px dashed $color-accent; // to change
+  align-items: center;
+  
+  .books {
+    width: 100%;
+    margin-bottom: 25px;
+  }
 
   .about {
     flex: 1 60%;
-    min-height: 200px;
-    
-    img {
-      display: block;
-      float: right;
-      height: 100px;
-      margin: 15px 0 0 15px;
+    text-align: justify;
+
+    p {
+      background: $color-black;
+      color: $color-white;
+      padding: 15px;
+      border-radius: 15px;
     }
   }
 
@@ -27,7 +32,8 @@ footer {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    flex: 1 200px;
+    flex: 1 250px;
+    text-align: center;
     ul {
       margin: 0;
       padding: 0;
@@ -35,6 +41,10 @@ footer {
       li {
       list-style-type: none;
       }
+    }
+    img {
+      margin-top: 15px;
+      width: 100px;
     }
   }
   
@@ -44,4 +54,12 @@ footer {
     flex: 1 100%;
   }
   
+}
+
+@include mobile {
+  footer {
+    .about {
+      margin-bottom: 25px;
+    }
+  }
 }

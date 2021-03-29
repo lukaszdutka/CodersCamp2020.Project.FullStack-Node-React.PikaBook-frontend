@@ -1,17 +1,20 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
 import "./Footer.scss";
-import pikachu from "../../Assets/Images/pikachu.png"
+import pikachu from "../../Assets/Images/pikachu.png";
+import books from "../../Assets/Images/books.png";
 
 const Footer  = () => {
     return ( 
         <footer>
+            <img className="books" src={books} alt="books" />
             <div className="about">
+                <p>
                 Pikabook APP is for book lovers. Are you one of them? If so, <b>pick a book</b> you want to read. Then suggest yours you have already read. That's all. <b>Connect with other bookworms!</b>
-                <img src={pikachu} alt="pikachu" />
+                </p>
             </div>
             <div className="authors">
-                <b>Created by Mangos'team</b>
+                <b>Created by Mangosteam</b>
                 <ul>
                     <li>Mentor: Łukasz Dutka</li>
                     <li>Aleksandra Cypko</li>
@@ -20,6 +23,7 @@ const Footer  = () => {
                     <li>Agata Ludwiczyńska</li>
                     <li>Mariusz Smarż</li>
                 </ul>
+                <img src={pikachu} alt="pikachu" />
             </div>
             <div className="github">
                 Application made as part of the <b>CodersCamp2020</b> project.<br />
