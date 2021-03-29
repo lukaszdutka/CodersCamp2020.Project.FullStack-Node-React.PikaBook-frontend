@@ -1,0 +1,80 @@
+@import "../../Assets/shared.scss";
+
+.nav {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  margin-top: 25px;
+  font-size: 2.5rem;
+  width: 100%;
+  
+
+  .nav-item {
+    position: relative;
+    margin: 0 5px;
+    transform: translateZ(0);
+    
+    @include transition-ease;
+
+    span {
+      display: inline;
+    }
+
+    i:not(.fa-power-off) {
+      display: none;
+    }
+    
+    &:before {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      left: 51%;
+      right: 51%;
+      bottom: -10px;
+      background: $color-black;
+      height: 2px;
+      @include transition-ease;
+    }
+
+    &:hover:not(.log-out)::before{
+      left: 0;
+      right: 0;
+    }
+
+    .poke {
+      display: inline-block;
+      height: 30px;
+      width: 30px;
+      background: url("../../Assets/Images/poke-new.png");
+      background-size: contain;
+      background-position: center bottom;
+      background-repeat: no-repeat;
+    }
+  }
+
+  .log-out {
+    margin-left: 15px;
+    &:hover {
+      color: $color-accent;
+    }
+  }
+
+  .is-active.nav-item::before {
+    left: 0;
+    right: 0;
+  }
+}
+
+@include mobile {
+  .nav {
+    .nav-item {
+      span {
+        display: none;
+      }
+      i:not(.fa-power-off) {
+        display: inline;
+      }
+    }
+  }
+}
