@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Login.scss";
 
 const Login = ({ setAccessToken }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
-  const [status, setStatus] = useState()
+  const [status, setStatus] = useState();
 
   const handleInputChange = (e) => {
     if (e.target.id === "loginEmail") return setEmailInput(e.target.value);
@@ -14,7 +15,7 @@ const Login = ({ setAccessToken }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setStatus('Wait...')
+    setStatus("Wait...");
     logIn(emailInput, passwordInput);
     setEmailInput("");
     setPasswordInput("");
@@ -39,10 +40,11 @@ const Login = ({ setAccessToken }) => {
   };
 
   return (
-    <div>
+    <div className="logInContainer">
       <h1>Log in</h1>
       <form onSubmit={handleSubmit}>
         <input
+          className="textInputDark"
           type="email"
           id="loginEmail"
           placeholder="E-mail"
@@ -51,6 +53,7 @@ const Login = ({ setAccessToken }) => {
           required
         ></input>
         <input
+          className="textInputDark"
           type="password"
           id="loginPassword"
           placeholder="Password"
@@ -58,7 +61,7 @@ const Login = ({ setAccessToken }) => {
           onChange={handleInputChange}
           required
         ></input>
-        <input type="submit" value="Log in"></input>
+        <input type="submit" value="Log in" className="buttonDark"></input>
       </form>
       <div>{status}</div>
       <p>
