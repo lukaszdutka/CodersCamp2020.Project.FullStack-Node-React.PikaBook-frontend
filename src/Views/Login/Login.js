@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "./Login.scss";
+
+import "../../Assets/shared.scss";
 
 const Login = ({ setAccessToken }) => {
   const [emailInput, setEmailInput] = useState("");
@@ -40,9 +41,9 @@ const Login = ({ setAccessToken }) => {
   };
 
   return (
-    <div className="logInContainer">
-      <h1>Log in</h1>
+    <div className="logInAndRegistration">
       <form onSubmit={handleSubmit}>
+        <h1>Log in</h1>
         <input
           className="textInputDark"
           type="email"
@@ -62,11 +63,11 @@ const Login = ({ setAccessToken }) => {
           required
         ></input>
         <input type="submit" value="Log in" className="buttonDark"></input>
+        <div>{status}</div>
+        <p>
+          <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
+        </p>
       </form>
-      <div>{status}</div>
-      <p>
-        <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
-      </p>
     </div>
   );
 };

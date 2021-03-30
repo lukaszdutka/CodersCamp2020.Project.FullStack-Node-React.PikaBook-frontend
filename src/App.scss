@@ -1,12 +1,10 @@
-// @import "./style/shared.scss"
+@import "./Assets/shared.scss";
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
 body {
-  font-family: sans-serif;
-  background-color: #E5E5E5;
-  padding: 0;
-  margin: 0;
-  box-sizing: border-box;
-  font-family: Montserrat;
+  font-family: 'Montserrat', sans-serif;
+  background: $color-white;
+  font-size: 1.8rem;
 }
 
 #root {
@@ -14,33 +12,4 @@ body {
   display: flex; 
   flex-flow: column nowrap;
   justify-content: space-between;
-}
-
-.headerContainer {
-  height: 100px;
-}
-
-.footerContainer {
-  height: 50px;
-}
-
-main {
-  flex-grow: 1;
-}
-
-.textInputDark {
-  background-color: rgba(0, 1, 1, 0.2);
-  border: 3px solid black;
-  font-size: 22px;
-  color: black;
-  display: block;
-  padding: 5px;
-  color: black;
-}
-
-.buttonDark {
-  font-size: 22px;
-  color: white;
-  background-color: black;
-  padding: 5px 10px;
 }

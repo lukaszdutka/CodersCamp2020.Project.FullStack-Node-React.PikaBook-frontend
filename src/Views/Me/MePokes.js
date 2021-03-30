@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Footer  = () => {
+const MePokes  = () => {
     return ( 
         <div>
-            Footer
+            Me_Pokes
         </div>
       );
 }
  
-export default Footer;
+export default MePokes;

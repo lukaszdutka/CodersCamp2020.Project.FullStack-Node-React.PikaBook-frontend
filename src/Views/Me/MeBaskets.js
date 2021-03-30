@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Footer  = () => {
+const MeBaskets  = () => {
     return ( 
         <div>
-            Footer
+            Me_Baskets
         </div>
       );
 }
  
-export default Footer;
+export default MeBaskets;
