@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { useHistory } from "react-router-dom"
+import { useHistory } from "react-router-dom";
+import createAccount from "../../API/createAccount"
 
 const Registration = () => {
   const [usernameInput, setUsernameInput] = useState("");
@@ -19,39 +20,26 @@ const Registration = () => {
       return setLocationInput(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     setCreationStatus("Request is being sent");
     e.preventDefault();
-    createAccount(usernameInput, emailInput, passwordInput, locationInput);
+    const res = await createAccount(
+      usernameInput,
+      emailInput,
+      passwordInput,
+      locationInput
+    );
+    res.error
+      ? setCreationStatus(res.error)
+      : setCreationStatus("Account successfully created");
     setUsernameInput("");
     setEmailInput("");
     setPasswordInput("");
     setLocationInput("");
-  };
-
-  const createAccount = async (name, email, password, location) => {
-    let res = await fetch("https://pikabook.herokuapp.com/api/users", {
-      method: "post",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-        location,
-      }),
-    });
-    if (!res.ok) {
-      res = await res.text();
-      setCreationStatus(res);
-    } else {
-      res = await res.json();
-      setCreationStatus("Account successfully created");
+    if (res.created) {
       setTimeout(() => {
-        history.push("/")
-      }, 2000)
+        history.push("/");
+      }, 2000);
     }
   };
 

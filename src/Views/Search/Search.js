@@ -1,6 +1,6 @@
 import { useState } from "react";
 import Book from "../../SharedComponents/BookMini";
-import fetchBooks from "../../SharedFunctions/fetchBooks";
+import { searchAllBooks } from "../../API/fetchBooks";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 
@@ -22,11 +22,7 @@ const Search = () => {
     e.preventDefault();
     setStatus("Searching...");
     setPage(1);
-    const res = await fetchBooks(
-      "https://pikabook.herokuapp.com/api/books?",
-      searchTitle,
-      searchLocation
-    );
+    const res = await searchAllBooks({name: searchTitle, location: searchLocation });
     if (res.error) setStatus(res.error);
     setBooks(res.books);
     if (books.length === 0) setStatus("No books found");
@@ -55,6 +51,14 @@ const Search = () => {
         <input type="submit" value="Search"></input>
       </form>
       <div>{books.length === 0 ? status : `${books.length} book(s) found`}</div>
+      {books.length > onPageLimit && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          list={books}
+          limit={onPageLimit}
+        />
+      )}
       <div>{bookList}</div>
       {books.length > onPageLimit && (
         <Pagination
