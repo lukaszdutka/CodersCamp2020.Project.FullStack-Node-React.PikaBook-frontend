@@ -37,7 +37,6 @@ function App() {
               ) : (
                 <Login
                   setAccessToken={setAccessToken}
-                  accessToken={accessToken}
                 />
               )
             }
