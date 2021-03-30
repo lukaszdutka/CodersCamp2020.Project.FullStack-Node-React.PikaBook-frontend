@@ -2,15 +2,14 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import "./Footer.scss";
 import pikachu from "../../Assets/Images/pikachu.png";
-import books from "../../Assets/Images/books.png";
 
 const Footer  = () => {
     return ( 
         <footer>
-            <img className="books" src={books} alt="books" />
+            <div className="books"></div>
             <div className="about">
                 <p>
-                Pikabook APP is for book lovers. Are you one of them? If so, <b>pick a book</b> you want to read. Then suggest yours you have already read. That's all. <b>Connect with other bookworms!</b>
+                Pikabook APP is for book lovers. Are you one of them? If so, <span>pick a book</span> you want to read. Then suggest yours you have already read. That's all. <span>Connect with other bookworms!</span>
                 </p>
             </div>
             <div className="authors">
