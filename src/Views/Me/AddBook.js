@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import { addBook } from '../../API/addBook'
 import { useHistory } from "react-router-dom"
 
 const AddBook = () => {
@@ -9,7 +10,7 @@ const AddBook = () => {
     const [releaseDateInput, setReleaseDateInput] = useState("");
     const [publisherInput, setPublisherInput] = useState("");
     const [descriptionInput, setDescriptionInput] = useState("");
-    const [creationStatus, setCreationStatus] = useState();
+    const [status, setStatus] = useState();
     const history = useHistory();
 
     const handleInputChange = (e) => {
@@ -23,9 +24,16 @@ const AddBook = () => {
 
     const handleSubmit = (e) => {
         console.log('Send submit ...')
-        setCreationStatus("Request is being sent");
+        setStatus("Request is being sent");
         e.preventDefault();
-        addNewBook(titleInput, authorInput, genresInput, releaseDateInput, publisherInput, descriptionInput );
+        const res = addBook(titleInput, authorInput, genresInput, releaseDateInput, publisherInput, descriptionInput );
+        if (res.error) setStatus(res.error);
+        if (res.added) {
+            setStatus("Book successfully added")
+            setTimeout(() => {
+                history.push("/");
+              }, 2000);
+        }
         setTitleInput("");
         setAuthorInput("");
         setGeneresInput("");
@@ -34,33 +42,33 @@ const AddBook = () => {
         setDescriptionInput("");
     };
 
-    const addNewBook = async (title, author, genres, releaseDate, publisher, description) => {
-        let res = await fetch("https://pikabook.herokuapp.com/api/books", {
-          method: "post",
-          headers: {
-            Accept: "application/json, text/plain, */*",
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            title,
-            author,
-            genres,
-            releaseDate,
-            publisher,
-            description
-          }),
-        });
-        if (!res.ok) {
-          res = await res.text();
-          setCreationStatus(res);
-        } else {
-          res = await res.json();
-          setCreationStatus("Book successfully added");
-          setTimeout(() => {
-            history.push("/me")
-          }, 2000)
-        }
-    };
+    // const addNewBook = async (title, author, genres, releaseDate, publisher, description) => {
+    //     let res = await fetch("https://pikabook.herokuapp.com/api/books", {
+    //       method: "post",
+    //       headers: {
+    //         Accept: "application/json, text/plain, */*",
+    //         "Content-Type": "application/json",
+    //       },
+    //       body: JSON.stringify({
+    //         title,
+    //         author,
+    //         genres,
+    //         releaseDate,
+    //         publisher,
+    //         description
+    //       }),
+    //     });
+    //     if (!res.ok) {
+    //       res = await res.text();
+    //       setCreationStatus(res);
+    //     } else {
+    //       res = await res.json();
+    //       setCreationStatus("Book successfully added");
+    //       setTimeout(() => {
+    //         history.push("/me")
+    //       }, 2000)
+    //     }
+    // };
   
     return (
         <div>
@@ -116,7 +124,7 @@ const AddBook = () => {
                 ></input>
                 <input type="submit" value="Add"></input>
             </form>
-            <p>{creationStatus}</p>
+            <p>{status}</p>
         </div>
     )
 }
