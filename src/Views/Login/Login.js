@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import logIn from "../../API/logIn";
 
 import "../../Assets/shared.scss";
 
@@ -14,30 +15,14 @@ const Login = ({ setAccessToken }) => {
       return setPasswordInput(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Wait...");
-    logIn(emailInput, passwordInput);
+    const res = await logIn(emailInput, passwordInput);
+    if (res.error) setStatus(res.error);
     setEmailInput("");
     setPasswordInput("");
-  };
-
-  const logIn = async (email, password) => {
-    let res = await fetch("https://pikabook-api.herokuapp.com/api/auth", {
-      method: "post",
-      headers: {
-        Accept: "application/json, text/plain, */*",
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({ email, password }),
-    });
-    if (!res.ok) {
-      res = await res.text();
-      setStatus(res);
-    } else {
-      res = await res.json();
-      setAccessToken(res);
-    }
+    if (res.accessToken) setAccessToken(res.accessToken);
   };
 
   return (
