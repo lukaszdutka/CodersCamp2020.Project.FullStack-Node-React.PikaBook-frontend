@@ -74,7 +74,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/user/:id/basket"
+            path="/basket"
             render={() =>
               accessToken ? (
                 <Basket accessToken={accessToken} />

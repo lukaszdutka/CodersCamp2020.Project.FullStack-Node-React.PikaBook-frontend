@@ -1,11 +1,17 @@
-import React from 'react'
+import { useLocation } from "react-router-dom";
 
-const Basket  = () => {
-    return ( 
-        <div>
-            Basket
-        </div>
-      );
-}
- 
-export default Basket;
+const CreateBasket = ({ accessToken }) => {
+  const location = useLocation();
+  const chosenBooks = location.state.chosenBooks;
+  const recipient = location.state.id;
+
+  const chosenBooksList = chosenBooks.map((book) => <p key={book}>{book}</p>);
+
+  return (
+    <div>
+      sender {accessToken}, recipient {recipient}, {chosenBooksList}
+    </div>
+  );
+};
+
+export default CreateBasket;
