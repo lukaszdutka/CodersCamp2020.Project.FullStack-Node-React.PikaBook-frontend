@@ -6,24 +6,10 @@ import { searchMyBooks } from "../../API/fetchBooks";
 const Me  = (accessToken) => {
     const [books, setBooks] = useState([]);
 
-    const fetchMyBooks = async () => {
-        let res = await searchMyBooks({
-          headers: {'Authorization': 'Bearer ' + accessToken.token}
-        })
-        // let res = await fetch('https://pikabook.herokuapp.com/api/me/books',  {
-        //   headers: {
-        //     'Authorization': 'Bearer ' + accessToken.token
-        //   }
-        // });
-        if (!res.ok) {
-          res = await res.text();
-          //do some stuff
-          setBooks([])
-        } else {
-          res = await res.json();
-          setBooks(res)
-        }
-      };
+    const fetchMyBooks = await searchMyBooks({
+      headers: {'Authorization': 'Bearer ' + accessToken.token}
+    })
+
     const bookList = books.map((book) => <Book key={book._id} data={book} />);
 
     return ( 
