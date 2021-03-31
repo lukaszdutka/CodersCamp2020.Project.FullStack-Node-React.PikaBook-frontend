@@ -5,7 +5,7 @@ const CreateBasket = ({ accessToken }) => {
   const chosenBooks = location.state.chosenBooks;
   const recipient = location.state.id;
 
-  const chosenBooksList = chosenBooks.map((book) => <p key={book}>{book}</p>);
+  const chosenBooksList = chosenBooks.map((book) => <p key={book._id}>{book.name}</p>);
 
   return (
     <div>

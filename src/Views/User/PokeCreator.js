@@ -1,5 +1,4 @@
-import { useEffect, useState } from "react";
-import { searchOneBook } from "../../API/fetchBooks";
+import {  useState } from "react";
 
 import listProperties from "../../SharedFunctions/listProperties";
 import sendPoke from "../../API/sendPoke";
@@ -7,30 +6,15 @@ import sendPoke from "../../API/sendPoke";
 const PokeCreator = ({
   accessToken,
   recipientId,
-  booksId,
+  books,
   recipientName,
   recipientLocation,
   setPokeCreatorVisible,
 }) => {
-  const [chosenBooks, setChosenBooks] = useState([]);
   const [status, setStatus] = useState("");
 
-  useEffect(() => {
-    const fetchChosenBooksData = async (books) => { 
-      let fetchedBooks = [];
-      await books.forEach(async (book) => {
-        const res = await searchOneBook(book);
-        if (res.error) console.log(res.error);
-        if (res.book && !fetchedBooks.some((book) => book._id === res.book._id)) {
-          fetchedBooks = [...fetchedBooks, res.book];
-        }
-        setChosenBooks(fetchedBooks);
-      });
-    };
-    fetchChosenBooksData(booksId);
-  }, [booksId]);
-
   const handleConfirm = async () => {
+    const booksId = books.map(book => book._id);
     const res = sendPoke(accessToken, recipientId, booksId);
     if (res.error) setStatus(res.error);
     if (res.created) setStatus("Poke successfully sent!");
@@ -40,10 +24,10 @@ const PokeCreator = ({
     setPokeCreatorVisible(false);
   };
 
-  const bookList = chosenBooks.map((book) => {
-    const { name, author, publisher, year } = book;
+  const bookList = books.map((book) => {
+    const { name, author, publisher, year, _id } = book;
     return (
-      <li>
+      <li key={_id}>
         <b>{name}</b>
         {listProperties(author) && ` by ${listProperties(author)}`} {publisher}{" "}
         {year}
@@ -58,7 +42,7 @@ const PokeCreator = ({
         to browse your book collection and make him/her know that you showed
         interest in the following books in their possession:
       </p>
-      <ul>{bookList}</ul>
+      <ul>{bookList.length > 0 ? bookList : "None"}</ul>
       {status}
       {status || <button onClick={handleConfirm}>Confirm</button>}
       <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button>

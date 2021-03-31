@@ -60,11 +60,11 @@ const User = ({ accessToken }) => {
 
   const handleCheckboxChange = (e) => {
     if (!e.target.checked) {
-      const chosenBooksNew = chosenBooks.filter((book) => book !== e.target.id);
-      setChosenBooks(chosenBooksNew);
+      const newBooks = chosenBooks.filter((book) => book._id !== e.target.id);
+      setChosenBooks(newBooks);
     }
     if (e.target.checked) {
-      const newBook = e.target.id;
+      const newBook = books.find(book => book._id === e.target.id)
       setChosenBooks([...chosenBooks, newBook]);
     }
   };
@@ -100,7 +100,7 @@ const User = ({ accessToken }) => {
           recipientId={id}
           recipientName={username}
           recipientLocation={userLocation}
-          booksId={chosenBooks}
+          books={chosenBooks}
           setPokeCreatorVisible={setPokeCreatorVisible}
         />
       )}
