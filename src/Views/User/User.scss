@@ -10,15 +10,15 @@
   grid-row: span 2;
 }
 
-.pokeCreatorContainer {
+.creatorContainer {
   background-color: $color-primary;
   position: fixed;
   width: 700px;
   height: 500px;
   top: 50%;
   left: 50%;
-  margin-top: -250px; /* Negative half of height. */
-  margin-left: -350px; /* Negative half of width. */
+  margin-top: -250px; 
+  margin-left: -350px; 
 
   li {
     list-style: none;
@@ -26,7 +26,7 @@
 }
 
 @include mobile {
-  .pokeCreatorContainer {
+  .creatorContainer {
     width: 90%;
     height: 80vh;
     margin-top: -40vh;

@@ -5,6 +5,7 @@ import { searchUsersBooks } from "../../API/fetchBooks";
 import { fetchOtherUser } from "../../API/fetchUser";
 import Book from "../../SharedComponents/Book";
 import PokeCreator from "./PokeCreator";
+import MessageCreator from "./MessageCreator";
 
 import "./User.scss";
 
@@ -15,6 +16,7 @@ const User = ({ accessToken }) => {
   const [userLocation, setUserLocation] = useState("");
   const [chosenBooks, setChosenBooks] = useState([]);
   const [pokeCreatorVisible, setPokeCreatorVisible] = useState(false);
+  const [messageCreatorVisible, setMessageCreatorVisible] = useState(false);
   const history = useHistory();
   const location = useLocation();
 
@@ -50,8 +52,12 @@ const User = ({ accessToken }) => {
     getUserData();
   }, [id]);
 
+  const handleSendMessage = () => {
+    !pokeCreatorVisible && setMessageCreatorVisible(true);
+  };
+
   const handleSendPoke = async () => {
-    setPokeCreatorVisible(true);
+    !messageCreatorVisible && setPokeCreatorVisible(true);
   };
 
   const handleCreateBasket = () => {
@@ -64,7 +70,7 @@ const User = ({ accessToken }) => {
       setChosenBooks(newBooks);
     }
     if (e.target.checked) {
-      const newBook = books.find(book => book._id === e.target.id)
+      const newBook = books.find((book) => book._id === e.target.id);
       setChosenBooks([...chosenBooks, newBook]);
     }
   };
@@ -87,7 +93,7 @@ const User = ({ accessToken }) => {
       <div>
         <p>{username}</p>
         <p>{userLocation}</p>
-        <button>Send message</button>
+        <button onClick={handleSendMessage}>Send message</button>
       </div>
       <div>
         <button onClick={handleCreateBasket}>Add to basket</button>
@@ -102,6 +108,15 @@ const User = ({ accessToken }) => {
           recipientLocation={userLocation}
           books={chosenBooks}
           setPokeCreatorVisible={setPokeCreatorVisible}
+        />
+      )}
+      {messageCreatorVisible && (
+        <MessageCreator
+          accessToken={accessToken}
+          recipientId={id}
+          recipientName={username}
+          recipientLocation={userLocation}
+          setMessageCreatorVisible={setMessageCreatorVisible}
         />
       )}
     </div>
