@@ -1,0 +1,75 @@
+@import "../../Assets/shared.scss";
+
+footer {
+  width: 100%;
+  padding: 25px 0;
+  font-size: 1.5rem;
+
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  
+  .books {
+    height: 60px;
+    margin-bottom: 25px;
+    flex: 1 100%;
+
+    background-image: url("../../Assets/Images/books.png");
+    background-repeat: repeat-x;
+    background-size: contain;
+    background-position: center;
+  }
+
+  .about {
+    flex: 1 65%;
+    margin-bottom: 25px;
+
+    text-align: justify;
+
+    p {
+      margin: 0 25px;
+      padding: 15px;
+      color: $color-white;
+      border-radius: 25px;
+      background: $color-black;
+
+      span {
+        color: $color-primary;
+        font-weight: normal;
+      }
+    }
+  }
+
+  .authors {
+    flex: 1 250px;
+    margin-bottom: 25px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    ul {
+      margin-top: 15px;
+
+      li {
+      list-style-type: none;
+      }
+    }
+
+    img {
+      margin-top: 15px;
+      width: 100px;
+    }
+  }
+  
+  .github {
+    text-align: center;
+    flex: 1 100%;
+
+    a {
+      text-decoration: underline;
+    }
+  }
+}
