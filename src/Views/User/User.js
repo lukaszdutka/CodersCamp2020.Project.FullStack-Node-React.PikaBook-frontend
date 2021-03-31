@@ -1,27 +1,41 @@
 import { useState, useEffect } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, useLocation } from "react-router-dom";
 
 import { searchUsersBooks } from "../../API/fetchBooks";
 import { fetchOtherUser } from "../../API/fetchUser";
-import sendPoke from "../../API/sendPoke";
 import Book from "../../SharedComponents/Book";
+import PokeCreator from "./PokeCreator";
+
+import "./User.scss";
 
 const User = ({ accessToken }) => {
   const { id } = useParams();
   const [books, setBooks] = useState([]);
   const [username, setUsername] = useState("");
-  const [location, setLocation] = useState("");
+  const [userLocation, setUserLocation] = useState("");
   const [chosenBooks, setChosenBooks] = useState([]);
+  const [pokeCreatorVisible, setPokeCreatorVisible] = useState(false);
   const history = useHistory();
+  const location = useLocation();
 
   useEffect(() => {
     const getBooks = async () => {
+      const chosenBookId = location.state.bookId;
       const res = await searchUsersBooks(id);
       if (res.error) console.log(res.error);
-      if (res.books) setBooks(res.books);
+      if (res.books) {
+        const bookList = res.books.sort((bookOne, bookTwo) => {
+          return bookOne._id === chosenBookId
+            ? -1
+            : bookTwo._id === chosenBookId
+            ? 1
+            : 0;
+        });
+        setBooks(bookList);
+      }
     };
     getBooks();
-  }, [id]);
+  }, [id, location.state.bookId]);
 
   useEffect(() => {
     const getUserData = async () => {
@@ -30,20 +44,19 @@ const User = ({ accessToken }) => {
       if (res.user) {
         const { name, location } = res.user;
         setUsername(name);
-        setLocation(location);
+        setUserLocation(location);
       }
     };
     getUserData();
   }, [id]);
 
   const handleSendPoke = async () => {
-    const res = sendPoke(accessToken, id, chosenBooks);
-    console.log(res)
+    setPokeCreatorVisible(true);
   };
 
   const handleCreateBasket = () => {
-      history.push("/basket", { chosenBooks, id })
-  }
+    history.push("/basket", { chosenBooks, id });
+  };
 
   const handleCheckboxChange = (e) => {
     if (!e.target.checked) {
@@ -66,14 +79,14 @@ const User = ({ accessToken }) => {
   ));
 
   return (
-    <div>
-      <div>
+    <div className="userContainer">
+      <div className="usersBooks">
         <div>Books</div>
         {bookList}
       </div>
       <div>
         <p>{username}</p>
-        <p>{location}</p>
+        <p>{userLocation}</p>
         <button>Send message</button>
       </div>
       <div>
@@ -81,6 +94,16 @@ const User = ({ accessToken }) => {
         <p>OR</p>
         <button onClick={handleSendPoke}>Create poke</button>
       </div>
+      {pokeCreatorVisible && (
+        <PokeCreator
+          accessToken={accessToken}
+          recipientId={id}
+          recipientName={username}
+          recipientLocation={userLocation}
+          booksId={chosenBooks}
+          setPokeCreatorVisible={setPokeCreatorVisible}
+        />
+      )}
     </div>
   );
 };
