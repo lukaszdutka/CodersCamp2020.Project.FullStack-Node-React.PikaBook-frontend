@@ -2,6 +2,7 @@ $color-primary: #fff8cdff;
 $color-accent: #c22b11ff;
 $color-black: #212121ff;
 $color-white: #f5f5f5ff;
+$color-black-opaque: rgba(0, 1, 1, 0.2);
 
 a {
   text-decoration: none;
@@ -30,7 +31,7 @@ a {
 }
 
 .textInputDark {
-  background-color: rgba(0, 1, 1, 0.2);
+  background-color: $color-black-opaque;
   border: 2px solid $color-black;
   font-size: 2rem;
   display: block;
@@ -45,11 +46,16 @@ a {
   padding: 5px 10px;
 }
 
+.status {
+  color: $color-accent;
+  font-weight: bold;
+}
+
 .logInAndRegistration {
   background-color: $color-primary;
   max-width: 550px;
-  margin: 125px auto;
-  box-shadow: 2px 6px 10px 10px rgba(0, 1, 1, 0.25);
+  margin: 45px auto;
+  @include boxshadow;
 
   form {
     padding: 30px;
@@ -84,6 +90,7 @@ a {
 @include mobile {
   .logInAndRegistration {
     max-width: 80%;
+    margin: 70px auto;
 
     form {
       padding: 50px 10px;

@@ -90,7 +90,7 @@ const Registration = () => {
           value="Create a new account"
           className="buttonDark"
         ></input>
-        <p>{creationStatus}</p>
+        <p className='status'>{creationStatus}</p>
       </form>
     </div>
   );
