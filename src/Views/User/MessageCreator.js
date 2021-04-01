@@ -9,16 +9,18 @@ const MessageCreator = ({
   setMessageCreatorVisible,
 }) => {
   const [messageContent, setMessageContent] = useState("");
+  const [sentMessage, setSentMessage] = useState("");
   const [status, setStatus] = useState("");
 
   const handleTextareaChange = (e) => {
-      setMessageContent(e.target.value);
+    setMessageContent(e.target.value);
   };
 
   const handleConfirm = async () => {
-    const res = sendMessage(accessToken, recipientId, messageContent);
+    const res = await sendMessage(accessToken, recipientId, messageContent);
     if (res.error) setStatus(res.error);
     if (res.created) setStatus("Message successfully sent!");
+    if (res.message) setSentMessage(res.message);
   };
 
   const handleCancel = () => {
@@ -28,13 +30,21 @@ const MessageCreator = ({
   return (
     <div className="creatorContainer">
       <h1>Send a message to {recipientName}</h1>
-      <textarea
-        onChange={handleTextareaChange}
-        value={messageContent}
-      ></textarea>
-      {status}
-      {status || <button onClick={handleConfirm}>Confirm</button>}
-      <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button>
+      {sentMessage ? (
+        <>
+          <p>{sentMessage}</p>
+        </>
+      ) : (
+        <textarea
+          onChange={handleTextareaChange}
+          value={messageContent}
+        ></textarea>
+      )}
+      <p>
+        <b>{status}</b>
+      </p>
+      {!sentMessage && <button onClick={handleConfirm}>Confirm</button>}
+      <button onClick={handleCancel}>{sentMessage ? "Back" : "Cancel"}</button>
     </div>
   );
 };

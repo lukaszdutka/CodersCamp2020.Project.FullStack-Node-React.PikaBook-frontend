@@ -36,10 +36,6 @@ const User = ({ accessToken }) => {
         setBooks(bookList);
       }
     };
-    getBooks();
-  }, [id, location.state.bookId]);
-
-  useEffect(() => {
     const getUserData = async () => {
       const res = await fetchOtherUser(id);
       if (res.error) console.log(res.error);
@@ -49,8 +45,9 @@ const User = ({ accessToken }) => {
         setUserLocation(location);
       }
     };
+    getBooks();
     getUserData();
-  }, [id]);
+  }, [id, location.state.bookId]);
 
   const handleSendMessage = () => {
     !pokeCreatorVisible && setMessageCreatorVisible(true);
@@ -61,7 +58,7 @@ const User = ({ accessToken }) => {
   };
 
   const handleCreateBasket = () => {
-    history.push("/basket", { chosenBooks, id });
+    if (chosenBooks.length > 0) history.push("/basket", { chosenBooks, id });
   };
 
   const handleCheckboxChange = (e) => {

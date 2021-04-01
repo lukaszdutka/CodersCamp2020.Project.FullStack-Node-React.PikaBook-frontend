@@ -1,5 +1,5 @@
 import { useHistory } from "react-router-dom";
-import listProperties from "../../SharedFunctions/listProperties";
+import listProperties from "../SharedFunctions/listProperties";
 
 const BookMini = ({ book: { name, author, ownerId, _id } }) => {
   const history = useHistory();

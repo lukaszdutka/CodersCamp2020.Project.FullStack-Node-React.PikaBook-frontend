@@ -1,5 +1,5 @@
 import { useState } from "react";
-import Book from "./BookMini";
+import Book from "../../SharedComponents/BookMini";
 import { searchAllBooks } from "../../API/fetchBooks";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";

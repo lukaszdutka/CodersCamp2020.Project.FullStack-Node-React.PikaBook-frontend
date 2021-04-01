@@ -14,7 +14,7 @@ const PokeCreator = ({
 
   const handleConfirm = async () => {
     const booksId = books.map((book) => book._id);
-    const res = sendPoke(accessToken, recipientId, booksId);
+    const res = await sendPoke(accessToken, recipientId, booksId);
     if (res.error) setStatus(res.error);
     if (res.created) setStatus("Poke successfully sent!");
   };
@@ -36,14 +36,18 @@ const PokeCreator = ({
 
   return (
     <div className="creatorContainer">
-      <p>
-        Confirm that you want to invite {recipientName} to browse your book
-        collection and make him/her know that you showed interest in the
-        following books in their possession:
-      </p>
-      <ul>{bookList.length > 0 ? bookList : "None"}</ul>
-      {status}
-      {status || <button onClick={handleConfirm}>Confirm</button>}
+      {!status && (
+        <>
+          <p>
+            Confirm that you want to invite {recipientName} to browse your book
+            collection and make him/her know that you showed interest in the
+            following books in their possession:
+          </p>
+          <ul>{bookList.length > 0 ? bookList : "None"}</ul>
+        </>
+      )}
+      <p><b>{status}</b></p>
+      {!status && <button onClick={handleConfirm}>Confirm</button>}
       <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button>
     </div>
   );
