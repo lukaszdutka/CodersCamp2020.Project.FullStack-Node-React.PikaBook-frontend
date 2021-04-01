@@ -15,9 +15,9 @@ const Pagination = ({ page, setPage, list, limit }) => {
   const maxPageNumber = getMaxPageNumber(limit);
 
   return (
-    <div>
+    <div className="pagination">
       {page > 1 && (
-        <button onClick={(e) => handlePageChange(e, "previous")}>
+        <button className="buttonArrow prev" onClick={(e) => handlePageChange(e, "previous")}>
           &#x2190;
         </button>
       )}
@@ -29,9 +29,9 @@ const Pagination = ({ page, setPage, list, limit }) => {
         max={maxPageNumber}
         onChange={(e) => handlePageChange(e, "input")}
       ></input>
-      <span>out of {maxPageNumber}</span>
+      <span> out of {maxPageNumber}</span>
       {page < maxPageNumber && (
-        <button onClick={(e) => handlePageChange(e, "next")}>&#x2192;</button>
+        <button className="buttonArrow next" onClick={(e) => handlePageChange(e, "next")}>&#x2192;</button>
       )}
     </div>
   );
