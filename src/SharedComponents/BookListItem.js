@@ -1,7 +1,6 @@
 import listProperties from "../SharedFunctions/listProperties";
 
-const BookListItem = ( {book}) => {
-    const { name, author, publisher, year, _id } = book;
+const BookListItem = ( { book: { name, author, publisher, year, _id } }) => {
     return (
       <li key={_id}>
         <b>{name}</b>

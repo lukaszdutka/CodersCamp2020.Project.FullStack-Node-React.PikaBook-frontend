@@ -23,9 +23,7 @@ const CreateBasket = ({ accessToken }) => {
 
   useEffect(() => {
     const getBooks = async () => {
-      const res = await searchMyBooks({
-        Authorization: `Bearer ${accessToken}`,
-      });
+      const res = await searchMyBooks(accessToken);
       if (res.error) console.log(res.error);
       if (res.books) setMyBooks(res.books);
     };
@@ -37,7 +35,7 @@ const CreateBasket = ({ accessToken }) => {
   };
 
   const handleCreateBasket = async () => {
-    setBasketCreatorVisible(true);
+    offeredBooks.length > 0 && setBasketCreatorVisible(true);
   };
 
   let chosenBooksList = getPagination(chosenPage, onPageLimit, chosenBooks);
