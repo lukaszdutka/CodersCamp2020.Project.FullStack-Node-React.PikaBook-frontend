@@ -4,8 +4,7 @@ import sendMessage from "../../API/sendMessage";
 
 const MessageCreator = ({
   accessToken,
-  recipientId,
-  recipientName,
+  recipient,
   setMessageCreatorVisible,
 }) => {
   const [messageContent, setMessageContent] = useState("");
@@ -17,7 +16,7 @@ const MessageCreator = ({
   };
 
   const handleConfirm = async () => {
-    const res = await sendMessage(accessToken, recipientId, messageContent);
+    const res = await sendMessage(accessToken, recipient._id, messageContent);
     if (res.error) setStatus(res.error);
     if (res.created) setStatus("Message successfully sent!");
     if (res.message) setSentMessage(res.message);
@@ -29,7 +28,7 @@ const MessageCreator = ({
 
   return (
     <div className="creatorContainer">
-      <h1>Send a message to {recipientName}</h1>
+      <h1>Send a message to {recipient.name}</h1>
       {sentMessage ? (
         <>
           <p>{sentMessage}</p>

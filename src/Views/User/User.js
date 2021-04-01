@@ -3,20 +3,25 @@ import { useParams, useHistory, useLocation } from "react-router-dom";
 
 import { searchUsersBooks } from "../../API/fetchBooks";
 import { fetchOtherUser } from "../../API/fetchUser";
+import addBooksToList from "../../SharedFunctions/addBooksToList";
 import Book from "../../SharedComponents/Book";
 import PokeCreator from "./PokeCreator";
 import MessageCreator from "./MessageCreator";
+import getPagination from "../../SharedFunctions/getPagination";
+import Pagination from "../../SharedComponents/Pagination";
 
 import "./User.scss";
+import "../../Assets/shared.scss";
 
 const User = ({ accessToken }) => {
   const { id } = useParams();
   const [books, setBooks] = useState([]);
-  const [username, setUsername] = useState("");
-  const [userLocation, setUserLocation] = useState("");
+  const [user, setUser] = useState("");
   const [chosenBooks, setChosenBooks] = useState([]);
   const [pokeCreatorVisible, setPokeCreatorVisible] = useState(false);
   const [messageCreatorVisible, setMessageCreatorVisible] = useState(false);
+  const [page, setPage] = useState(1);
+  const onPageLimit = 10;
   const history = useHistory();
   const location = useLocation();
 
@@ -40,9 +45,7 @@ const User = ({ accessToken }) => {
       const res = await fetchOtherUser(id);
       if (res.error) console.log(res.error);
       if (res.user) {
-        const { name, location } = res.user;
-        setUsername(name);
-        setUserLocation(location);
+        setUser(res.user);
       }
     };
     getBooks();
@@ -58,27 +61,22 @@ const User = ({ accessToken }) => {
   };
 
   const handleCreateBasket = () => {
-    if (chosenBooks.length > 0) history.push("/basket", { chosenBooks, id });
+    if (chosenBooks.length > 0) history.push("/basket", { chosenBooks, user });
   };
 
   const handleCheckboxChange = (e) => {
-    if (!e.target.checked) {
-      const newBooks = chosenBooks.filter((book) => book._id !== e.target.id);
-      setChosenBooks(newBooks);
-    }
-    if (e.target.checked) {
-      const newBook = books.find((book) => book._id === e.target.id);
-      setChosenBooks([...chosenBooks, newBook]);
-    }
+    setChosenBooks(addBooksToList(e, books, chosenBooks));
   };
 
-  const bookList = books.map((book) => (
+  let bookList = getPagination(page, onPageLimit, books);
+  bookList = bookList.map((book) => (
     <Book
       key={book._id}
       book={book}
       type="checkbox"
       handleCheckboxChange={handleCheckboxChange}
       inputDisabled={pokeCreatorVisible || messageCreatorVisible ? true : false}
+      chosenBooks={chosenBooks}
     />
   ));
 
@@ -86,11 +84,27 @@ const User = ({ accessToken }) => {
     <div className="userContainer">
       <div className="usersBooks">
         <div>Books</div>
+        {books.length > onPageLimit && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          list={books}
+          limit={onPageLimit}
+        />
+      )}
         {bookList}
+        {books.length > onPageLimit && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          list={books}
+          limit={onPageLimit}
+        />
+      )}
       </div>
       <div>
-        <p>{username}</p>
-        <p>{userLocation}</p>
+        <p>{user.name}</p>
+        <p>{user.location}</p>
         <button onClick={handleSendMessage}>Send message</button>
       </div>
       <div>
@@ -101,9 +115,7 @@ const User = ({ accessToken }) => {
       {pokeCreatorVisible && (
         <PokeCreator
           accessToken={accessToken}
-          recipientId={id}
-          recipientName={username}
-          recipientLocation={userLocation}
+          recipient={user}
           books={chosenBooks}
           setPokeCreatorVisible={setPokeCreatorVisible}
         />
@@ -111,9 +123,7 @@ const User = ({ accessToken }) => {
       {messageCreatorVisible && (
         <MessageCreator
           accessToken={accessToken}
-          recipientId={id}
-          recipientName={username}
-          recipientLocation={userLocation}
+          recipient={user}
           setMessageCreatorVisible={setMessageCreatorVisible}
         />
       )}

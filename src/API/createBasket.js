@@ -1,5 +1,10 @@
-export const sendPoke = async (accessToken, recipient, books) => {
-  let res = await fetch("https://pikabook.herokuapp.com/api/pokes", {
+export const createBasket = async (
+  accessToken,
+  targetUserID,
+  booksOffered,
+  booksRequested
+) => {
+  let res = await fetch("https://pikabook.herokuapp.com/api/baskets", {
     method: "post",
     headers: {
       Accept: "application/json, text/plain, */*",
@@ -7,8 +12,9 @@ export const sendPoke = async (accessToken, recipient, books) => {
       Authorization: `Bearer ${accessToken}`,
     },
     body: JSON.stringify({
-      recipient,
-      books,
+      targetUserID,
+      booksOffered,
+      booksRequested,
     }),
   });
   if (!res.ok) {
@@ -20,4 +26,4 @@ export const sendPoke = async (accessToken, recipient, books) => {
   }
 };
 
-export default sendPoke;
+export default createBasket;
