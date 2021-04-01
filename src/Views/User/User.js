@@ -78,6 +78,7 @@ const User = ({ accessToken }) => {
       book={book}
       type="checkbox"
       handleCheckboxChange={handleCheckboxChange}
+      inputDisabled={pokeCreatorVisible || messageCreatorVisible ? true : false}
     />
   ));
 

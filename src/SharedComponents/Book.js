@@ -4,6 +4,7 @@ const Book = ({
   book: { _id, name, author, genres, publisher, year, description },
   type,
   handleCheckboxChange,
+  inputDisabled
 }) => {
   return (
     <div>
@@ -16,7 +17,7 @@ const Book = ({
         <p>{description}</p>
       </div>
       {type === "checkbox" && (
-        <input type="checkbox" onChange={handleCheckboxChange} id={_id}></input>
+        <input type="checkbox" onChange={handleCheckboxChange} id={_id} disabled={inputDisabled}></input>
       )}
     </div>
   );
