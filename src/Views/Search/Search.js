@@ -5,7 +5,7 @@ import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 import "./Search.scss";
 
-const Search = () => {
+const Search = ({ loggedUser }) => {
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
   const [books, setBooks] = useState([]);
@@ -23,9 +23,15 @@ const Search = () => {
     e.preventDefault();
     setStatus("Searching...");
     setPage(1);
-    const res = await searchAllBooks({name: searchTitle, location: searchLocation });
+    const res = await searchAllBooks({
+      name: searchTitle,
+      location: searchLocation,
+    });
     if (res.error) setStatus(res.error);
-    setBooks(res.books);
+    const otherUsersBooks = res.books.filter(
+      (book) => book.ownerId._id !== loggedUser._id
+    );
+    setBooks(otherUsersBooks);
     if (books.length === 0) setStatus("No books found");
   };
 
@@ -53,7 +59,9 @@ const Search = () => {
             onChange={handleInputChange}
           ></input>
           <input className="buttonDark" type="submit" value="Search"></input>
-          <div className="status">{books.length === 0 ? status : `${books.length} book(s) found`}</div>
+          <div className="status">
+            {books.length === 0 ? status : `${books.length} book(s) found`}
+          </div>
         </form>
       </div>
       <div>

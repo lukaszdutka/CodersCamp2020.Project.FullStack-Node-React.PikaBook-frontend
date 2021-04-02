@@ -22,7 +22,9 @@ const Login = ({ setAccessToken }) => {
     if (res.error) setStatus(res.error);
     setEmailInput("");
     setPasswordInput("");
-    if (res.accessToken) setAccessToken(res.accessToken);
+    if (res.accessToken) {
+      setAccessToken(res.accessToken);
+    } 
   };
 
   return (

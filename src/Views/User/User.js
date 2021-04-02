@@ -75,7 +75,7 @@ const User = ({ accessToken }) => {
       book={book}
       type="checkbox"
       handleCheckboxChange={handleCheckboxChange}
-      inputDisabled={pokeCreatorVisible || messageCreatorVisible ? true : false}
+      inputDisabled={pokeCreatorVisible || messageCreatorVisible}
       chosenBooks={chosenBooks}
     />
   ));
@@ -92,7 +92,7 @@ const User = ({ accessToken }) => {
             limit={onPageLimit}
           />
         )}
-        {bookList}
+        {bookList.length > 0 ? bookList : "Loading..."}
         {books.length > onPageLimit && (
           <Pagination
             page={page}
