@@ -1,22 +1,18 @@
 import { useHistory } from "react-router-dom";
+import listProperties from "../SharedFunctions/listProperties";
 
-const BookMini = ({ book: { name, author, ownerId } }) => {
+const BookMini = ({ book: { name, author, ownerId, _id } }) => {
   const history = useHistory();
 
-  const authorList = author.map((singleAuthor, index) => {
-    if (index < author.length - 1) return singleAuthor + ", ";
-    return singleAuthor;
-  });
-
-  const handleOnClick = () => {
-    history.push(`/user/${ownerId._id}`);
+  const handleOnClick = (e) => {
+    history.push(`/user/${ownerId._id}`, {bookId: e.target.id});
   };
 
   return (
     <div className="book">
       <div className="bookData">
         <h3>{name}</h3>
-        <p>{authorList}</p>
+        <p>{listProperties(author)}</p>
       </div>
       <div className="userData">
         <p>{ownerId.name}</p>
@@ -26,6 +22,7 @@ const BookMini = ({ book: { name, author, ownerId } }) => {
         className="buttonDark"
         type="button"
         value="User's profile"
+        id={_id}
         onClick={handleOnClick}
       ></input>
     </div>

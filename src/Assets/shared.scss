@@ -88,6 +88,22 @@ a {
   }
 }
 
+.creatorContainer {
+  background-color: $color-primary;
+  position: fixed;
+  width: 700px;
+  height: 500px;
+  top: 50%;
+  left: 50%;
+  margin-top: -250px; 
+  margin-left: -350px;
+  overflow-y: scroll; 
+
+  li {
+    list-style: none;
+  }
+}
+
 @include mobile {
   .logInAndRegistration {
     max-width: 80%;
@@ -100,5 +116,11 @@ a {
         width: 80%;
       }
     }
+  }
+  .creatorContainer {
+    width: 90%;
+    height: 80vh;
+    margin-top: -40vh;
+    margin-left: -45%;
   }
 }
