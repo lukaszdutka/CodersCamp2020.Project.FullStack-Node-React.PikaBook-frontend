@@ -3,6 +3,7 @@ import Book from "../../SharedComponents/BookMini";
 import { searchAllBooks } from "../../API/fetchBooks";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
+import "./Search.scss";
 
 const Search = () => {
   const [searchTitle, setSearchTitle] = useState("");
@@ -32,42 +33,48 @@ const Search = () => {
   bookList = bookList.map((book) => <Book key={book._id} book={book} />);
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          id="searchTitle"
-          placeholder="Book's title"
-          value={searchTitle}
-          onChange={handleInputChange}
-        ></input>
-        <input
-          type="text"
-          id="searchLocation"
-          placeholder="Location"
-          value={searchLocation}
-          onChange={handleInputChange}
-        ></input>
-        <input type="submit" value="Search"></input>
-      </form>
-      <div>{books.length === 0 ? status : `${books.length} book(s) found`}</div>
-      {books.length > onPageLimit && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          list={books}
-          limit={onPageLimit}
-        />
-      )}
-      <div>{bookList}</div>
-      {books.length > onPageLimit && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          list={books}
-          limit={onPageLimit}
-        />
-      )}
+    <div className="search">
+      <div className="logInAndRegistration">
+        <form onSubmit={handleSubmit}>
+          <input
+            className="textInputDark"
+            type="text"
+            id="searchTitle"
+            placeholder="Book's title"
+            value={searchTitle}
+            onChange={handleInputChange}
+          ></input>
+          <input
+            className="textInputDark"
+            type="text"
+            id="searchLocation"
+            placeholder="Location"
+            value={searchLocation}
+            onChange={handleInputChange}
+          ></input>
+          <input className="buttonDark" type="submit" value="Search"></input>
+          <div className="status">{books.length === 0 ? status : `${books.length} book(s) found`}</div>
+        </form>
+      </div>
+      <div>
+        {books.length > onPageLimit && (
+          <Pagination
+            page={page}
+            setPage={setPage}
+            list={books}
+            limit={onPageLimit}
+          />
+        )}
+        <div className="booksList">{bookList}</div>
+        {books.length > onPageLimit && (
+          <Pagination
+            page={page}
+            setPage={setPage}
+            list={books}
+            limit={onPageLimit}
+          />
+        )}
+      </div>
     </div>
   );
 };
