@@ -61,7 +61,7 @@ const User = ({ accessToken }) => {
   };
 
   const handleCreateBasket = () => {
-    if (chosenBooks.length > 0) history.push("/basket", { chosenBooks, user });
+    history.push("/basket", { chosenBooks, user });
   };
 
   const handleCheckboxChange = (e) => {
@@ -85,22 +85,22 @@ const User = ({ accessToken }) => {
       <div className="usersBooks">
         <div>Books</div>
         {books.length > onPageLimit && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          list={books}
-          limit={onPageLimit}
-        />
-      )}
+          <Pagination
+            page={page}
+            setPage={setPage}
+            list={books}
+            limit={onPageLimit}
+          />
+        )}
         {bookList}
         {books.length > onPageLimit && (
-        <Pagination
-          page={page}
-          setPage={setPage}
-          list={books}
-          limit={onPageLimit}
-        />
-      )}
+          <Pagination
+            page={page}
+            setPage={setPage}
+            list={books}
+            limit={onPageLimit}
+          />
+        )}
       </div>
       <div>
         <p>{user.name}</p>
@@ -108,7 +108,9 @@ const User = ({ accessToken }) => {
         <button onClick={handleSendMessage}>Send message</button>
       </div>
       <div>
-        <button onClick={handleCreateBasket}>Add to basket</button>
+        <button onClick={handleCreateBasket} disabled={chosenBooks.length < 1}>
+          Add to basket
+        </button>
         <p>OR</p>
         <button onClick={handleSendPoke}>Create poke</button>
       </div>

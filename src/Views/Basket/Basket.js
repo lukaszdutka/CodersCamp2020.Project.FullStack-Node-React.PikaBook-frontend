@@ -35,7 +35,7 @@ const CreateBasket = ({ accessToken }) => {
   };
 
   const handleCreateBasket = async () => {
-    offeredBooks.length > 0 && setBasketCreatorVisible(true);
+    setBasketCreatorVisible(true);
   };
 
   let chosenBooksList = getPagination(chosenPage, onPageLimit, chosenBooks);
@@ -50,7 +50,7 @@ const CreateBasket = ({ accessToken }) => {
       book={book}
       type="checkbox"
       handleCheckboxChange={handleCheckboxChange}
-      inputDisabled={basketCreatorVisible ? true : false}
+      inputDisabled={basketCreatorVisible}
       chosenBooks={offeredBooks}
     />
   ));
@@ -99,7 +99,9 @@ const CreateBasket = ({ accessToken }) => {
           )}
         </div>
       </div>
-      <button onClick={handleCreateBasket}>Create a basket</button>
+      <button onClick={handleCreateBasket} disabled={offeredBooks.length < 1}>
+        Create a basket
+      </button>
       {basketCreatorVisible && (
         <BasketCreator
           accessToken={accessToken}
