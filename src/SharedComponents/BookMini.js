@@ -9,16 +9,17 @@ const BookMini = ({ book: { name, author, ownerId, _id } }) => {
   };
 
   return (
-    <div>
+    <div className="book">
       <div className="bookData">
-        <h1>{name}</h1>
+        <h3>{name}</h3>
         <p>{listProperties(author)}</p>
       </div>
       <div className="userData">
         <p>{ownerId.name}</p>
-        <p>{ownerId.location}</p>
+        <p>{ownerId.location} {ownerId.location && <i className="fas fa-map-marker-alt"> </i>}</p>
       </div>
       <input
+        className="buttonDark"
         type="button"
         value="User's profile"
         id={_id}

@@ -41,7 +41,8 @@ a {
 
 .buttonDark {
   font-size: 2rem;
-  color: $color-white;
+  line-height: 1;
+  color: $color-primary;
   background-color: $color-black;
   padding: 5px 10px;
 }
