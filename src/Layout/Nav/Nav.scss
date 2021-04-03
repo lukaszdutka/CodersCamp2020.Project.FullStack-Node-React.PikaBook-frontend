@@ -46,7 +46,7 @@
       display: inline-block;
       height: 30px;
       width: 30px;
-      background: url("../../Assets/Images/poke-new.png");
+      background: url("../../Assets/Images/poke.png");
       background-size: contain;
       background-position: center bottom;
       background-repeat: no-repeat;
@@ -55,11 +55,17 @@
 
     .alert {
       position: absolute;
-      top: 50%;
-      left: 100%;
+      right: -10px;
+      top: -5px;
       font-size: 1.5rem;
       font-weight: bold;
-      color: $color-accent;
+      color: $color-primary;
+      background-color: $color-accent;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: grid;
+      align-items: center;
     }
   }
 

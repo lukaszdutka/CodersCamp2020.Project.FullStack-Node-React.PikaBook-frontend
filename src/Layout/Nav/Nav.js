@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 
 import "./Nav.scss";
 
-const Nav = ({ setAccessToken, loggedUser: { _id}, loggedUsersPokes }) => {
+const Nav = ({ setAccessToken, loggedUser: { _id }, loggedUsersPokes }) => {
   const handleLogOut = () => {
     setAccessToken("");
   };
@@ -12,8 +12,8 @@ const Nav = ({ setAccessToken, loggedUser: { _id}, loggedUsersPokes }) => {
     const receivedPokes = loggedUsersPokes.filter(
       (poke) => poke.recipient._id === _id
     );
-    return receivedPokes.filter(poke => !poke.read).length;
-  }
+    return receivedPokes.filter((poke) => !poke.read).length;
+  };
 
   return (
     <div className="nav">
@@ -42,7 +42,9 @@ const Nav = ({ setAccessToken, loggedUser: { _id}, loggedUsersPokes }) => {
         <span>My books</span>
       </NavLink>
       <NavLink className="nav-item" activeClassName="is-active" to="/me/pokes">
-        <div className="poke"><div className="alert">{newPokes()}</div></div>
+        <div className="poke">
+          {newPokes() > 0 && <div className="alert">{newPokes()}</div>}
+        </div>
       </NavLink>
       <NavLink className="nav-item log-out" to="/" onClick={handleLogOut}>
         <i className="fas fa-power-off"></i>

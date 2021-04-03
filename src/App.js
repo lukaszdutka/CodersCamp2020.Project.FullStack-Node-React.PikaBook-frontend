@@ -22,7 +22,7 @@ import { fetchLoggedUser } from "./API/fetchUser";
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
-  const [loggedUser, setLoggedUser] = useState("");
+  const [loggedUser, setLoggedUser] = useState({});
   const [loggedUsersPokes, setLoggedUsersPokes] = useState([]);
   const pokesInterval = useRef();
 
@@ -34,7 +34,7 @@ function App() {
     }
     if (!accessToken) {
       setLoggedUsersPokes([]);
-      setLoggedUser("");
+      setLoggedUser({});
     }
   }, [accessToken]);
 
