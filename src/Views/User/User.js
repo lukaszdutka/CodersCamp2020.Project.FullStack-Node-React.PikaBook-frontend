@@ -20,16 +20,18 @@ const User = ({ accessToken }) => {
   const [chosenBooks, setChosenBooks] = useState([]);
   const [pokeCreatorVisible, setPokeCreatorVisible] = useState(false);
   const [messageCreatorVisible, setMessageCreatorVisible] = useState(false);
+  const [status, setStatus] = useState("")
   const [page, setPage] = useState(1);
   const onPageLimit = 10;
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
+    setStatus('Loading...')
     const getBooks = async () => {
       const chosenBookId = location.state.bookId;
       const res = await searchUsersBooks(id);
-      if (res.error) console.log(res.error);
+      if (res.error) setStatus(res.error);
       if (res.books) {
         const bookList = res.books.sort((bookOne, bookTwo) => {
           return bookOne._id === chosenBookId
@@ -39,6 +41,7 @@ const User = ({ accessToken }) => {
             : 0;
         });
         setBooks(bookList);
+        setStatus("");
       }
     };
     const getUserData = async () => {
@@ -75,7 +78,7 @@ const User = ({ accessToken }) => {
       book={book}
       type="checkbox"
       handleCheckboxChange={handleCheckboxChange}
-      inputDisabled={pokeCreatorVisible || messageCreatorVisible ? true : false}
+      inputDisabled={pokeCreatorVisible || messageCreatorVisible}
       chosenBooks={chosenBooks}
     />
   ));
@@ -92,7 +95,7 @@ const User = ({ accessToken }) => {
             limit={onPageLimit}
           />
         )}
-        {bookList}
+        {status ? status : bookList}
         {books.length > onPageLimit && (
           <Pagination
             page={page}
