@@ -10,9 +10,6 @@ import MessageCreator from "./MessageCreator";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 
-import "./User.scss";
-import "../../Assets/shared.scss";
-
 const User = ({ accessToken }) => {
   const { id } = useParams();
   const [books, setBooks] = useState([]);

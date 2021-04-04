@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./Footer.scss";
 import pikachu from "../../Assets/Images/pikachu.png";
 
 const Footer = () => {

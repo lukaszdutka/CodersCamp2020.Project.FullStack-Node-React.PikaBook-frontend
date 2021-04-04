@@ -1,4 +1,13 @@
 @import-normalize;
+@import "./Assets/shared";
+@import "./App";
+@import "./Layout/Nav/Nav";
+@import "./Layout/Header/Header";
+@import "./Layout/Footer/Footer";
+@import "./Views/User/User";
+@import "./Views/Search/Search";
+@import "./Views/Pokes/Pokes";
+@import "./Views/Basket/Basket";
 
 * {
   margin: 0;

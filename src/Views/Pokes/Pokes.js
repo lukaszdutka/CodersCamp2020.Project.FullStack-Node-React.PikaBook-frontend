@@ -4,8 +4,6 @@ import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 import updatePoke from "../../API/updatePoke";
 
-import "./Pokes.scss";
-
 const Pokes = ({ accessToken, loggedUsersPokes, setLoggedUsersPokes, loggedUser: { _id } }) => {
   const [receivedPage, setReceivedPage] = useState(1);
   const [offeredPage, setOfferedPage] = useState(1);

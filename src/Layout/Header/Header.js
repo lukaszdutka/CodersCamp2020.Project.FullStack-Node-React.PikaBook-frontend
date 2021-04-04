@@ -2,8 +2,6 @@ import React from "react";
 import logo from "../../Assets/Images/pikabook.png";
 import Nav from "../Nav/Nav";
 
-import "./Header.scss";
-
 const Header = ({
   setAccessToken,
   accessToken,

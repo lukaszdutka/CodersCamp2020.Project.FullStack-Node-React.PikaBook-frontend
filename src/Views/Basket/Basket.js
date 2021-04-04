@@ -8,8 +8,6 @@ import addBooksToList from "../../SharedFunctions/addBooksToList";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 
-import "./Basket.scss";
-
 const CreateBasket = ({ accessToken }) => {
   const location = useLocation();
   const user = location.state.user;

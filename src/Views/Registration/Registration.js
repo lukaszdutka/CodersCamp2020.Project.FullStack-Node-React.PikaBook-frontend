@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-import "../../Assets/shared.scss";
-
 import createAccount from "../../API/createAccount"
 
 const Registration = () => {
