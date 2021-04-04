@@ -88,7 +88,7 @@ const Registration = () => {
           value="Create a new account"
           className="buttonDark"
         ></input>
-        <p className='status'>{creationStatus}</p>
+        <p className='status'>{creationStatus != "Request is being sent" && creationStatus}{creationStatus === "Request is being sent" &&  <div className="loader"></div>}</p>
       </form>
     </div>
   );
