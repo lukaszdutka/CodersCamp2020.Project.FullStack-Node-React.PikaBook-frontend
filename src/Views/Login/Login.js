@@ -2,8 +2,6 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import logIn from "../../API/logIn";
 
-import "../../Assets/shared.scss";
-
 const Login = ({ setAccessToken }) => {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");

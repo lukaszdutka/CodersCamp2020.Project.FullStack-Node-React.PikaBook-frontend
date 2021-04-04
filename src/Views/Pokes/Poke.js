@@ -2,8 +2,6 @@ import { useHistory } from "react-router-dom";
 
 import BookListItem from "../../SharedComponents/BookListItem";
 
-import "./Pokes.scss";
-
 const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) => {
   return (
     <div className={!read && "newPoke"}>
