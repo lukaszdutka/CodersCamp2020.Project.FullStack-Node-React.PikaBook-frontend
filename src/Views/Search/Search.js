@@ -21,7 +21,6 @@ const Search = ({ loggedUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Searching...");
-    setBooks([]);
     setPage(1);
     const res = await searchAllBooks({
       name: searchTitle,
@@ -32,7 +31,7 @@ const Search = ({ loggedUser }) => {
       (book) => book.ownerId._id !== loggedUser._id
     );
     setBooks(otherUsersBooks);
-    if (books.length === 0) setStatus("No books found");
+    otherUsersBooks.length === 0 ? setStatus("No books found") : setStatus(`${otherUsersBooks.length} book(s) found`);
   };
 
   let bookList = getPagination(page, onPageLimit, books);
@@ -60,8 +59,7 @@ const Search = ({ loggedUser }) => {
           ></input> 
           <input className="buttonDark" type="submit" value="Search"></input>
           <div className="status">
-            {status != "Searching..." && (books.length === 0 ? status : `${books.length} book(s) found`)}
-            {status === "Searching..." && <div className="loader"></div>}
+            {status === "Searching..." ? <div className="loader"></div> : status}
           </div>
         </form>
       </div>
