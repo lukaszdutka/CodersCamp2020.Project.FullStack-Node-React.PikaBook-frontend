@@ -21,7 +21,7 @@ const Search = ({ loggedUser }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setStatus("Searching...");
-    books.length = 0; // przy kolejnym szukaniu pamiętało ilość znalezionych poprzednio ksiązek i ileśli była większa od 0 to zacinało status na Searching... szczególnie gdy nowe wyszukiwanie dawało 0 znalezionych książek to potrzebabyło dwa razy kliknać search by dostać resultat "No books found"
+    setBooks([]);
     setPage(1);
     const res = await searchAllBooks({
       name: searchTitle,
