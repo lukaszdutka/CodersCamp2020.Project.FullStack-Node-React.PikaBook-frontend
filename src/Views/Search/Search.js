@@ -31,7 +31,7 @@ const Search = ({ loggedUser }) => {
       (book) => book.ownerId._id !== loggedUser._id
     );
     setBooks(otherUsersBooks);
-    if (books.length === 0) setStatus("No books found");
+    otherUsersBooks.length === 0 ? setStatus("No books found") : setStatus(`${otherUsersBooks.length} book(s) found`);
   };
 
   let bookList = getPagination(page, onPageLimit, books);
@@ -56,10 +56,10 @@ const Search = ({ loggedUser }) => {
             placeholder="Location"
             value={searchLocation}
             onChange={handleInputChange}
-          ></input>
+          ></input> 
           <input className="buttonDark" type="submit" value="Search"></input>
           <div className="status">
-            {books.length === 0 ? status : `${books.length} book(s) found`}
+            {status === "Searching..." ? <div className="loader"></div> : status}
           </div>
         </form>
       </div>

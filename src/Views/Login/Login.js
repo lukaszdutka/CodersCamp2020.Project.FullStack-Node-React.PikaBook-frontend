@@ -48,7 +48,9 @@ const Login = ({ setAccessToken }) => {
           required
         ></input>
         <input type="submit" value="Log in" className="buttonDark"></input>
-        <div className='status'>{status}</div>
+        <div className='status'>
+          {status === "Wait..." ? <div className="loader"></div> : status}
+        </div>
         <p>
           <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
         </p>
