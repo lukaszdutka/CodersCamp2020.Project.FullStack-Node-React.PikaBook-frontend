@@ -10,29 +10,35 @@ import User from "./Views/User/User";
 import Me from "./Views/Me/Me";
 import MeBooks from "./Views/Me/MeBooks";
 import MeBaskets from "./Views/Me/MeBaskets";
-import MeConversations from "./Views/Me/MeConversations";
+import Conversations from "./Views/Conversations/Conversations";
 import Pokes from "./Views/Pokes/Pokes";
 import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
 import fetchPokes from "./API/fetchPokes";
 import { fetchLoggedUser } from "./API/fetchUser";
+import { fetchConversations } from "./API/fetchConversations";
 
 function App() {
   const [accessToken, setAccessToken] = useState("");
   const [loggedUser, setLoggedUser] = useState({});
   const [loggedUsersPokes, setLoggedUsersPokes] = useState([]);
+  const [loggedUsersConversations, setLoggedUsersConversations] = useState([]);
   const pokesInterval = useRef();
+  const conversationsInterval = useRef();
 
   useEffect(() => {
     clearInterval(pokesInterval.current);
+    clearInterval(conversationsInterval.current);
     if (accessToken) {
       getLoggedUserData(accessToken);
       getLoggedUsersPokes(accessToken);
+      getLoggedUsersConversations(accessToken);
     }
     if (!accessToken) {
       setLoggedUsersPokes([]);
       setLoggedUser({});
+      setLoggedUsersConversations([]);
     }
   }, [accessToken]);
 
@@ -49,9 +55,21 @@ function App() {
       if (res.pokes) setLoggedUsersPokes(res.pokes.reverse());
     };
     getPokes();
-    const pokeInterval = setInterval(async () => getPokes(), 5000);
-    pokesInterval.current = pokeInterval;
+    const interval = setInterval(async () => getPokes(), 5000);
+    pokesInterval.current = interval;
     return () => clearInterval(pokesInterval.current);
+  };
+
+  const getLoggedUsersConversations = async (accessToken) => {
+    const getConversations = async () => {
+      const res = await fetchConversations(accessToken);
+      if (res.error) console.log(res.error);
+      if (res.conversations) setLoggedUsersConversations(res.conversations);
+    };
+    getConversations();
+    const interval = setInterval(async () => getConversations(), 1000);
+    conversationsInterval.current = interval;
+    return () => clearInterval(conversationsInterval.current);
   };
 
   return (
@@ -160,7 +178,11 @@ function App() {
             path="/me/conversations"
             render={() =>
               accessToken ? (
-                <MeConversations accessToken={accessToken} />
+                <Conversations
+                  accessToken={accessToken}
+                  loggedUser={loggedUser}
+                  loggedUsersConversations={loggedUsersConversations}
+                />
               ) : (
                 <Redirect to="/" />
               )

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import Book from "../../SharedComponents/BookMini";
 import { searchAllBooks } from "../../API/fetchBooks";
 import getPagination from "../../SharedFunctions/getPagination";
@@ -11,6 +11,7 @@ const Search = ({ loggedUser }) => {
   const [status, setStatus] = useState("Let's start searching!");
   const [page, setPage] = useState(1);
   const onPageLimit = 10;
+  const scrollTo = useRef();
 
   const handleInputChange = (e) => {
     if (e.target.id === "searchTitle") return setSearchTitle(e.target.value);
@@ -63,13 +64,14 @@ const Search = ({ loggedUser }) => {
           </div>
         </form>
       </div>
-      <div>
+      <div ref={scrollTo}>
         {books.length > onPageLimit && (
           <Pagination
             page={page}
             setPage={setPage}
             list={books}
             limit={onPageLimit}
+            scrollTo={scrollTo}
           />
         )}
         <div className="booksList">{bookList}</div>
@@ -79,6 +81,7 @@ const Search = ({ loggedUser }) => {
             setPage={setPage}
             list={books}
             limit={onPageLimit}
+            scrollTo={scrollTo}
           />
         )}
       </div>
