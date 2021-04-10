@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { addBook } from '../../API/addBook'
 import { useHistory } from "react-router-dom"
 
-const AddBook = () => {
+const AddBook = ({accessToken}) => {
 
     const [titleInput, setTitleInput] = useState("");
     const [authorInput, setAuthorInput] = useState("");
@@ -22,11 +22,19 @@ const AddBook = () => {
         if (e.target.id === "description") return setDescriptionInput(e.target.value);
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         console.log('Send submit ...')
         setStatus("Request is being sent");
         e.preventDefault();
-        const res = addBook(titleInput, authorInput, genresInput, releaseDateInput, publisherInput, descriptionInput );
+        let autorListInput = authorInput.split(",")
+        if (authorInput === "") {
+            autorListInput = []
+        }
+        let genresListInput = genresInput.split(",")
+        if (genresInput === "") {
+            genresListInput = []
+        }
+        const res = await addBook(accessToken, titleInput, autorListInput, genresListInput, releaseDateInput, publisherInput, descriptionInput );
         if (res.error) setStatus(res.error);
         if (res.added) {
             setStatus("Book successfully added")
@@ -41,34 +49,6 @@ const AddBook = () => {
         setPublisherInput("");
         setDescriptionInput("");
     };
-
-    // const addNewBook = async (title, author, genres, releaseDate, publisher, description) => {
-    //     let res = await fetch("https://pikabook.herokuapp.com/api/books", {
-    //       method: "post",
-    //       headers: {
-    //         Accept: "application/json, text/plain, */*",
-    //         "Content-Type": "application/json",
-    //       },
-    //       body: JSON.stringify({
-    //         title,
-    //         author,
-    //         genres,
-    //         releaseDate,
-    //         publisher,
-    //         description
-    //       }),
-    //     });
-    //     if (!res.ok) {
-    //       res = await res.text();
-    //       setCreationStatus(res);
-    //     } else {
-    //       res = await res.json();
-    //       setCreationStatus("Book successfully added");
-    //       setTimeout(() => {
-    //         history.push("/me")
-    //       }, 2000)
-    //     }
-    // };
   
     return (
         <div>
@@ -88,7 +68,6 @@ const AddBook = () => {
                     placeholder="Author"
                     value={authorInput}
                     onChange={handleInputChange}
-                    required
                 ></input>
                 <input
                     type="text"
@@ -96,7 +75,6 @@ const AddBook = () => {
                     placeholder="Genres"
                     value={genresInput}
                     onChange={handleInputChange}
-                    required
                 ></input>
                 <input
                     type="text"
@@ -104,7 +82,6 @@ const AddBook = () => {
                     placeholder="Release date"
                     value={releaseDateInput}
                     onChange={handleInputChange}
-                    required
                 ></input>
                 <input
                     type="text"
@@ -112,7 +89,6 @@ const AddBook = () => {
                     placeholder="Publisher"
                     value={publisherInput}
                     onChange={handleInputChange}
-                    required
                 ></input>
                 <input
                     type="text"
@@ -120,7 +96,6 @@ const AddBook = () => {
                     placeholder="Description"
                     value={descriptionInput}
                     onChange={handleInputChange}
-                    required
                 ></input>
                 <input type="submit" value="Add"></input>
             </form>

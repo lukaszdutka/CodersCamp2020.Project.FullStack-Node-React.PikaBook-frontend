@@ -26,7 +26,7 @@ const MeBooks  = ({accessToken}) => {
     return ( 
         <div>
             <div >{bookList.length === 0 ? status : bookList}</div>
-            <div><AddBook></AddBook></div>
+            <div><AddBook accessToken={accessToken}></AddBook></div>
         </div>
       );
 }
