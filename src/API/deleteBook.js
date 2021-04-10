@@ -12,7 +12,7 @@ export const deleteBook = async (accessToken, id) => {
       return { error: res };
     } else {
       res = await res.json();
-      return { updated: true };
+      return { deleted: true };
     }
   };
   

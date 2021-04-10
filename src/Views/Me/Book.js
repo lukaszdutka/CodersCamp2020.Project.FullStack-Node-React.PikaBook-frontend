@@ -1,11 +1,13 @@
 import React from 'react'
+import DeleteBook from './DeleteBook'
 
- const Book = ({data}) => {
+ const Book = ({accessToken, data}) => {
     const {
         name,
         author,
         publisher,
-        genres
+        genres,
+        _id
     } = data;
 
     const authorList = author.map((singleAuthor, index) => {
@@ -26,6 +28,8 @@ import React from 'react'
                 <p>{authorList}</p>
                 <p>{publisher}</p>
                 <p>{genresList}</p>
+                <p>{_id}</p>
+                <DeleteBook accessToken={accessToken} id={_id}/>
             </div>
         </div>
     )

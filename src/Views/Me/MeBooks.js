@@ -21,7 +21,7 @@ const MeBooks  = ({accessToken}) => {
       getBooks();
     }, [accessToken]);
 
-    const bookList = myBooks.map((book) => <Book key={book._id} data={book} />);
+    const bookList = myBooks.map((book) => <Book key={book._id} accessToken={accessToken} data={book} />);
 
     return ( 
         <div>
