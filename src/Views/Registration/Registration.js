@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
+
 import createAccount from "../../API/createAccount"
 
 const Registration = () => {
@@ -44,11 +45,12 @@ const Registration = () => {
   };
 
   return (
-    <div>
-      <h1>Register</h1>
+    <div className="logInAndRegistration"> 
       <form onSubmit={handleSubmit}>
+        <h1>Register</h1>
         <input
           type="text"
+          className="textInputDark"
           id="registerUsername"
           placeholder="Name"
           value={usernameInput}
@@ -57,6 +59,7 @@ const Registration = () => {
         ></input>
         <input
           type="email"
+          className="textInputDark"
           id="registerEmail"
           placeholder="E-mail"
           value={emailInput}
@@ -65,6 +68,7 @@ const Registration = () => {
         ></input>
         <input
           type="password"
+          className="textInputDark"
           id="registerPassword"
           placeholder="Password"
           value={passwordInput}
@@ -73,14 +77,21 @@ const Registration = () => {
         ></input>
         <input
           type="text"
+          className="textInputDark"
           id="registerLocation"
           placeholder="Location"
           value={locationInput}
           onChange={handleInputChange}
         ></input>
-        <input type="submit" value="Create a new account"></input>
+        <input
+          type="submit"
+          value="Create a new account"
+          className="buttonDark"
+        ></input>
+        <div className='status'>
+          {creationStatus === "Request is being sent" ? <div className="loader"></div> : creationStatus}
+        </div>
       </form>
-      <p>{creationStatus}</p>
     </div>
   );
 };

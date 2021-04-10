@@ -2,11 +2,11 @@ export const searchAllBooks = (params) => {
   return searchBooks("https://pikabook.herokuapp.com/api/books?", params);
 };
 
-export const searchMyBooks = (headers) => {
+export const searchMyBooks = (accessToken) => {
   return searchBooks(
     "https://pikabook.herokuapp.com/api/me/books",
     {},
-    headers
+    accessToken
   );
 };
 
@@ -14,10 +14,21 @@ export const searchUsersBooks = (id) => {
   return searchBooks(`https://pikabook.herokuapp.com/api/users/${id}/books`);
 };
 
-const searchBooks = async (url, params = {}, headers = {}) => {
+export const searchOneBook = async (id) => {
+  let res = await fetch(`https://pikabook.herokuapp.com/api/books/${id}`);
+  if (!res.ok) {
+    res = await res.text();
+    return { error: res };
+  } else {
+    res = await res.json();
+    return { book: res };
+  }
+}
+
+const searchBooks = async (url, params = {}, accessToken = '') => {
   let res = await fetch(url + new URLSearchParams(params), {
     method: "get",
-    headers,
+    headers: { Authorization: `Bearer ${accessToken}`}
   });
   if (!res.ok) {
     res = await res.text();

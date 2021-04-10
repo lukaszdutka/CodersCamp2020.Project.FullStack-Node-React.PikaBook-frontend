@@ -1,0 +1,82 @@
+.search {
+  margin-bottom: 50px;
+
+  .logInAndRegistration {
+    background: linear-gradient(180deg, #FFF8CD 0%, #FFFFFF);
+  }
+
+  .status {
+    color: $color-black;
+    font-weight: normal;
+    margin-top: 10px;
+  }
+
+  .pagination {
+    margin: 5px auto;
+    width: fit-content;
+    position: relative;
+    
+    input {
+      text-align: center;
+    }
+
+    .buttonArrow {
+      background-color: $color-black;
+      color: $color-primary;
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+    }
+
+    .prev {
+      position: absolute;
+      left: -30px;
+    }
+
+    .next {
+      position: absolute;
+      right: -30px;
+    }
+  }
+
+  .booksList {
+
+    .book {
+      background-color: $color-primary;
+      max-width: 550px;
+      margin: 45px auto;
+      padding: 25px;
+      @include boxshadow;
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+      align-items: center;
+      
+      .bookData {
+        flex: 1 50%;
+      }
+
+      .userData {
+        flex: 1 50%;
+        text-align: right;
+      }
+
+      h3 {
+        font-weight: 500;
+        font-size: 2.2rem;
+      }
+
+      p {
+        margin: 5px 0;
+        font-size: 1.7rem;
+        i {
+          margin-left: 5px;
+        }
+      }
+
+      .buttonDark {
+        font-size: 1.7rem;
+      }
+    }
+  }
+}

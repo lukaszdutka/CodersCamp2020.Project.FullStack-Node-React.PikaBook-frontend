@@ -1,7 +1,5 @@
-import "./App.scss";
-
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 import Header from "./Layout/Header/Header";
 import Footer from "./Layout/Footer/Footer";
@@ -13,19 +11,57 @@ import Me from "./Views/Me/Me";
 import MeBooks from "./Views/Me/MeBooks";
 import MeBaskets from "./Views/Me/MeBaskets";
 import MeConversations from "./Views/Me/MeConversations";
-import MePokes from "./Views/Me/MePokes";
+import Pokes from "./Views/Pokes/Pokes";
 import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
+import fetchPokes from "./API/fetchPokes";
+import { fetchLoggedUser } from "./API/fetchUser";
+
 function App() {
   const [accessToken, setAccessToken] = useState("");
+  const [loggedUser, setLoggedUser] = useState({});
+  const [loggedUsersPokes, setLoggedUsersPokes] = useState([]);
+  const pokesInterval = useRef();
+
+  useEffect(() => {
+    clearInterval(pokesInterval.current);
+    if (accessToken) {
+      getLoggedUserData(accessToken);
+      getLoggedUsersPokes(accessToken);
+    }
+    if (!accessToken) {
+      setLoggedUsersPokes([]);
+      setLoggedUser({});
+    }
+  }, [accessToken]);
+
+  const getLoggedUserData = async (accessToken) => {
+    const res = await fetchLoggedUser(accessToken);
+    if (res.error) console.log(res.error);
+    if (res.user) setLoggedUser(res.user);
+  };
+
+  const getLoggedUsersPokes = async (accessToken) => {
+    const getPokes = async () => {
+      const res = await fetchPokes(accessToken);
+      if (res.error) console.log(res.error);
+      if (res.pokes) setLoggedUsersPokes(res.pokes.reverse());
+    };
+    getPokes();
+    const pokeInterval = setInterval(async () => getPokes(), 5000);
+    pokesInterval.current = pokeInterval;
+    return () => clearInterval(pokesInterval.current);
+  };
 
   return (
     <BrowserRouter>
-      <Header 
+      <Header
         setAccessToken={setAccessToken}
         accessToken={accessToken}
-       />
+        loggedUser={loggedUser}
+        loggedUsersPokes={loggedUsersPokes}
+      />
       <main>
         <Switch>
           <Route
@@ -37,6 +73,7 @@ function App() {
               ) : (
                 <Login
                   setAccessToken={setAccessToken}
+                  setLoggedUser={setLoggedUser}
                 />
               )
             }
@@ -56,7 +93,7 @@ function App() {
             exact
             render={() =>
               accessToken ? (
-                <Search accessToken={accessToken} />
+                <Search accessToken={accessToken} loggedUser={loggedUser} />
               ) : (
                 <Redirect to="/" />
               )
@@ -74,7 +111,7 @@ function App() {
             }
           ></Route>
           <Route
-            path="/user/:id/basket"
+            path="/basket"
             render={() =>
               accessToken ? (
                 <Basket accessToken={accessToken} />
@@ -108,7 +145,12 @@ function App() {
             path="/me/pokes"
             render={() =>
               accessToken ? (
-                <MePokes accessToken={accessToken} />
+                <Pokes
+                  accessToken={accessToken}
+                  loggedUsersPokes={loggedUsersPokes}
+                  setLoggedUsersPokes={setLoggedUsersPokes}
+                  loggedUser={loggedUser}
+                />
               ) : (
                 <Redirect to="/" />
               )

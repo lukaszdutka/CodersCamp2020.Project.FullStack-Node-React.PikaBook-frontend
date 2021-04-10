@@ -20,14 +20,17 @@ const Login = ({ setAccessToken }) => {
     if (res.error) setStatus(res.error);
     setEmailInput("");
     setPasswordInput("");
-    if (res.accessToken) setAccessToken(res.accessToken);
+    if (res.accessToken) {
+      setAccessToken(res.accessToken);
+    } 
   };
 
   return (
-    <div>
-      <h1>Log in</h1>
+    <div className="logInAndRegistration">
       <form onSubmit={handleSubmit}>
+        <h1>Log in</h1>
         <input
+          className="textInputDark"
           type="email"
           id="loginEmail"
           placeholder="E-mail"
@@ -36,6 +39,7 @@ const Login = ({ setAccessToken }) => {
           required
         ></input>
         <input
+          className="textInputDark"
           type="password"
           id="loginPassword"
           placeholder="Password"
@@ -43,12 +47,14 @@ const Login = ({ setAccessToken }) => {
           onChange={handleInputChange}
           required
         ></input>
-        <input type="submit" value="Log in"></input>
+        <input type="submit" value="Log in" className="buttonDark"></input>
+        <div className='status'>
+          {status === "Wait..." ? <div className="loader"></div> : status}
+        </div>
+        <p>
+          <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
+        </p>
       </form>
-      <div>{status}</div>
-      <p>
-        <Link to="/registration">CREATE A NEW ACCOUNT!</Link>
-      </p>
     </div>
   );
 };
