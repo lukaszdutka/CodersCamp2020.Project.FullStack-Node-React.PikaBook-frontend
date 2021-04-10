@@ -10,7 +10,7 @@ const Message = ({ message: { sender, content, date }, interlocutor }) => {
   const creationDate = new Date(date).toLocaleString();
   const name = interlocutor._id === sender ? `${interlocutor.name}:` : "You:";
   return (
-    <div className={name === "You" ? "yourMessage" : "interlocutorsMessage"}>
+    <div className={name === "You:" ? "yourMessage" : "interlocutorsMessage"}>
       <div>{creationDate}</div>
       <div>
         <div>{name}</div>
@@ -85,6 +85,7 @@ const SingleConversation = ({
     e.preventDefault();
     const res = await sendMessage(accessToken, interlocutor._id, messageInput);
     if (res.error) setStatus(res.error);
+    setMessageInput("");
   };
 
   const handleChange = (e) => {
@@ -111,7 +112,7 @@ const SingleConversation = ({
         {messages.length === 0 ? status : messageList}
       </div>
       <form onSubmit={handleSubmit}>
-        <textarea onChange={handleChange}></textarea>
+        <textarea onChange={handleChange} value={messageInput}></textarea>
         <input type="submit" value="Send"></input>
       </form>
     </div>

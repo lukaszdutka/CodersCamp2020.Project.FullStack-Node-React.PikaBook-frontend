@@ -12,8 +12,13 @@ const Conversations = ({
   const [page, setPage] = useState(1);
   const onPageLimit = 10;
   const scrollTo = useRef();
-  
-  let conversationsList = getPagination(page, onPageLimit, loggedUsersConversations);
+
+  let conversationsList = loggedUsersConversations.sort((a,b) => {
+    const dateA = new Date(a.messages[0].date);
+    const dateB = new Date(b.messages[0].date);
+    return dateB - dateA;
+  });
+  conversationsList = getPagination(page, onPageLimit, conversationsList);
   conversationsList = conversationsList.map((conversation) => {
     return (
       <ConversationRecap
