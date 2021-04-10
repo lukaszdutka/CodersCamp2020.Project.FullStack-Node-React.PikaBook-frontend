@@ -11,6 +11,7 @@ import Me from "./Views/Me/Me";
 import MeBooks from "./Views/Me/MeBooks";
 import MeBaskets from "./Views/Me/MeBaskets";
 import Conversations from "./Views/Conversations/Conversations";
+import SingleConversation from "./Views/SingleConversation/SingleConversation";
 import Pokes from "./Views/Pokes/Pokes";
 import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
@@ -67,7 +68,7 @@ function App() {
       if (res.conversations) setLoggedUsersConversations(res.conversations);
     };
     getConversations();
-    const interval = setInterval(async () => getConversations(), 1000);
+    const interval = setInterval(async () => getConversations(), 5000);
     conversationsInterval.current = interval;
     return () => clearInterval(conversationsInterval.current);
   };
@@ -79,6 +80,7 @@ function App() {
         accessToken={accessToken}
         loggedUser={loggedUser}
         loggedUsersPokes={loggedUsersPokes}
+        loggedUsersConversations={loggedUsersConversations}
       />
       <main>
         <Switch>
@@ -176,12 +178,27 @@ function App() {
           ></Route>
           <Route
             path="/me/conversations"
+            exact
             render={() =>
               accessToken ? (
                 <Conversations
                   accessToken={accessToken}
                   loggedUser={loggedUser}
                   loggedUsersConversations={loggedUsersConversations}
+                />
+              ) : (
+                <Redirect to="/" />
+              )
+            }
+          ></Route>
+          <Route
+            path="/me/conversations/conversation"
+            render={() =>
+              accessToken ? (
+                <SingleConversation
+                  accessToken={accessToken}
+                  getLoggedUsersConversations={getLoggedUsersConversations}
+                  conversationsInterval={conversationsInterval}
                 />
               ) : (
                 <Redirect to="/" />

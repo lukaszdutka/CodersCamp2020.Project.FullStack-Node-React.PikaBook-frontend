@@ -1,16 +1,19 @@
-import ConversationItem from "./ConversationItem";
+import ConversationRecap from "./ConversationRecap";
 
 const Conversations = ({
   accessToken,
   loggedUser,
   loggedUsersConversations,
 }) => {
+  
   const conversationsList = loggedUsersConversations.map((conversation) => {
-    return <ConversationItem
-      key={conversation._id}
-      conversation={conversation}
-      loggedUser={loggedUser}
-    />;
+    return (
+      <ConversationRecap
+        key={conversation._id}
+        conversation={conversation}
+        loggedUser={loggedUser}
+      />
+    );
   });
 
   return (

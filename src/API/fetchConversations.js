@@ -18,7 +18,7 @@ export const fetchConversationByInterlocutor = async (
   params
 ) => {
   let res = await fetch(
-    `https://pikabook.herokuapp.com/api/me/conversations:${interlocutorsId}` +
+    `https://pikabook.herokuapp.com/api/me/conversations/${interlocutorsId}?` +
       new URLSearchParams(params),
     {
       method: "get",
