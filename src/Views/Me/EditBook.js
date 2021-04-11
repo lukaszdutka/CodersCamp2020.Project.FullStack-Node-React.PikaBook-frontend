@@ -47,7 +47,7 @@ const EditBook = ({
     const handleUpdate = async (e) => {
         console.log('Send updated book ...')
         console.log('Author input: ' + typeof authorInput)
-        setStatus("Request is being sent");
+        // setStatus("Request is being sent");
         e.preventDefault();
         let bookName = authorInput;
         if (Array.isArray(authorInput)) {
@@ -74,6 +74,7 @@ const EditBook = ({
         setReleaseDateInput("");
         setPublisherInput("");
         setDescriptionInput("");
+        setEditBookVisible(false);
     };
 
   const handleCancel = () => {
@@ -81,7 +82,7 @@ const EditBook = ({
   };
 
   return (
-    <div className="editContainer">
+    <div className="creatorContainer">
         {!status && (
             <>
                 <h1>Edit book</h1>
@@ -133,8 +134,8 @@ const EditBook = ({
                 </form>
             </>
         )}
-        
-        <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button>
+        <button onClick={handleCancel}>Cancel</button>
+        {/* <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button> */}
         <p>{status}</p>
     </div>
 )
