@@ -27,22 +27,32 @@ const PokeCreator = ({
   ));
 
   return (
-    <div className="creatorContainer">
+    <div className="creatorContainer" id="pokeCreator">
       {!status && (
         <>
           <p>
-            Confirm that you want to invite {recipient.name} to browse your book
-            collection and make him/her know that you showed interest in the
-            following books in their possession:
+            Invite {<b>{recipient.name}</b>} to browse your book collection and make
+            him/her know that you showed interest in the following books in
+            their possession:
           </p>
           <ul>{bookList.length > 0 ? bookList : "None"}</ul>
         </>
       )}
-      <p>
-        <b>{status}</b>
-      </p>
-      {!status && <button onClick={handleConfirm}>Confirm</button>}
-      <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button>
+      {status && (
+        <p>
+          <b>status</b>
+        </p>
+      )}
+      <div>
+        {!status && (
+          <button className="buttonDark" onClick={handleConfirm}>
+            Confirm
+          </button>
+        )}
+        <button className="buttonDark" onClick={handleCancel}>
+          {status ? "Back" : "Cancel"}
+        </button>
+      </div>
     </div>
   );
 };
