@@ -15,8 +15,6 @@ export const addBook = async (
     if (publisher) { bookBody.publisher = publisher }
     if (description) { bookBody.description = description }
 
-    console.log(bookBody)
-
     let res = await fetch("https://pikabook.herokuapp.com/api/books", {
       method: "post",
       headers: {

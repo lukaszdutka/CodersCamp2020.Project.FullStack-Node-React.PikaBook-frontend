@@ -1,4 +1,22 @@
-export const updateBook = async (accessToken, id) => {
+export const updateBook = async (
+    accessToken, 
+    id,
+    name, 
+    author, 
+    genres, 
+    year, 
+    publisher, 
+    description
+    ) => {
+    
+    const bookBody = {}
+    bookBody.name = name
+    if (author.length !== 0) { bookBody.author = author }
+    if (genres.length !== 0) { bookBody.genres = genres }
+    if (year) { bookBody.year = year }
+    if (publisher) { bookBody.publisher = publisher }
+    if (description) { bookBody.description = description }
+
     let res = await fetch(`https://pikabook.herokuapp.com/api/books/${id}`, {
       method: "put",
       headers: {
@@ -6,6 +24,7 @@ export const updateBook = async (accessToken, id) => {
         "Content-Type": "application/json",
         Authorization: `Bearer ${accessToken}`,
       },
+      body: JSON.stringify(bookBody),
     });
     if (!res.ok) {
       res = await res.text();
