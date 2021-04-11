@@ -27,11 +27,11 @@ const MessageCreator = ({
   };
 
   return (
-    <div className="creatorContainer">
+    <div className="creatorContainer" id="messageCreator">
       <h1>Send a message to {recipient.name}</h1>
       {sentMessage ? (
         <>
-          <p>{sentMessage}</p>
+          <p className="sentMessage">{sentMessage}</p>
         </>
       ) : (
         <textarea
@@ -39,11 +39,21 @@ const MessageCreator = ({
           value={messageContent}
         ></textarea>
       )}
-      <p>
-        <b>{status}</b>
-      </p>
-      {!sentMessage && <button onClick={handleConfirm}>Confirm</button>}
-      <button onClick={handleCancel}>{sentMessage ? "Back" : "Cancel"}</button>
+      {status && (
+        <p>
+          <b>{status}</b>
+        </p>
+      )}
+      <div>
+        {!sentMessage && (
+          <button className="buttonDark" onClick={handleConfirm}>
+            Confirm
+          </button>
+        )}
+        <button className="buttonDark" onClick={handleCancel}>
+          {sentMessage ? "Back" : "Cancel"}
+        </button>
+      </div>
     </div>
   );
 };

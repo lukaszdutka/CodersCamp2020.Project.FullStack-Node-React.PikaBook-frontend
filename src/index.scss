@@ -1,6 +1,7 @@
 @import-normalize;
 @import "./Assets/shared";
 @import "./App";
+@import "./SharedComponents/Book.scss";
 @import "./Layout/Nav/Nav";
 @import "./Layout/Header/Header";
 @import "./Layout/Footer/Footer";
@@ -11,7 +12,9 @@
 @import "./Views/Conversations/Conversations";
 @import "./Views/Conversations/ConversationsRecap";
 @import "./Views/SingleConversation/SingleConversation";
-
+@import "./Views/User/MessageCreator.scss";
+@import "./Views/User//PokeCreator";
+@import "./Views/Basket/BasketCreator";
 
 * {
   margin: 0;

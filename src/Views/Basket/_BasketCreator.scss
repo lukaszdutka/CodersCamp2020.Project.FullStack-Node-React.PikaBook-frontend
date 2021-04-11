@@ -1,0 +1,9 @@
+#basketCreator {
+    ul {
+        width: 90%;
+        max-height: 20%;
+        overflow-y: scroll;
+        background: $white-gradient;
+        @include boxshadow;
+    }
+}

@@ -3,6 +3,8 @@ $color-accent: #c22b11ff;
 $color-black: #212121ff;
 $color-white: #f5f5f5ff;
 $color-black-opaque: rgba(0, 1, 1, 0.2);
+$white-gradient: linear-gradient(180deg, #E5E5E5 0%, rgba(255, 255, 255, 0) 100%);
+$primary-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, #FFF8CD 100%);
 
 a {
   text-decoration: none;
@@ -47,6 +49,11 @@ a {
   padding: 5px 10px;
 }
 
+.buttonDark:disabled {
+  background-color: lightgray;
+  border: none;
+}
+
 .status {
   color: $color-accent;
   font-weight: bold;
@@ -88,8 +95,52 @@ a {
   }
 }
 
-.creatorContainer {
+// pagination
+
+.pagination {
+  margin: 5px auto;
+  width: fit-content;
+  position: relative;
+  
+  input {
+    text-align: center;
+  }
+
+  .buttonArrow {
+    background-color: $color-black;
+    color: $color-primary;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
+
+  .prev {
+    position: absolute;
+    left: -30px;
+  }
+
+  .next {
+    position: absolute;
+    right: -30px;
+  }
+}
+
+// books heading
+.booksHeading {
+  font-size: 3rem;
+  text-align: center;
+  line-height: 3;
+  margin: 0;
   background-color: $color-primary;
+  border-bottom: 1px solid grey;
+  @include boxshadow;
+}
+
+// creationContainer
+
+.creatorContainer {
+  background: $color-white;
+  @include boxshadow;
   position: fixed;
   width: 700px;
   height: 500px;
@@ -97,11 +148,52 @@ a {
   left: 50%;
   margin-top: -250px; 
   margin-left: -350px;
-  overflow-y: scroll; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  padding: 5px 2px;
+  text-align: center;
+
+  h1 {
+    font-size: 3rem;
+    margin: 0;
+  }
 
   li {
     list-style: none;
   }
+
+  button {
+    margin: 0px 5px;
+  }
+
+  * {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
+// custom checkbox
+
+.checkboxStyled {
+  -webkit-appearance: none;
+  background-color: #fafafa;
+  border: 1px solid #cacece;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05);
+  padding: 9px;
+  border-radius: 3px;
+  display: inline-block;
+  position: relative;
+}
+
+.checkboxStyled:checked:after {
+  content: '\2714';
+  font-size: 14px;
+  position: absolute;
+  top: 0px;
+  left: 3px;
+  color: green;
 }
 
 @include mobile {

@@ -11,34 +11,6 @@
     margin-top: 10px;
   }
 
-  .pagination {
-    margin: 5px auto;
-    width: fit-content;
-    position: relative;
-    
-    input {
-      text-align: center;
-    }
-
-    .buttonArrow {
-      background-color: $color-black;
-      color: $color-primary;
-      width: 25px;
-      height: 25px;
-      border-radius: 50%;
-    }
-
-    .prev {
-      position: absolute;
-      left: -30px;
-    }
-
-    .next {
-      position: absolute;
-      right: -30px;
-    }
-  }
-
   .booksList {
 
     .book {

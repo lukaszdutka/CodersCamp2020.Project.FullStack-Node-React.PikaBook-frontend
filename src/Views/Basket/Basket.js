@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
 import { searchMyBooks } from "../../API/fetchBooks";
+import { useRef } from "react";
+
 import Book from "../../SharedComponents/Book";
 import BasketCreator from "./BasketCreator";
 import addBooksToList from "../../SharedFunctions/addBooksToList";
@@ -18,6 +20,8 @@ const CreateBasket = ({ accessToken }) => {
   const [chosenPage, setChosenPage] = useState(1);
   const [offeredPage, setOfferedPage] = useState(1);
   const onPageLimit = 10;
+  const chosenScrollTo = useRef();
+  const myScrollTo= useRef();
 
   useEffect(() => {
     const getBooks = async () => {
@@ -55,17 +59,9 @@ const CreateBasket = ({ accessToken }) => {
 
   return (
     <div className="createBasketContainer">
-      <div className="basketBookList">
-        <div>
-          <h1>Books chosen from {user.name}'s collection</h1>
-          {chosenBooks.length > onPageLimit && (
-            <Pagination
-              page={chosenPage}
-              setPage={setChosenPage}
-              list={chosenBooks}
-              limit={onPageLimit}
-            />
-          )}
+      <div className="basketBookList" ref={chosenScrollTo}>
+        <div className="basketChosenBooks">
+          <h1 className="booksHeading">{user.name}'s books</h1>
           {chosenBooksList}
           {chosenBooks.length > onPageLimit && (
             <Pagination
@@ -73,19 +69,12 @@ const CreateBasket = ({ accessToken }) => {
               setPage={setChosenPage}
               list={chosenBooks}
               limit={onPageLimit}
+              scrollTo={chosenScrollTo}
             />
           )}
         </div>
-        <div>
-          <h1>My books</h1>
-          {myBooks.length > onPageLimit && (
-            <Pagination
-              page={offeredPage}
-              setPage={setOfferedPage}
-              list={myBooks}
-              limit={onPageLimit}
-            />
-          )}
+        <div className="basketMyBooks" ref={myScrollTo}>
+          <h1 className="booksHeading">My books</h1>
           {myBooksList}
           {myBooks.length > onPageLimit && (
             <Pagination
@@ -93,11 +82,16 @@ const CreateBasket = ({ accessToken }) => {
               setPage={setOfferedPage}
               list={myBooks}
               limit={onPageLimit}
+              scrollTo={myScrollTo}
             />
           )}
         </div>
       </div>
-      <button onClick={handleCreateBasket} disabled={offeredBooks.length < 1}>
+      <button
+        className="buttonDark"
+        onClick={handleCreateBasket}
+        disabled={offeredBooks.length < 1}
+      >
         Create a basket
       </button>
       {basketCreatorVisible && (
