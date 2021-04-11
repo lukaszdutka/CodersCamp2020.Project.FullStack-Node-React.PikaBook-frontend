@@ -145,7 +145,7 @@ function App() {
             exact
             render={() =>
               accessToken ? (
-                <Me accessToken={accessToken} />
+                <Me accessToken={accessToken} loggedUser={loggedUser} />
               ) : (
                 <Redirect to="/" />
               )
