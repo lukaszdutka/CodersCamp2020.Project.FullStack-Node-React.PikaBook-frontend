@@ -4,30 +4,35 @@ import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
 import updatePoke from "../../API/updatePoke";
 
-const Pokes = ({ accessToken, loggedUsersPokes, setLoggedUsersPokes, loggedUser: { _id } }) => {
+const Pokes = ({
+  accessToken,
+  loggedUsersPokes,
+  setLoggedUsersPokes,
+  loggedUser: { _id },
+}) => {
   const [receivedPage, setReceivedPage] = useState(1);
   const [offeredPage, setOfferedPage] = useState(1);
-  const [prevPokes, setPrevPokes] = useState(loggedUsersPokes);
+  const [prevPokes, setPrevPokes] = useState([]);
   const onPageLimit = 10;
 
   useEffect(() => {
-    if (loggedUsersPokes.length !== prevPokes.length) setPrevPokes(loggedUsersPokes);
-    if (loggedUsersPokes.some(poke => !poke.read)) {
-      const updatedPokes = loggedUsersPokes.map(poke => {
-        updatePoke(accessToken, poke._id)
-        return {...poke, read: true};
+    if (loggedUsersPokes.length !== prevPokes.length)
+      setPrevPokes(loggedUsersPokes);
+    const receivedPokes = loggedUsersPokes.filter(
+      (poke) => poke.recipient._id === _id
+    );
+    if (receivedPokes.some((poke) => !poke.read)) {
+      const updatedPokes = loggedUsersPokes.map((poke) => {
+        updatePoke(accessToken, poke._id);
+        return { ...poke, read: true };
       });
       setLoggedUsersPokes(updatedPokes);
-    }     
-  }, [accessToken, loggedUsersPokes, setLoggedUsersPokes, prevPokes]);
+    }
+  }, [accessToken, loggedUsersPokes, setLoggedUsersPokes, prevPokes, _id]);
 
-  const receivedPokes = prevPokes.filter(
-    (poke) => poke.recipient._id === _id
-  );
+  const receivedPokes = prevPokes.filter((poke) => poke.recipient._id === _id);
 
-  const offeredPokes = prevPokes.filter(
-    (poke) => poke.sender._id === _id
-  );
+  const offeredPokes = prevPokes.filter((poke) => poke.sender._id === _id);
 
   let receivedPokesList = getPagination(
     receivedPage,

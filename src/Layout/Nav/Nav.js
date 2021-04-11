@@ -1,7 +1,12 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
-const Nav = ({ setAccessToken, loggedUser: { _id }, loggedUsersPokes }) => {
+const Nav = ({
+  setAccessToken,
+  loggedUser: { _id },
+  loggedUsersPokes,
+  loggedUsersConversations,
+}) => {
   const handleLogOut = () => {
     setAccessToken("");
   };
@@ -11,6 +16,13 @@ const Nav = ({ setAccessToken, loggedUser: { _id }, loggedUsersPokes }) => {
       (poke) => poke.recipient._id === _id
     );
     return receivedPokes.filter((poke) => !poke.read).length;
+  };
+
+  const newMessages = () => {
+    return loggedUsersConversations.filter(conversation => {
+      const { read, recipient } = conversation.messages[0];
+      return !read && recipient === _id;
+    }).length;
   };
 
   return (
@@ -26,6 +38,7 @@ const Nav = ({ setAccessToken, loggedUser: { _id }, loggedUsersPokes }) => {
       >
         <i className="fas fa-envelope"></i>
         <span>Messages</span>
+        {newMessages() > 0 && <div className="alert">{newMessages()}</div>}
       </NavLink>
       <NavLink className="nav-item" activeClassName="is-active" to="/me/basket">
         <i className="fas fa-shopping-basket"></i>
