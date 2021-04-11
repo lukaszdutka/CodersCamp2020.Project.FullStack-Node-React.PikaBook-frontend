@@ -2,9 +2,13 @@
     textarea {
       width: 90%;
       height: 60%;
+      padding: 5px;
+      font-style: Arial, sans-serif;
+      resize: none;
     }
 
     .sentMessage {
       overflow-y: scroll;
+      max-height: 50%;
     }
   }

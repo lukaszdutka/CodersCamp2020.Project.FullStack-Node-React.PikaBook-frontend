@@ -40,7 +40,7 @@ const PokeCreator = ({
       )}
       {status && (
         <p>
-          <b>status</b>
+          <b>{status}</b>
         </p>
       )}
       <div>

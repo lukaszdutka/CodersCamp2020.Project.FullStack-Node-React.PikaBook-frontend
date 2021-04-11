@@ -125,6 +125,19 @@ a {
   }
 }
 
+// books heading
+.booksHeading {
+  font-size: 3rem;
+  text-align: center;
+  line-height: 3;
+  margin: 0;
+  background-color: $color-primary;
+  border-bottom: 1px solid grey;
+  @include boxshadow;
+}
+
+// creationContainer
+
 .creatorContainer {
   background: $color-white;
   @include boxshadow;

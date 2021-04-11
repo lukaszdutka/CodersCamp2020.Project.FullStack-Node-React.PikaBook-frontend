@@ -41,7 +41,7 @@ const BasketCreator = ({
   ));
 
   return (
-    <div className="creatorContainer">
+    <div className="creatorContainer" id="basketCreator">
       {!status && (
         <>
           <p>
@@ -53,11 +53,11 @@ const BasketCreator = ({
           <ul>{requestedBooksList}</ul>
         </>
       )}
-      <p>
-        <b>{status}</b>
-      </p>
-      {!status && <button onClick={handleConfirm}>Confirm</button>}
-      {!status && <button onClick={handleCancel}>Cancel</button>}
+        {status && <p><b>{status}</b></p>}
+      <div>
+        {!status && <button className="buttonDark" onClick={handleConfirm}>Confirm</button>}
+        {!status && <button className="buttonDark" onClick={handleCancel}>Cancel</button>}
+      </div>
     </div>
   );
 };

@@ -9,5 +9,8 @@
       width: 90%;
       padding-top: 0px;
       padding-bottom: 0px;
+      background: $white-gradient;
+      @include boxshadow;
+      max-height: 50%;
     }
   }
