@@ -31,13 +31,18 @@
       width: auto;
     }
 
+    .or {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
     .or::before,
     .or::after {
-      display: inline-block;
       content: "";
       border-top: 1.5px solid black;
-      width: 100px;
-      margin: 0 1rem;
+      width: 40%;
       transform: translateY(-0.5rem);
     }
   }
@@ -47,7 +52,7 @@
   textarea {
     width: 90%;
   }
-} 
+}
 
 @include mobile {
   .userContainer {

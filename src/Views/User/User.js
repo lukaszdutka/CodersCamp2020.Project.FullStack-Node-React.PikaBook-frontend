@@ -83,7 +83,7 @@ const User = ({ accessToken }) => {
 
   return (
     <div className="userContainer">
-      <div className="usersBooks" ref={scrollTo}>``
+      <div className="usersBooks" ref={scrollTo}>
         <h1 className="booksHeading">Books</h1>
         {status ? status : bookList}
         {books.length > onPageLimit && (
