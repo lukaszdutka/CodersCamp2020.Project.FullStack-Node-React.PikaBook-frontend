@@ -7,6 +7,7 @@ const Header = ({
   accessToken,
   loggedUser,
   loggedUsersPokes,
+  loggedUsersConversations
 }) => {
   return (
     <div className="header">
@@ -16,6 +17,7 @@ const Header = ({
           setAccessToken={setAccessToken}
           loggedUser={loggedUser}
           loggedUsersPokes={loggedUsersPokes}
+          loggedUsersConversations={loggedUsersConversations}
         />
       )}
     </div>

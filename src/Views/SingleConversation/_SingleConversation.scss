@@ -1,0 +1,18 @@
+.singleConversationContainer {
+  .messagesList {
+      height: 60vh;
+      overflow: scroll;
+  }
+  .yourMessage {
+    text-align: right;
+  }
+
+  .interlocutorsMessage {
+    text-align: left;
+  }
+  
+  button {
+      width: 80px;
+      text-align: center;
+  }
+}

@@ -1,4 +1,5 @@
-const Pagination = ({ page, setPage, list, limit }) => {
+const Pagination = ({ page, setPage, list, limit, scrollTo }) => {
+
   const getMaxPageNumber = () => {
     const result = Math.ceil(list.length / limit);
     if (result < 1) return 1;
@@ -10,6 +11,7 @@ const Pagination = ({ page, setPage, list, limit }) => {
     if (type === "next" && page < maxNumber) setPage(page + 1);
     if (type === "previous" && page > 1) setPage(page - 1);
     if (type === "input") setPage(e.target.value);
+    if (scrollTo) scrollTo.current.scrollIntoView({ behavior: 'smooth', block: 'start' })
   };
 
   const maxPageNumber = getMaxPageNumber(limit);
