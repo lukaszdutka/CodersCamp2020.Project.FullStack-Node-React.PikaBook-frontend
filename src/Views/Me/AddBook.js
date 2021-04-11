@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import { addBook } from '../../API/addBook'
 import { useHistory } from "react-router-dom"
 
-const AddBook = ({accessToken}) => {
+const AddBook = ({accessToken, getBooks}) => {
 
     const [titleInput, setTitleInput] = useState("");
     const [authorInput, setAuthorInput] = useState("");
@@ -48,6 +48,7 @@ const AddBook = ({accessToken}) => {
         setReleaseDateInput("");
         setPublisherInput("");
         setDescriptionInput("");
+        getBooks();
     };
   
     return (

@@ -38,7 +38,6 @@ import EditBook from './EditBook'
                 <p>{genresList}</p>
                 <p>{year}</p>
                 <p>{description}</p>
-                <p>{_id}</p>
                 <DeleteBook accessToken={accessToken} id={_id}/>
                 <button onClick={handleEditBook}>Edit</button>
                 {editBookVisible && (
@@ -48,7 +47,6 @@ import EditBook from './EditBook'
                         bookData={data}
                     />
                 )}
-                {/* <EditBook accessToken={accessToken} setEditBookVisible={setEditBookVisible} bookData={data}/> */}
             </div>
         </div>
     )
