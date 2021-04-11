@@ -1,14 +1,19 @@
-import React from 'react'
+import React, {useState} from 'react'
 import DeleteBook from './DeleteBook'
+import EditBook from './EditBook'
 
  const Book = ({accessToken, data}) => {
     const {
         name,
         author,
-        publisher,
         genres,
+        year,
+        publisher,
+        description,
         _id
     } = data;
+
+    const [editBookVisible, setEditBookVisible] = useState(false);
 
     const authorList = author.map((singleAuthor, index) => {
         if (index < author.length - 1) return singleAuthor + ', '; 
@@ -20,6 +25,9 @@ import DeleteBook from './DeleteBook'
         return singleGenre
     });
 
+    const handleEditBook = async () => {
+        setEditBookVisible(true);
+    }
 
     return (
         <div>
@@ -28,8 +36,19 @@ import DeleteBook from './DeleteBook'
                 <p>{authorList}</p>
                 <p>{publisher}</p>
                 <p>{genresList}</p>
+                <p>{year}</p>
+                <p>{description}</p>
                 <p>{_id}</p>
                 <DeleteBook accessToken={accessToken} id={_id}/>
+                <button onClick={handleEditBook}>Edit</button>
+                {editBookVisible && (
+                    <EditBook 
+                        accessToken={accessToken} 
+                        setEditBookVisible={setEditBookVisible} 
+                        bookData={data}
+                    />
+                )}
+                {/* <EditBook accessToken={accessToken} setEditBookVisible={setEditBookVisible} bookData={data}/> */}
             </div>
         </div>
     )
