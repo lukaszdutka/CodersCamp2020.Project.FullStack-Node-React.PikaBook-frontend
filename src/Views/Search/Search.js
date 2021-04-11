@@ -7,6 +7,8 @@ import Pagination from "../../SharedComponents/Pagination";
 const Search = ({ loggedUser }) => {
   const [searchTitle, setSearchTitle] = useState("");
   const [searchLocation, setSearchLocation] = useState("");
+  const [searchAuthor, setSearchAuthor] = useState("");
+  const [searchGenre, setSearchGenre] = useState("");
   const [books, setBooks] = useState([]);
   const [status, setStatus] = useState("Let's start searching!");
   const [page, setPage] = useState(1);
@@ -15,6 +17,8 @@ const Search = ({ loggedUser }) => {
 
   const handleInputChange = (e) => {
     if (e.target.id === "searchTitle") return setSearchTitle(e.target.value);
+    if (e.target.id === "searchAuthor") return setSearchAuthor(e.target.value);
+    if (e.target.id === "searchGenre") return setSearchGenre(e.target.value);
     if (e.target.id === "searchLocation")
       return setSearchLocation(e.target.value);
   };
@@ -26,13 +30,17 @@ const Search = ({ loggedUser }) => {
     const res = await searchAllBooks({
       name: searchTitle,
       location: searchLocation,
+      author: searchAuthor, 
+      genres: searchGenre
     });
     if (res.error) setStatus(res.error);
     const otherUsersBooks = res.books.filter(
       (book) => book.ownerId._id !== loggedUser._id
     );
     setBooks(otherUsersBooks);
-    otherUsersBooks.length === 0 ? setStatus("No books found") : setStatus(`${otherUsersBooks.length} book(s) found`);
+    otherUsersBooks.length === 0
+      ? setStatus("No books found")
+      : setStatus(`${otherUsersBooks.length} book(s) found`);
   };
 
   let bookList = getPagination(page, onPageLimit, books);
@@ -53,14 +61,34 @@ const Search = ({ loggedUser }) => {
           <input
             className="textInputDark"
             type="text"
+            id="searchAuthor"
+            placeholder="Book's author"
+            value={searchAuthor}
+            onChange={handleInputChange}
+          ></input>
+          <input
+            className="textInputDark"
+            type="text"
+            id="searchGenre"
+            placeholder="Book's genre"
+            value={searchGenre}
+            onChange={handleInputChange}
+          ></input>
+          <input
+            className="textInputDark"
+            type="text"
             id="searchLocation"
             placeholder="Location"
             value={searchLocation}
             onChange={handleInputChange}
-          ></input> 
+          ></input>
           <input className="buttonDark" type="submit" value="Search"></input>
           <div className="status">
-            {status === "Searching..." ? <div className="loader"></div> : status}
+            {status === "Searching..." ? (
+              <div className="loader"></div>
+            ) : (
+              status
+            )}
           </div>
         </form>
       </div>
