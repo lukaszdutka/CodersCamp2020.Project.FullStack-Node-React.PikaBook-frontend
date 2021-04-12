@@ -11,27 +11,57 @@
     @include boxshadow;
   }
 
-  li {
-    list-style: none;
-    background: red;
-  }
-
   .poke {
     background: $color-primary;
     margin-top: 25px;
-    padding: 10px;
-    font-size: 1.5rem;
+    padding: 25px;
+    font-size: 1.8rem;
     border: 3px solid $color-black;
     display: flex;
+    flex-flow: column nowrap;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-start;
+
+    ul {
+      margin: 5px 0;
+      align-self: center;
+      text-align: center;
+      li {
+        list-style: none;
+        // min-height: 25px;
+        padding: 5px;
+      }
+    }
 
     .buttonDark {
+      margin-top: 25px;
       font-size: 1.5rem;
+      width: max-content;
+      align-self: flex-end;
     }
   }
 }
 
 .newPoke {
-  color: red;
+  position: relative;
+  color: $color-accent;
+  &::before {
+    content: "new";
+    position: absolute;
+    right: -25px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-primary;
+    background-color: $color-accent;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    display: grid;
+    align-items: center;
+    @include boxshadow;
+  }
 }

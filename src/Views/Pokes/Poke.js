@@ -62,7 +62,7 @@ const Poke = ({ poke: { sender, recipient, books, date, read }, type }) => {
   const creationDate = new Date(date).toLocaleString();
 
   const handleOnClick = () => {
-    if (type === 'offered') history.push(`/user/${sender._id}`, { bookId: "" });
+    if (type === 'received') history.push(`/user/${sender._id}`, { bookId: "" });
     if (type === 'sent') history.push(`/user/${recipient._id}`, { bookId: "" });
   };
 
