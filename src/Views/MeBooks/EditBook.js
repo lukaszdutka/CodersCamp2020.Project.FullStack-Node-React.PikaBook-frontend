@@ -18,19 +18,9 @@ const EditBook = ({
         _id
     } = bookData;
 
-    const authorList = author.map((singleAuthor, index) => {
-        if (index < author.length - 1) return singleAuthor + ', '; 
-        return singleAuthor
-    });
-
-    const genresList = genres.map((singleGenre, index) => {
-        if (index < author.length - 1) return singleGenre + ', '; 
-        return singleGenre
-    });
-
     const [titleInput, setTitleInput] = useState(name);
-    const [authorInput, setAuthorInput] = useState(authorList);
-    const [genresInput, setGeneresInput] = useState(genresList);
+    const [authorInput, setAuthorInput] = useState(author);
+    const [genresInput, setGeneresInput] = useState(genres);
     const [releaseDateInput, setReleaseDateInput] = useState(year);
     const [publisherInput, setPublisherInput] = useState(publisher);
     const [descriptionInput, setDescriptionInput] = useState(description);
@@ -46,27 +36,8 @@ const EditBook = ({
     };
 
     const handleUpdate = async (e) => {
-        console.log('Send updated book ...')
-        console.log('Author input: ' + typeof authorInput)
-        // setStatus("Request is being sent");
         e.preventDefault();
-        let bookName = authorInput;
-        if (Array.isArray(authorInput)) {
-            bookName = authorInput.join(",")
-        }
-        let autorListInput = bookName.split(",")
-        if (authorInput === "") {
-            autorListInput = []
-        }
-        let genresName = genresInput;
-        if (Array.isArray(genresInput)) {
-            genresName = genresInput.join(",")
-        }
-        let genresListInput = genresName.split(",")
-        if (genresInput === "") {
-            genresListInput = []
-        }
-        const res = await updateBook(accessToken, _id, titleInput, autorListInput, genresListInput, releaseDateInput, publisherInput, descriptionInput );
+        const res = await updateBook(accessToken, _id, titleInput, authorInput, genresInput, releaseDateInput, publisherInput, descriptionInput );
         if (res.error) setStatus(res.error);
         if (res.added) setStatus("Book successfully updated")
         setTitleInput("");
@@ -137,7 +108,6 @@ const EditBook = ({
             </>
         )}
         <button onClick={handleCancel}>Cancel</button>
-        {/* <button onClick={handleCancel}>{status ? "Back" : "Cancel"}</button> */}
         <p>{status}</p>
     </div>
 )
