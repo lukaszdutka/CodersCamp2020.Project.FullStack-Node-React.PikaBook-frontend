@@ -16,22 +16,41 @@ import listProperties from '../../SharedFunctions/listProperties'
 
     const [editBookVisible, setEditBookVisible] = useState(false);
 
-    const authorList = listProperties(author)
-    const genresList = listProperties(genres)
-
     const handleEditBook = async () => {
         setEditBookVisible(true);
     }
 
     return (
-        <div>
-            <div>
-                <h1>{name}</h1>
-                <p>{authorList}</p>
-                <p>{publisher}</p>
-                <p>{genresList}</p>
-                <p>{year}</p>
-                <p>{description}</p>
+        <div className="bookContainer">
+            <div className="bookInfo">
+                <p className="bookTitle">
+                    <b>{name}</b>
+                </p>
+                {author.length > 0 && (
+                    <p className="author">
+                        <b>Author:</b> {listProperties(author)}
+                    </p>
+                )}
+                {publisher && (
+                    <p className="publisher">
+                        <b>Publisher:</b> {publisher}
+                    </p>
+                )}
+                {year && (
+                    <p className="year">
+                        <b>Publication year:</b> {year}
+                    </p>
+                )}
+                {genres.length > 0 && (
+                    <p className="genres">
+                        <b>Genre:</b> {listProperties(genres)}
+                    </p>
+                )}
+                {description && (
+                    <p className="description">
+                        <b>Description:</b> {description}
+                    </p>
+                )}
                 <DeleteBook 
                     accessToken={accessToken} 
                     id={_id}
