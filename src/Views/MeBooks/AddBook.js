@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import { addBook } from '../../API/addBook'
-import { useHistory } from "react-router-dom"
 
 const AddBook = ({accessToken, getBooks}) => {
 
@@ -11,7 +10,6 @@ const AddBook = ({accessToken, getBooks}) => {
     const [publisherInput, setPublisherInput] = useState("");
     const [descriptionInput, setDescriptionInput] = useState("");
     const [status, setStatus] = useState();
-    const history = useHistory();
 
     const handleInputChange = (e) => {
         if (e.target.id === "bookTitle") return setTitleInput(e.target.value);
@@ -38,9 +36,6 @@ const AddBook = ({accessToken, getBooks}) => {
         if (res.error) setStatus(res.error);
         if (res.added) {
             setStatus("Book successfully added")
-            setTimeout(() => {
-                history.push("/");
-              }, 2000);
         }
         setTitleInput("");
         setAuthorInput("");
@@ -48,7 +43,7 @@ const AddBook = ({accessToken, getBooks}) => {
         setReleaseDateInput("");
         setPublisherInput("");
         setDescriptionInput("");
-        getBooks();
+        getBooks(accessToken);
     };
   
     return (
