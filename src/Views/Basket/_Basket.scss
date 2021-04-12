@@ -1,7 +1,42 @@
+.createBasketContainer {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
 .basketBookList {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
+.basketChosenBooks {
+  width: 350px;
+  margin: 25px;
+  justify-self: flex-end;
+}
 
+.basketMyBooks {
+  width: 350px;
+  margin: 25px;
+  justify-self: flex-start;
+}
 
+@include mobile {
+  .basketBookList {
+    grid-template-columns: 1fr;
+
+    .basketChosenBooks {
+      width: 90%;
+      justify-self: center;
+      margin-bottom: 0;
+    }
+
+    .basketMyBooks {
+      width: 90%;
+      justify-self: center;
+    }
+
+    .userInfo {
+      width: 100%;
+    }
+  }
+}

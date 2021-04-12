@@ -4,7 +4,7 @@ const BookListItem = ( { book: { name, author, publisher, year, _id } }) => {
     return (
       <li key={_id}>
         <b>{name}</b>
-        {listProperties(author) && ` by ${listProperties(author)}`} {publisher}{" "}
+        {author.length > 0 && ` by ${listProperties(author)}`} {publisher}{" "}
         {year}
       </li>
     );

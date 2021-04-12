@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useParams, useHistory, useLocation } from "react-router-dom";
 
 import { searchUsersBooks } from "../../API/fetchBooks";
@@ -17,14 +17,15 @@ const User = ({ accessToken }) => {
   const [chosenBooks, setChosenBooks] = useState([]);
   const [pokeCreatorVisible, setPokeCreatorVisible] = useState(false);
   const [messageCreatorVisible, setMessageCreatorVisible] = useState(false);
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
-  const onPageLimit = 10;
+  const onPageLimit = 4;
+  const scrollTo = useRef();
   const history = useHistory();
   const location = useLocation();
 
   useEffect(() => {
-    setStatus('Loading...')
+    setStatus("Loading...");
     const getBooks = async () => {
       const chosenBookId = location.state.bookId;
       const res = await searchUsersBooks(id);
@@ -82,16 +83,8 @@ const User = ({ accessToken }) => {
 
   return (
     <div className="userContainer">
-      <div className="usersBooks">
-        <div>Books</div>
-        {books.length > onPageLimit && (
-          <Pagination
-            page={page}
-            setPage={setPage}
-            list={books}
-            limit={onPageLimit}
-          />
-        )}
+      <div className="usersBooks" ref={scrollTo}>
+        <h1 className="booksHeading">Books</h1>
         {status ? status : bookList}
         {books.length > onPageLimit && (
           <Pagination
@@ -99,20 +92,35 @@ const User = ({ accessToken }) => {
             setPage={setPage}
             list={books}
             limit={onPageLimit}
+            scrollTo={scrollTo}
           />
         )}
       </div>
-      <div>
-        <p>{user.name}</p>
-        <p>{user.location}</p>
-        <button onClick={handleSendMessage}>Send message</button>
-      </div>
-      <div>
-        <button onClick={handleCreateBasket} disabled={chosenBooks.length < 1}>
-          Add to basket
-        </button>
-        <p>OR</p>
-        <button onClick={handleSendPoke}>Create poke</button>
+      <div className="userPanel">
+        <div className="userInfo">
+          <p>{user.name}</p>
+          {user.location && (
+            <p>
+              <i className="fas fa-map-marker-alt"></i> {user.location}
+            </p>
+          )}
+          <button className="buttonDark" onClick={handleSendMessage}>
+            Send message
+          </button>
+        </div>
+        <div className="userInfo">
+          <button
+            className="buttonDark"
+            onClick={handleCreateBasket}
+            disabled={chosenBooks.length < 1}
+          >
+            Add to basket
+          </button>
+          <p className="or">OR</p>
+          <button className="buttonDark" onClick={handleSendPoke}>
+            Create poke
+          </button>
+        </div>
       </div>
       {pokeCreatorVisible && (
         <PokeCreator

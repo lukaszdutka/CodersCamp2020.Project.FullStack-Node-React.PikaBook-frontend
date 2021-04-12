@@ -1,10 +1,76 @@
 .userContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto;
+  align-items: flex-start;
+
+  .usersBooks {
+    width: 350px;
+    margin: 25px;
+    justify-self: end;
+  }
+
+  .userPanel {
+    justify-self: flex-start;
+    margin: 25px;
+  }
+
+  .userInfo {
+    width: 350px;
+    height: 150px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    text-align: center;
+    background: $primary-gradient;
+    @include boxshadow;
+    padding: 10px;
+    margin-bottom: 25px;
+
+    button {
+      width: auto;
+    }
+
+    .or {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .or::before,
+    .or::after {
+      content: "";
+      border-top: 1.5px solid black;
+      width: 40%;
+      transform: translateY(-0.5rem);
+    }
+  }
 }
 
-.usersBooks {
-  grid-row: span 2;
+#messageCreator {
+  textarea {
+    width: 90%;
+  }
 }
 
+@include mobile {
+  .userContainer {
+    grid-template-columns: 1fr;
+
+    .usersBooks {
+      width: 90%;
+      justify-self: center;
+      margin-bottom: 0;
+    }
+
+    .userPanel {
+      width: 90%;
+      justify-self: center;
+    }
+
+    .userInfo {
+      width: 100%;
+    }
+  }
+}
