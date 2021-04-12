@@ -19,8 +19,8 @@ const EditBook = ({
     } = bookData;
 
     const [titleInput, setTitleInput] = useState(name);
-    const [authorInput, setAuthorInput] = useState(author);
-    const [genresInput, setGeneresInput] = useState(genres);
+    const [authorInput, setAuthorInput] = useState(author.join(", "));
+    const [genresInput, setGeneresInput] = useState(genres.join(", "));
     const [releaseDateInput, setReleaseDateInput] = useState(year);
     const [publisherInput, setPublisherInput] = useState(publisher);
     const [descriptionInput, setDescriptionInput] = useState(description);
@@ -37,7 +37,17 @@ const EditBook = ({
 
     const handleUpdate = async (e) => {
         e.preventDefault();
-        const res = await updateBook(accessToken, _id, titleInput, authorInput, genresInput, releaseDateInput, publisherInput, descriptionInput );
+        let authorListInput = authorInput.split(",")
+        if (authorInput === "") {
+            authorListInput = []
+        }
+        let genresListInput = genresInput.split(",")
+        if (genresInput === "") {
+            genresListInput = []
+        }
+        console.log("authorListInput: " + authorListInput[0])
+        console.log("authorListInput: " + typeof authorListInput)
+        const res = await updateBook(accessToken, _id, titleInput, authorListInput, genresListInput, releaseDateInput, publisherInput, descriptionInput );
         if (res.error) setStatus(res.error);
         if (res.added) setStatus("Book successfully updated")
         setTitleInput("");
