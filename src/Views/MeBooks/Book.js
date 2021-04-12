@@ -1,6 +1,7 @@
 import React, {useState} from 'react'
 import DeleteBook from './DeleteBook'
 import EditBook from './EditBook'
+import listProperties from '../../SharedFunctions/listProperties'
 
  const Book = ({accessToken, data, getBooks}) => {
     const {
@@ -15,15 +16,8 @@ import EditBook from './EditBook'
 
     const [editBookVisible, setEditBookVisible] = useState(false);
 
-    const authorList = author.map((singleAuthor, index) => {
-        if (index < author.length - 1) return singleAuthor + ', '; 
-        return singleAuthor
-    });
-
-    const genresList = genres.map((singleGenre, index) => {
-        if (index < author.length - 1) return singleGenre + ', '; 
-        return singleGenre
-    });
+    const authorList = listProperties(author)
+    const genresList = listProperties(genres)
 
     const handleEditBook = async () => {
         setEditBookVisible(true);
