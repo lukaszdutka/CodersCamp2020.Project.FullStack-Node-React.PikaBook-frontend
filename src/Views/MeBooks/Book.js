@@ -32,7 +32,11 @@ import listProperties from '../../SharedFunctions/listProperties'
                 <p>{genresList}</p>
                 <p>{year}</p>
                 <p>{description}</p>
-                <DeleteBook accessToken={accessToken} id={_id}/>
+                <DeleteBook 
+                    accessToken={accessToken} 
+                    id={_id}
+                    getBooks={getBooks}
+                />
                 <button onClick={handleEditBook}>Edit</button>
                 {editBookVisible && (
                     <EditBook 
