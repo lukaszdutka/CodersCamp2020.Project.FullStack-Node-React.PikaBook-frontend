@@ -1,8 +1,5 @@
 const listProperties = (list) => {
-    list.map((singleProperty, index) => {
-      if (index < list.length - 1) return singleProperty + ", ";
-      return singleProperty;
-    });
-  };
+  return list.join(", ")
+};
 
-  export default listProperties
+export default listProperties
