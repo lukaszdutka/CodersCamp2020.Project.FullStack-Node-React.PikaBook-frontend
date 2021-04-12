@@ -4,7 +4,7 @@ import BookListItem from "../../SharedComponents/BookListItem";
 
 const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) => {
   return (
-    <div className={!read && "newPoke"}>
+    <div className={read ? "poke" : "newPoke poke"}>
       {bookList.length > 0 ? (
         <>
           <p>
@@ -20,7 +20,7 @@ const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) =
           collection and invited you to browse his/hers collection
         </p>
       )}
-      <button onClick={handleOnClick}>
+      <button className="buttonDark" onClick={handleOnClick}>
         Visit <b>{sender.name}</b>'s profile
       </button>
     </div>
@@ -34,7 +34,7 @@ const PokeSent = ({
   handleOnClick,
 }) => {
   return (
-    <div>
+    <div className="poke" >
       {bookList.length > 0 ? (
         <>
           <p>
@@ -50,7 +50,7 @@ const PokeSent = ({
           collection and invited you him/her browse your collection.
         </p>
       )}
-      <button onClick={handleOnClick}>
+      <button className="buttonDark" onClick={handleOnClick}>
         Visit <b>{recipient.name}</b>'s profile
       </button>
     </div>
