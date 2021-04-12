@@ -82,6 +82,7 @@ const Registration = () => {
           placeholder="Location"
           value={locationInput}
           onChange={handleInputChange}
+          required
         ></input>
         <input
           type="submit"
