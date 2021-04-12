@@ -4,7 +4,8 @@ import { updateBook } from '../../API/updateBook'
 const EditBook = ({
   accessToken,
   setEditBookVisible,
-  bookData
+  bookData,
+  getBooks
 }) => {
 
     const {
@@ -75,6 +76,7 @@ const EditBook = ({
         setPublisherInput("");
         setDescriptionInput("");
         setEditBookVisible(false);
+        getBooks(accessToken)
     };
 
   const handleCancel = () => {

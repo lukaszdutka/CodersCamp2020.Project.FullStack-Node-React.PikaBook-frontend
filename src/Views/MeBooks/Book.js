@@ -2,7 +2,7 @@ import React, {useState} from 'react'
 import DeleteBook from './DeleteBook'
 import EditBook from './EditBook'
 
- const Book = ({accessToken, data}) => {
+ const Book = ({accessToken, data, getBooks}) => {
     const {
         name,
         author,
@@ -45,6 +45,7 @@ import EditBook from './EditBook'
                         accessToken={accessToken} 
                         setEditBookVisible={setEditBookVisible} 
                         bookData={data}
+                        getBooks={getBooks}
                     />
                 )}
             </div>
