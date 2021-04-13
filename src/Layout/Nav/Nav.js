@@ -53,9 +53,8 @@ const Nav = ({
         <span>My books</span>
       </NavLink>
       <NavLink className="nav-item" activeClassName="is-active" to="/me/pokes">
-        <div className="poke">
+        <i class="fas fa-bell"></i>
           {newPokes() > 0 && <div className="alert">{newPokes()}</div>}
-        </div>
       </NavLink>
       <NavLink className="nav-item log-out" to="/" onClick={handleLogOut}>
         <i className="fas fa-power-off"></i>

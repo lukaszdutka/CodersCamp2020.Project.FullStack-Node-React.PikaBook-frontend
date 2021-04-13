@@ -19,7 +19,7 @@
       display: inline;
     }
 
-    i:not(.fa-power-off) {
+    i:not(.fa-power-off):not(.fa-bell) {
       display: none;
     }
     
@@ -38,17 +38,6 @@
     &:hover:not(.log-out)::before{
       left: 0;
       right: 0;
-    }
-
-    .poke {
-      display: inline-block;
-      height: 30px;
-      width: 30px;
-      background: url("../../Assets/Images/poke.png");
-      background-size: contain;
-      background-position: center bottom;
-      background-repeat: no-repeat;
-      position: relative;
     }
 
     .alert {
@@ -86,7 +75,7 @@
       span {
         display: none;
       }
-      i:not(.fa-power-off) {
+      i:not(.fa-power-off):not(.fa-bell) {
         display: inline;
       }
     }
