@@ -12,7 +12,7 @@ const ConversationRecap = ({
   const date = new Date(lastMessage.date).toLocaleString();
   const sender =
     lastMessage.sender === interlocutor._id ? interlocutor.name : "You";
-  const content = lastMessage.content.split(" ").slice(0, 5).join(" ");
+  const content = lastMessage.content.split("").slice(0, 9).join("");
 
   const openConversation = () => {
     history.push(`/me/conversations/conversation`, { interlocutor });

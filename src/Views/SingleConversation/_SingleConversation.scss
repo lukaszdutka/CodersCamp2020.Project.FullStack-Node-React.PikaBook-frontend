@@ -1,18 +1,87 @@
 .singleConversationContainer {
+  max-width: 550px;
+  margin: 25px auto;
+
+  .exit {
+    float: right;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 3rem;
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .loadMore {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
   .messagesList {
-      height: 60vh;
-      overflow: scroll;
+      height: 50vh;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .yourMessage, .interlocutorsMessage {
+    width: fit-content;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .date {
+      max-width: 70px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .message {
+      background: $white-gradient;
+      @include boxshadow;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      div:first-child {
+        font-weight: bold;
+        margin-right: 25px;
+      }
+    }
   }
   .yourMessage {
     text-align: right;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+
+    .date {
+      margin-left: 25px;
+    }
   }
 
   .interlocutorsMessage {
     text-align: left;
+    align-self: flex-start;
+    
+    .date {
+      margin-right: 25px;
+    }
+    
+    .message {
+      background: $primary-gradient; 
+    }
   }
-  
-  button {
-      width: 80px;
-      text-align: center;
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    padding: 25px;
+
+    textarea {
+      width: 100%;
+      margin-right: 25px;
+    }
   }
 }

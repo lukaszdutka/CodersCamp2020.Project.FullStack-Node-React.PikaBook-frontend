@@ -2,7 +2,7 @@
     display: flex;
     flex-flow: column nowrap;
     margin: 25px auto;
-    max-width: 990px;
+    max-width: 550px;
     padding: 0 25px;
   
     h1 {
@@ -19,7 +19,7 @@
         &::before {
           content: "new";
           position: absolute;
-          right: -15px;
+          right: -20px;
           top: 50%;
           transform: translateY(-50%) rotate(30deg);
           font-size: 1.3rem;
@@ -45,6 +45,11 @@
         margin-bottom: 25px; 
         align-items: center;
         justify-content: space-between;
+
+        div {
+          max-width: 100px;
+          text-align: center;
+        }
     }
   
     .buttonDark {
