@@ -1,20 +1,30 @@
 .pokesContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-column-gap: 25px;
-  margin: 25px auto;
-  max-width: 990px;
-  padding: 0 25px;
+
+  .pokeColumn1 {
+    width: 350px;
+    margin: 25px;
+    justify-self: flex-end;
+  }
+
+  .pokeColumn2 {
+    width: 350px;
+    margin: 25px;
+    justify-self: flex-start;
+  }
 
   h1 {
     text-align: center;
     background: $primary-gradient;
     padding: 25px;
+    margin: 0;
     @include boxshadow;
   }
 
   .pokeContainer {
     @include boxshadow;
+    margin-top: 25px;
   }
 
   .poke {
@@ -78,5 +88,14 @@
 @include mobile {
   .pokesContainer {
     grid-template-columns: 1fr;
+
+    .pokeColumn1, .pokeColumn2 {
+      width: 90%;
+      justify-self: center;
+    }
+
+    .pokeColumn1 {
+      margin-bottom: 0;
+    }
   }
 }

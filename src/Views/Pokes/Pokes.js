@@ -50,7 +50,7 @@ const Pokes = ({
 
   return (
     <div className="pokesContainer">
-      <div>
+      <div className="pokeColumn1">
         <h1>Pokes received</h1>
         <div className="pokeContainer">{receivedPokesList}</div>
         {receivedPokes.length > onPageLimit && (
@@ -62,7 +62,7 @@ const Pokes = ({
           />
         )}
       </div>
-      <div>
+      <div className="pokeColumn2">
         <h1>Pokes sent</h1>
         <div className="pokeContainer">{offeredPokesList}</div>
         {offeredPokes.length > onPageLimit && (
