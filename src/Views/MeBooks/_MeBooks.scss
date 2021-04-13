@@ -63,11 +63,20 @@
         width: 90%;
         justify-self: center;
         margin-bottom: 0;
+        margin-left: 0;
+        margin-right: 0;
       }
   
       .meAddBook {
         width: 90%;
         justify-self: center;
+        margin-left: 0;
+        margin-right: 0;
+
+        .bookForm {
+          padding: 10px;
+        }
+
       }
     }
   }
