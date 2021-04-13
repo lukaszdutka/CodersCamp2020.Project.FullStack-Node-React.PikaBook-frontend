@@ -5,4 +5,4 @@ const listProperties = (list) => {
     });
   };
 
-  export default listProperties
+export default listProperties
