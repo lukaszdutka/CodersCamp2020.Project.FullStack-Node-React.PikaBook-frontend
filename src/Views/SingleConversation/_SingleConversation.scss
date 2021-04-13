@@ -77,11 +77,16 @@
   form {
     display: flex;
     justify-content: space-between;
+    align-items: center;
     padding: 25px;
 
     textarea {
+      padding: 10px;
       width: 100%;
       margin-right: 25px;
+      background-color: $color-black-opaque;
+      border: 3px solid $color-primary;
+      // max-height: 50px;
     }
   }
 }
