@@ -1,8 +1,10 @@
 .pokesContainer {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-gap: 5%;
-  padding: 0 5%;
+  grid-column-gap: 25px;
+  margin: 0 auto 25px;
+  max-width: 990px;
+  padding: 0 25px;
 
   h1 {
     text-align: center;
@@ -11,16 +13,18 @@
     @include boxshadow;
   }
 
+  .pokeContainer {
+    @include boxshadow;
+  }
+
   .poke {
-    background: $color-primary;
-    margin-top: 25px;
+    background: $white-gradient;
     padding: 25px;
     font-size: 1.8rem;
-    border: 3px solid $color-black;
     display: flex;
     flex-flow: column nowrap;
-    justify-content: space-between;
     align-items: flex-start;
+    border-bottom: 1px solid $color-black;
 
     ul {
       margin: 5px 0;
@@ -28,15 +32,19 @@
       text-align: center;
       li {
         list-style: none;
-        // min-height: 25px;
         padding: 5px;
+        border-bottom: 1px solid $color-black;
+      }
+
+      li:last-child {
+        border: none;
       }
     }
 
     .buttonDark {
+      color: $color-white;
       margin-top: 25px;
       font-size: 1.5rem;
-      width: max-content;
       align-self: flex-end;
     }
   }
@@ -45,23 +53,30 @@
 .newPoke {
   position: relative;
   color: $color-accent;
+  
   &::before {
     content: "new";
     position: absolute;
-    right: -25px;
+    right: -15px;
     top: 50%;
-    transform: translateY(-50%);
-    font-size: 1.5rem;
+    transform: translateY(-50%) rotate(30deg);
+    font-size: 1.3rem;
     font-weight: bold;
     text-transform: uppercase;
     text-align: center;
     color: $color-primary;
     background-color: $color-accent;
     border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: grid;
     align-items: center;
     @include boxshadow;
+  }
+}
+
+@include mobile {
+  .pokesContainer {
+    grid-template-columns: 1fr;
   }
 }
