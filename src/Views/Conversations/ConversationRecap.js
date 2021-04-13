@@ -21,7 +21,7 @@ const ConversationRecap = ({
   const isRead = !lastMessage.read && lastMessage.recipient === loggedUser._id;
 
   return (
-    <div className={isRead ? "newMessage" : ""}>
+    <div className={isRead ? "conversationContainer newMessage" : "conversationContainer"}>
       <div>
         <b>{interlocutor.name}</b>
       </div>
@@ -30,7 +30,7 @@ const ConversationRecap = ({
         <b>{sender}</b> wrote:{" "}
         {content === lastMessage.content ? content : `${content}...`}
       </div>
-      <button onClick={openConversation}>Go to conversation</button>
+      <button className="buttonDark" onClick={openConversation}>Go to conversation</button>
     </div>
   );
 };

@@ -1,0 +1,54 @@
+.conversationsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 0 auto 25px;
+    max-width: 990px;
+    padding: 0 25px;
+  
+    h1 {
+      text-align: center;
+      background: $primary-gradient;
+      padding: 25px;
+      @include boxshadow;
+    }
+  
+    .newMessage {
+        position: relative;
+        color: $color-accent;
+        
+        &::before {
+          content: "new";
+          position: absolute;
+          right: -15px;
+          top: 50%;
+          transform: translateY(-50%) rotate(30deg);
+          font-size: 1.3rem;
+          font-weight: bold;
+          text-transform: uppercase;
+          text-align: center;
+          color: $color-primary;
+          background-color: $color-accent;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: grid;
+          align-items: center;
+          @include boxshadow;
+        }
+    }
+    
+    .conversationContainer {
+        background: $white-gradient;
+        display: flex;
+        padding: 25px;
+        @include boxshadow;
+        margin-bottom: 25px; 
+        align-items: center;
+        justify-content: space-between;
+    }
+  
+    .buttonDark {
+        color: $color-white;
+        font-size: 1.5rem;
+    }
+}
