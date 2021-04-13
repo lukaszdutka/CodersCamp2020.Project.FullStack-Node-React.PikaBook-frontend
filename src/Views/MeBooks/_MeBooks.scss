@@ -1,0 +1,74 @@
+.meBooksContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+
+  .bookContainer {
+    grid-template-columns: 1fr;
+  }
+
+  .meBooks {
+    width: 350px;
+    margin: 25px;
+    justify-self: flex-end;
+
+    .status {
+      text-align: center;
+      margin-top: 20px;
+    }
+  }
+
+  .meAddBook {
+    width: 350px;
+    height: 450px;
+    margin: 25px;
+    justify-self: flex-start;
+    background: $white-gradient;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    @include boxshadow;
+  }
+
+  #editBookCreator {
+    .bookForm {
+        height: 95%;
+    }
+    .status {
+        margin: 0 0 10px 0;
+        padding: 0;
+    }
+  }
+
+  .bookForm {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+    padding: 15px;
+  }
+
+  .meBooksButtons {
+    * {
+      display: inline-block;
+      margin-left: 10px;
+      margin-right: 10px;
+      width: 80px;
+    }
+  }
+}
+
+@include mobile {
+    .meBooksContainer {
+      grid-template-columns: 1fr;
+  
+      .meBooks {
+        width: 90%;
+        justify-self: center;
+        margin-bottom: 0;
+      }
+  
+      .meAddBook {
+        width: 90%;
+        justify-self: center;
+      }
+    }
+  }
+  

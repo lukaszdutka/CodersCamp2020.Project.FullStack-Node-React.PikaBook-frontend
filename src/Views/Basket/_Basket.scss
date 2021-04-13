@@ -12,6 +12,11 @@
   width: 350px;
   margin: 25px;
   justify-self: flex-end;
+
+  .bookContainer {
+    grid-template-columns: 1fr;
+  }
+  
 }
 
 .basketMyBooks {
