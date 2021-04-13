@@ -85,7 +85,7 @@ function App() {
       <main>
         <Switch>
           <Route
-            path="/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend"
+            path="/"
             exact
             render={() =>
               accessToken ? (

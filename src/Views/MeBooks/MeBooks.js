@@ -46,7 +46,11 @@ const MeBooks = ({ accessToken }) => {
       <div className="meBooks" ref={scrollTo}>
         <h1 className="booksHeading">My books</h1>
         {bookList.length > 0 && bookList}
-        {status && <div className="status">{status}</div>}
+        {status && (
+          <div className="status">
+            {status === "Loading..." ? <div className="loader"></div> : status}
+          </div>
+        )}
         {myBooks.length > onPageLimit && (
           <Pagination
             page={page}

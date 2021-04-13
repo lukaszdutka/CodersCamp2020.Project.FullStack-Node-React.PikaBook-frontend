@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import Poke from "./Poke";
 import getPagination from "../../SharedFunctions/getPagination";
 import Pagination from "../../SharedComponents/Pagination";
@@ -14,6 +14,9 @@ const Pokes = ({
   const [offeredPage, setOfferedPage] = useState(1);
   const [prevPokes, setPrevPokes] = useState([]);
   const onPageLimit = 10;
+  const scrollTo1 = useRef();
+  const scrollTo2 = useRef();
+
 
   useEffect(() => {
     if (loggedUsersPokes.length !== prevPokes.length)
@@ -50,7 +53,7 @@ const Pokes = ({
 
   return (
     <div className="pokesContainer">
-      <div className="pokeColumn1">
+      <div className="pokeColumn1" ref={scrollTo1}>
         <h1>Pokes received</h1>
         <div className="pokeContainer">{receivedPokesList}</div>
         {receivedPokes.length > onPageLimit && (
@@ -59,10 +62,11 @@ const Pokes = ({
             setPage={setReceivedPage}
             list={receivedPokes}
             limit={onPageLimit}
+            scrollTo={scrollTo1}
           />
         )}
       </div>
-      <div className="pokeColumn2">
+      <div className="pokeColumn2" ref={scrollTo2}>
         <h1>Pokes sent</h1>
         <div className="pokeContainer">{offeredPokesList}</div>
         {offeredPokes.length > onPageLimit && (
@@ -71,6 +75,7 @@ const Pokes = ({
             setPage={setOfferedPage}
             list={offeredPokes}
             limit={onPageLimit}
+            scrollTo={scrollTo2}
           />
         )}
       </div>
