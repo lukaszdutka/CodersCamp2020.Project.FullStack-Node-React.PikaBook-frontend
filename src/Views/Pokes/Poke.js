@@ -4,7 +4,7 @@ import BookListItem from "../../SharedComponents/BookListItem";
 
 const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) => {
   return (
-    <div className={!read && "newPoke"}>
+    <div className={read ? "poke" : "newPoke poke"}>
       {bookList.length > 0 ? (
         <>
           <p>
@@ -12,15 +12,15 @@ const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) =
             following books in your collection:
           </p>
           <ul>{bookList}</ul>
-          <p>and invited you to browse his/hers collection.</p>{" "}
+          {/* <p>and invited you to browse his/hers collection.</p>{" "} */}
         </>
       ) : (
         <p>
           On {creationDate} <b>{sender.name}</b> showed interest in your
-          collection and invited you to browse his/hers collection
+          collection. {/*and invited you to browse his/hers collection*/}
         </p>
       )}
-      <button onClick={handleOnClick}>
+      <button className="buttonDark" onClick={handleOnClick}>
         Visit <b>{sender.name}</b>'s profile
       </button>
     </div>
@@ -34,7 +34,7 @@ const PokeSent = ({
   handleOnClick,
 }) => {
   return (
-    <div>
+    <div className="poke" >
       {bookList.length > 0 ? (
         <>
           <p>
@@ -42,15 +42,15 @@ const PokeSent = ({
             <b>{recipient.name}</b>'s collection:
           </p>
           <ul>{bookList}</ul>
-          <p>and invited him/her to browse your collection.</p>{" "}
+          {/* <p>and invited him/her to browse your collection.</p>{" "} */}
         </>
       ) : (
         <p>
           On {creationDate} you showed interest in <b>{recipient.name}</b>'s'
-          collection and invited you him/her browse your collection.
+          collection. {/*and invited you him/her browse your collection.*/}
         </p>
       )}
-      <button onClick={handleOnClick}>
+      <button className="buttonDark" onClick={handleOnClick}>
         Visit <b>{recipient.name}</b>'s profile
       </button>
     </div>
@@ -62,7 +62,7 @@ const Poke = ({ poke: { sender, recipient, books, date, read }, type }) => {
   const creationDate = new Date(date).toLocaleString();
 
   const handleOnClick = () => {
-    if (type === 'offered') history.push(`/user/${sender._id}`, { bookId: "" });
+    if (type === 'received') history.push(`/user/${sender._id}`, { bookId: "" });
     if (type === 'sent') history.push(`/user/${recipient._id}`, { bookId: "" });
   };
 

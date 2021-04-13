@@ -2,11 +2,100 @@
   display: grid;
   grid-template-columns: 1fr 1fr;
 
-  li {
-    list-style: none;
+  .pokeColumn1 {
+    width: 350px;
+    margin: 25px;
+    justify-self: flex-end;
+  }
+
+  .pokeColumn2 {
+    width: 350px;
+    margin: 25px;
+    justify-self: flex-start;
+  }
+
+  h1 {
+    text-align: center;
+    background: $primary-gradient;
+    padding: 25px;
+    margin: 0;
+    @include boxshadow;
+  }
+
+  .pokeContainer {
+    @include boxshadow;
+    margin-top: 25px;
+  }
+
+  .poke {
+    background: $white-gradient;
+    padding: 25px;
+    font-size: 1.8rem;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: flex-start;
+    border-bottom: 1px solid $color-black;
+
+    ul {
+      margin: 5px 0;
+      align-self: center;
+      text-align: center;
+      li {
+        list-style: none;
+        padding: 5px;
+        border-bottom: 1px solid $color-black;
+      }
+
+      li:last-child {
+        border: none;
+      }
+    }
+
+    .buttonDark {
+      color: $color-white;
+      margin-top: 25px;
+      font-size: 1.5rem;
+      align-self: flex-end;
+    }
   }
 }
 
 .newPoke {
-  color: red;
+  position: relative;
+  color: $color-accent;
+  
+  &::before {
+    content: "new";
+    position: absolute;
+    right: -15px;
+    top: 50%;
+    transform: translateY(-50%) rotate(30deg);
+    font-size: 1.3rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+    color: $color-primary;
+    background-color: $color-accent;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: grid;
+    align-items: center;
+    @include boxshadow;
+  }
+}
+
+@include mobile {
+  .pokesContainer {
+    grid-template-columns: 1fr;
+
+    .pokeColumn1, .pokeColumn2 {
+      width: 90%;
+      justify-self: center;
+    }
+
+    .pokeColumn1 {
+      margin-bottom: 0;
+    }
+  }
 }
