@@ -1,0 +1,87 @@
+.conversationsContainer {
+    display: flex;
+    flex-flow: column nowrap;
+    margin: 25px auto;
+    max-width: 550px;
+    padding: 0 25px;
+  
+    h1 {
+      text-align: center;
+      background: $primary-gradient;
+      padding: 25px;
+      @include boxshadow;
+    }
+  
+    .newMessage {
+        position: relative;
+        color: $color-accent;
+        
+        &::before {
+          content: "new";
+          position: absolute;
+          right: -20px;
+          top: 50%;
+          transform: translateY(-50%) rotate(30deg);
+          font-size: 1.3rem;
+          font-weight: bold;
+          text-transform: uppercase;
+          text-align: center;
+          color: $color-primary;
+          background-color: $color-accent;
+          border-radius: 50%;
+          width: 40px;
+          height: 40px;
+          display: grid;
+          align-items: center;
+          @include boxshadow;
+        }
+    }
+    
+    .conversationContainer {
+        background: $white-gradient;
+        display: flex;
+        padding: 20px;
+        @include boxshadow;
+        margin-bottom: 25px; 
+        align-items: center;
+        justify-content: space-between;
+
+        div {
+          max-width: 100px;
+          margin: 5px;
+          text-align: center;
+        }
+    }
+  
+    .buttonDark {
+        color: $color-white;
+        font-size: 1.5rem;
+    }
+}
+
+@include mobile {
+  .conversationsContainer {
+  
+    h1 {
+      font-size: 2.5rem;
+    }
+    
+    .conversationContainer {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: center;
+        align-items: center;
+
+        div {
+          max-width: 100%;
+          text-align: center;
+        }
+    }
+  
+    .buttonDark {
+        color: $color-white;
+        font-size: 1.5rem;
+        width: 100%;
+    }
+  }
+}

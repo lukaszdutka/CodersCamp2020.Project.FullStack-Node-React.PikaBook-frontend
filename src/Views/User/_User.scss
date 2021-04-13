@@ -41,7 +41,7 @@
     .or::before,
     .or::after {
       content: "";
-      border-top: 1.5px solid black;
+      border-top: 1.5px solid $color-black;
       width: 40%;
       transform: translateY(-0.5rem);
     }

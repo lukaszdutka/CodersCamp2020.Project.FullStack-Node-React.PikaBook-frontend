@@ -11,8 +11,8 @@ const Message = ({ message: { sender, content, date }, interlocutor }) => {
   const name = interlocutor._id === sender ? `${interlocutor.name}:` : "You:";
   return (
     <div className={name === "You:" ? "yourMessage" : "interlocutorsMessage"}>
-      <div>{creationDate}</div>
-      <div>
+      <div className="date">{creationDate}</div>
+      <div className="message">
         <div>{name}</div>
         <div>{content}</div>
       </div>
@@ -106,14 +106,14 @@ const SingleConversation = ({
 
   return (
     <div className="singleConversationContainer">
-      <div onClick={handleExit}>&#10006;</div>
-      <button onClick={handleLoadMore}>&#x2191;</button>
+      <div className="exit" onClick={handleExit}>&#10006;</div>
+      <button className="buttonDark loadMore" onClick={handleLoadMore}>&#x2191;</button>
       <div className="messagesList" ref={messagesDiv}>
-        {messages.length === 0 ? status : messageList}
+        {messages.length === 0 ? ( <div className="status"> {status === "Loading..." ? ( <div className="loader"></div> ) : ( status )} </div> ) : messageList}
       </div>
       <form onSubmit={handleSubmit}>
         <textarea onChange={handleChange} value={messageInput}></textarea>
-        <input type="submit" value="Send"></input>
+        <input className="buttonDark" type="submit" value="Send"></input>
       </form>
     </div>
   );

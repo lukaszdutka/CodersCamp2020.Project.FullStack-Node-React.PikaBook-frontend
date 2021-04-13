@@ -50,17 +50,9 @@ const Pokes = ({
 
   return (
     <div className="pokesContainer">
-      <div>
-        <h1>Pokes received:</h1>
-        {receivedPokes.length > onPageLimit && (
-          <Pagination
-            page={receivedPage}
-            setPage={setReceivedPage}
-            list={receivedPokes}
-            limit={onPageLimit}
-          />
-        )}
-        <div>{receivedPokesList}</div>
+      <div className="pokeColumn1">
+        <h1>Pokes received</h1>
+        <div className="pokeContainer">{receivedPokesList}</div>
         {receivedPokes.length > onPageLimit && (
           <Pagination
             page={receivedPage}
@@ -70,17 +62,9 @@ const Pokes = ({
           />
         )}
       </div>
-      <div>
-        {offeredPokes.length > onPageLimit && (
-          <Pagination
-            page={offeredPage}
-            setPage={setOfferedPage}
-            list={offeredPokes}
-            limit={onPageLimit}
-          />
-        )}
-        <h1>Pokes sent:</h1>
-        <div>{offeredPokesList}</div>
+      <div className="pokeColumn2">
+        <h1>Pokes sent</h1>
+        <div className="pokeContainer">{offeredPokesList}</div>
         {offeredPokes.length > onPageLimit && (
           <Pagination
             page={offeredPage}
