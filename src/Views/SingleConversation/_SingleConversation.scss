@@ -2,6 +2,11 @@
   max-width: 550px;
   margin: 25px auto;
 
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
   .exit {
     float: right;
     width: 40px;
@@ -84,9 +89,54 @@
       padding: 10px;
       width: 100%;
       margin-right: 25px;
-      background-color: $color-black-opaque;
+      background-color: #ccc9b6;
       border: 3px solid $color-primary;
-      // max-height: 50px;
+      resize: none;
+    }
+  }
+}
+
+@include mobile {
+  .singleConversationContainer {
+  
+    .yourMessage, .interlocutorsMessage {
+      flex-direction: column;
+      hyphens: auto;
+  
+      .date {
+        margin: 0;
+        margin-bottom: 5px;
+        align-self: flex-start;
+        text-align: left;
+      }
+  
+      .message {
+        flex-direction: column;
+        justify-content: center;
+        div:first-child {
+          margin: 0;
+          margin-bottom: 25px;
+        }
+      }
+    }
+    .yourMessage {
+      .date {
+        align-self: flex-end;
+        text-align: right;
+      }
+    }
+  
+    form {
+      flex-direction: column;
+
+      textarea {
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+      }
     }
   }
 }

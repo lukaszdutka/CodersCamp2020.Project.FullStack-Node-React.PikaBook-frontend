@@ -109,7 +109,7 @@ const SingleConversation = ({
       <div className="exit" onClick={handleExit}>&#10006;</div>
       <button className="buttonDark loadMore" onClick={handleLoadMore}>&#x2191;</button>
       <div className="messagesList" ref={messagesDiv}>
-        {messages.length === 0 ? status : messageList}
+        {messages.length === 0 ? ( <div className="status"> {status === "Loading..." ? ( <div className="loader"></div> ) : ( status )} </div> ) : messageList}
       </div>
       <form onSubmit={handleSubmit}>
         <textarea onChange={handleChange} value={messageInput}></textarea>
