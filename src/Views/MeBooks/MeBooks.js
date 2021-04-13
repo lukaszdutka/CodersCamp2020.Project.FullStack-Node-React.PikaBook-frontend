@@ -20,7 +20,7 @@ const MeBooks = ({ accessToken }) => {
       setStatus("No books found.");
     }
     if (res.books) {
-      setMyBooks(res.books);
+      setMyBooks(res.books.reverse());
       setStatus("");
     }
   };
