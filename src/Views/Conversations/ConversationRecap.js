@@ -12,7 +12,7 @@ const ConversationRecap = ({
   const date = new Date(lastMessage.date).toLocaleString();
   const sender =
     lastMessage.sender === interlocutor._id ? interlocutor.name : "You";
-  const content = lastMessage.content.split(" ").slice(0, 5).join(" ");
+  const content = lastMessage.content.split("").slice(0, 9).join("");
 
   const openConversation = () => {
     history.push(`/me/conversations/conversation`, { interlocutor });
@@ -21,7 +21,7 @@ const ConversationRecap = ({
   const isRead = !lastMessage.read && lastMessage.recipient === loggedUser._id;
 
   return (
-    <div className={isRead ? "newMessage" : ""}>
+    <div className={isRead ? "conversationContainer newMessage" : "conversationContainer"}>
       <div>
         <b>{interlocutor.name}</b>
       </div>
@@ -30,7 +30,7 @@ const ConversationRecap = ({
         <b>{sender}</b> wrote:{" "}
         {content === lastMessage.content ? content : `${content}...`}
       </div>
-      <button onClick={openConversation}>Go to conversation</button>
+      <button className="buttonDark" onClick={openConversation}>Go to conversation</button>
     </div>
   );
 };

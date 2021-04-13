@@ -30,7 +30,7 @@ const Conversations = ({
   });
 
   return (
-    <div>
+    <div className="conversationsContainer">
       <h1>My conversations</h1>
       <div ref={scrollTo}>
         {loggedUsersConversations.length > onPageLimit && (

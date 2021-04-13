@@ -1,18 +1,142 @@
 .singleConversationContainer {
+  max-width: 550px;
+  margin: 25px auto;
+
+  .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+  }
+  .exit {
+    float: right;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    font-size: 3rem;
+    display: grid;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .loadMore {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+  }
+
   .messagesList {
-      height: 60vh;
-      overflow: scroll;
+      height: 50vh;
+      overflow-y: scroll;
+      display: flex;
+      flex-direction: column;
+  }
+
+  .yourMessage, .interlocutorsMessage {
+    width: fit-content;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .date {
+      max-width: 70px;
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    .message {
+      background: $white-gradient;
+      @include boxshadow;
+      padding: 25px;
+      display: flex;
+      align-items: center;
+      div:first-child {
+        font-weight: bold;
+        margin-right: 25px;
+      }
+    }
   }
   .yourMessage {
     text-align: right;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+
+    .date {
+      margin-left: 25px;
+    }
   }
 
   .interlocutorsMessage {
     text-align: left;
+    align-self: flex-start;
+    
+    .date {
+      margin-right: 25px;
+    }
+    
+    .message {
+      background: $primary-gradient; 
+    }
   }
+
+  form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 25px;
+
+    textarea {
+      padding: 10px;
+      width: 100%;
+      margin-right: 25px;
+      background-color: #ccc9b6;
+      border: 3px solid $color-primary;
+      resize: none;
+    }
+  }
+}
+
+@include mobile {
+  .singleConversationContainer {
   
-  button {
-      width: 80px;
-      text-align: center;
+    .yourMessage, .interlocutorsMessage {
+      flex-direction: column;
+      hyphens: auto;
+  
+      .date {
+        margin: 0;
+        margin-bottom: 5px;
+        align-self: flex-start;
+        text-align: left;
+      }
+  
+      .message {
+        flex-direction: column;
+        justify-content: center;
+        div:first-child {
+          margin: 0;
+          margin-bottom: 25px;
+        }
+      }
+    }
+    .yourMessage {
+      .date {
+        align-self: flex-end;
+        text-align: right;
+      }
+    }
+  
+    form {
+      flex-direction: column;
+
+      textarea {
+        margin-right: 0;
+        margin-bottom: 5px;
+      }
+
+      input {
+        width: 100%;
+      }
+    }
   }
 }
