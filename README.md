@@ -1,6 +1,5 @@
 # CodersCamp 2020 - Projekt końcowy REACT
 ## **PikaBook** - Gotta read them all!
-___
 
 
 **Mangos Team** presents a system for books exchange. 
@@ -17,7 +16,7 @@ Open [DEMO](https://lukaszdutka.github.io/CodersCamp2020.Project.FullStack-Node-
 
 ## Our team 
 * [Aleksandra Cypko](https://github.com/AleksandraCyp)
-* [Agata Ludwiczyńska](https://github.com/AgataLudwiczynska)
+* [Agata Ludwiczyńska](https://github.com/AgataLudwiczynska) (UX/UI Designer)
 * [Daria Dziubałtowska](https://github.com/daria305) (Tech Lead)
 * [Małgorzata Dziewit](https://github.com/memeraki) (Develepment Manager)
 * [Mariusz Smarż](https://github.com/mariusz-sm) (Business Owner)
