@@ -25,10 +25,13 @@ Open [DEMO](https://lukaszdutka.github.io/CodersCamp2020.Project.FullStack-Node-
 Mentor: [Łukasz Dutka](https://github.com/lukaszdutka)
 
 ## API functionalities
- - create an accaunt and log in to the system
- - add and remove books to/from thier collection
- - search books by title, authors, genre and location
- - user can initiate exchange with other user, propose its own books for other user's titles by creating a basket
- - possible to change basket status to track the book exchange
- - users can communicate over messages to agree on a details of the exchange
- - pokes - interaction between users, to let others know you are interested in one of their books
+ - creating a new account and logging in 
+ - adding, removing and updating books in our collection 
+ - book searching by title, author, genre or owner’s location
+ - visiting other users’ profiles and browsing their collections
+ - letting other users know that some books in their collections sparkled our interest: poke creation
+ - initiating an exchange by creating a basket with books to be exchanged
+ - basket list and changing basket status to keep track of the book exchange
+ - list of all received/sent pokes
+ - chat allowing direct communication between users
+ - me view with information about the user
