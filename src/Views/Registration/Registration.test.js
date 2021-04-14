@@ -24,3 +24,15 @@ test('let change input value', () => {
     fireEvent.change(input, { target: { value: '123abc' } });
     expect(input.value).toBe('123abc');
 });
+
+test('submit change creationStatus', () => {
+    const { container } = render(
+        <BrowserRouter>
+            <Registration />
+        </BrowserRouter>
+    );
+    expect(container.getElementsByClassName('loader').length).toBe(0);
+    const input = screen.getByText("Create a new account");
+    fireEvent.click(input);
+    expect(container.getElementsByClassName('loader').length).toBe(1);
+});
