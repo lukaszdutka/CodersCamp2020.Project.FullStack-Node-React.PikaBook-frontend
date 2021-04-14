@@ -33,7 +33,7 @@
     font-size: 1.8rem;
     display: flex;
     flex-flow: column nowrap;
-    align-items: flex-start;
+    text-align: center;
     border-bottom: 1px solid $color-black;
 
     ul {
@@ -68,7 +68,7 @@
     content: "new";
     position: absolute;
     right: -15px;
-    top: 50%;
+    top: 40%;
     transform: translateY(-50%) rotate(30deg);
     font-size: 1.3rem;
     font-weight: bold;
