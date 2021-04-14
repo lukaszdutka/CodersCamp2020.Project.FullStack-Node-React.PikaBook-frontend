@@ -12,7 +12,7 @@ test('renders app elements', () => {
     <App />
   );
   expect(container.getElementsByTagName('main').length).toBe(1);
-  expect(container.getElementsByClassName('header').length).toBe(1);
-  // expect(container.getElementsByTagName('header').length).toBe(1);
+  // expect(container.getElementsByClassName('header').length).toBe(1);
+  expect(container.getElementsByTagName('header').length).toBe(1);
   expect(container.getElementsByTagName('footer').length).toBe(1);
 });
