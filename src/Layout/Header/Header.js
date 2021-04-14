@@ -10,7 +10,7 @@ const Header = ({
   loggedUsersConversations
 }) => {
   return (
-    <div className="header">
+    <header>
       <img className="img-logo" src={logo} alt="Pikabook" />
       {accessToken && (
         <Nav
@@ -20,7 +20,7 @@ const Header = ({
           loggedUsersConversations={loggedUsersConversations}
         />
       )}
-    </div>
+    </header>
   );
 };
 
