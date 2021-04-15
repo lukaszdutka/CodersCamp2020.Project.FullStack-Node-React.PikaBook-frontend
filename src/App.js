@@ -17,6 +17,7 @@ import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
 import fetchPokes from "./API/fetchPokes";
+import fetchBaskets from "./API/fetchBaskets";
 import { fetchLoggedUser } from "./API/fetchUser";
 import { fetchConversations } from "./API/fetchConversations";
 
@@ -24,6 +25,7 @@ function App() {
   const [accessToken, setAccessToken] = useState("");
   const [loggedUser, setLoggedUser] = useState({});
   const [loggedUsersPokes, setLoggedUsersPokes] = useState([]);
+  const [loggedUserBaskets, setLoggedUserBaskets] = useState([]);
   const [loggedUsersConversations, setLoggedUsersConversations] = useState([]);
   const pokesInterval = useRef();
   const conversationsInterval = useRef();
@@ -35,11 +37,13 @@ function App() {
       getLoggedUserData(accessToken);
       getLoggedUsersPokes(accessToken);
       getLoggedUsersConversations(accessToken);
+      getLoggedUserBaskets(accessToken);
     }
     if (!accessToken) {
       setLoggedUsersPokes([]);
       setLoggedUser({});
       setLoggedUsersConversations([]);
+      setLoggedUserBaskets([]);
     }
   }, [accessToken]);
 
@@ -72,6 +76,20 @@ function App() {
     conversationsInterval.current = interval;
     return () => clearInterval(conversationsInterval.current);
   };
+
+  const getLoggedUserBaskets = async (accessToken) => {
+    const getBaskets = async () => {
+      const res = await fetchBaskets(accessToken);
+      if (res.error) console.log(res.error);
+      if (res.baskets) setLoggedUserBaskets(res.baskets.reverse());
+    };
+    getBaskets();
+    const interval = setInterval(async () => getBaskets(), 5000);
+    pokesInterval.current = interval;
+    return () => clearInterval(pokesInterval.current);
+  };
+
+
 
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
@@ -209,7 +227,12 @@ function App() {
             path="/me/basket"
             render={() =>
               accessToken ? (
-                <MeBaskets accessToken={accessToken} />
+                <MeBaskets 
+                  accessToken={accessToken}
+                  loggedUser={loggedUser}
+                  loggedUserBaskets={loggedUserBaskets}
+                  setLoggedUserBaskets={setLoggedUserBaskets}
+                />
               ) : (
                 <Redirect to="/" />
               )
