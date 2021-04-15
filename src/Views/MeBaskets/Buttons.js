@@ -1,4 +1,4 @@
-import updateBasketStatus from "../../API/updateBasket";
+import { updateBasketStatus } from "../../API/updateBasket";
 
 const Buttons = ({
   accessToken,
