@@ -25,7 +25,7 @@ const BasketCreator = ({
     );
     if (res.error) setStatus(res.error);
     if (res.created) setStatus("Offer successfully sent!");
-    setTimeout(() => history.push("/me/basket"), 1000);
+    setTimeout(() => history.push("/me/baskets"), 1000);
   };
 
   const handleCancel = () => {

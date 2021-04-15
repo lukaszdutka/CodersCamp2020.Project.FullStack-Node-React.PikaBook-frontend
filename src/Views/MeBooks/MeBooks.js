@@ -20,7 +20,8 @@ const MeBooks = ({ accessToken }) => {
       setStatus("No books found.");
     }
     if (res.books) {
-      setMyBooks(res.books.reverse());
+      const bookList = res.books.filter((book) => !book.exchanged)
+      setMyBooks(bookList.reverse());
       setStatus("");
     }
   };

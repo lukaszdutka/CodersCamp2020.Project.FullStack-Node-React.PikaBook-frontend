@@ -1,5 +1,4 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import pikachu from "../../Assets/Images/pikachu.png";
 
 const Footer = () => {
@@ -13,18 +12,15 @@ const Footer = () => {
           already read. That's all. <span>Connect with other bookworms!</span>
         </p>
         <div className="github">
-        Application made as part of the <b>CodersCamp2020</b> project.
-        <br />
-        <Link
-          to={{
-            pathname:
-              "https://github.com/lukaszdutka/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend",
-          }}
-          target="_blank"
-        >
-          Visit Github for more information.
-        </Link>
-      </div>
+          Application made as part of the <b>CodersCamp2020</b> project.
+          <br />
+          <a
+            href="https://github.com/lukaszdutka/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend"
+            target="_blank"
+          >
+            Visit Github for more information.
+          </a>
+        </div>
       </div>
       <div className="authors">
         <div>

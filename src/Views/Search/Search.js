@@ -35,9 +35,9 @@ const Search = ({ loggedUser }) => {
     });
     if (res.error) setStatus(res.error);
     const otherUsersBooks = res.books.filter(
-      (book) => book.ownerId._id !== loggedUser._id
+      (book) => book.ownerId._id !== loggedUser._id && !book.exchanged
     );
-    setBooks(otherUsersBooks);
+    setBooks(otherUsersBooks.reverse());
     otherUsersBooks.length === 0
       ? setStatus("No books found")
       : setStatus(`${otherUsersBooks.length} book(s) found`);

@@ -1,0 +1,81 @@
+.meBaskestsContainer {
+  width: 704px;
+  margin: 0 auto;
+  text-align: center;
+
+  .basketBooks {
+    margin-left: 2px;
+    margin-right: 2px;
+  }
+
+  .basketHeader {
+    text-align: center;
+    background: $primary-gradient;
+    padding: 25px;
+    margin-top: 20px;
+    @include boxshadow;
+  }
+
+  .endedBasket {
+    opacity: 70%;
+  }
+
+  .singleBasket {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    margin-bottom: 20px;
+
+    .bookContainter {
+      grid-template-columns: 1fr;
+    }
+
+    .basketData {
+      grid-column: span 2;
+      background-color: $color-primary;
+      @include boxshadow;
+      padding: 10px;
+      margin: 4px;
+      p {
+        padding: 3px;
+      }
+      .buttonsAndStatus {
+        p {
+          color: $color-accent;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}
+
+@include mobile {
+  .meBaskestsContainer {
+    width: 90%;
+
+    .singleBasket {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin-bottom: 20px;
+
+      .basketData {
+        grid-column: span 1;
+        background-color: $color-primary;
+        @include boxshadow;
+        padding: 10px;
+        margin: 4px;
+        p {
+          padding: 3px;
+        }
+        .buttonsAndStatus {
+          p {
+            color: $color-accent;
+            font-weight: bold;
+          }
+          button {
+            margin: 2px;
+          }
+        }
+      }
+    }
+  }
+}

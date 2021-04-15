@@ -19,7 +19,7 @@ const User = ({ accessToken }) => {
   const [messageCreatorVisible, setMessageCreatorVisible] = useState(false);
   const [status, setStatus] = useState("");
   const [page, setPage] = useState(1);
-  const onPageLimit = 4;
+  const onPageLimit = 10;
   const scrollTo = useRef();
   const history = useHistory();
   const location = useLocation();
@@ -31,7 +31,8 @@ const User = ({ accessToken }) => {
       const res = await searchUsersBooks(id);
       if (res.error) setStatus(res.error);
       if (res.books) {
-        const bookList = res.books.sort((bookOne, bookTwo) => {
+        let bookList = res.books.filter(book => !book.exchanged);
+        bookList = bookList.sort((bookOne, bookTwo) => {
           return bookOne._id === chosenBookId
             ? -1
             : bookTwo._id === chosenBookId

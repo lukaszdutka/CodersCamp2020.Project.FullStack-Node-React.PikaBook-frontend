@@ -9,7 +9,7 @@ import Search from "./Views/Search/Search";
 import User from "./Views/User/User";
 import Me from "./Views/Me/Me";
 import MeBooks from "./Views/MeBooks/MeBooks";
-import MeBaskets from "./Views/Me/MeBaskets";
+import MeBaskets from "./Views/MeBaskets/MeBaskets";
 import Conversations from "./Views/Conversations/Conversations";
 import SingleConversation from "./Views/SingleConversation/SingleConversation";
 import Pokes from "./Views/Pokes/Pokes";
@@ -17,6 +17,7 @@ import Basket from "./Views/Basket/Basket";
 import Error from "./Views/Error";
 
 import fetchPokes from "./API/fetchPokes";
+import fetchBaskets from "./API/fetchBaskets";
 import { fetchLoggedUser } from "./API/fetchUser";
 import { fetchConversations } from "./API/fetchConversations";
 
@@ -24,21 +25,26 @@ function App() {
   const [accessToken, setAccessToken] = useState("");
   const [loggedUser, setLoggedUser] = useState({});
   const [loggedUsersPokes, setLoggedUsersPokes] = useState([]);
+  const [loggedUsersBaskets, setLoggedUsersBaskets] = useState([]);
   const [loggedUsersConversations, setLoggedUsersConversations] = useState([]);
   const pokesInterval = useRef();
   const conversationsInterval = useRef();
+  const basketsInterval = useRef();
 
   useEffect(() => {
     clearInterval(pokesInterval.current);
     clearInterval(conversationsInterval.current);
+    clearInterval(basketsInterval.current);
     if (accessToken) {
       getLoggedUserData(accessToken);
       getLoggedUsersPokes(accessToken);
+      getLoggedUsersBaskets(accessToken);
       getLoggedUsersConversations(accessToken);
     }
     if (!accessToken) {
       setLoggedUsersPokes([]);
       setLoggedUser({});
+      setLoggedUsersBaskets([]);
       setLoggedUsersConversations([]);
     }
   }, [accessToken]);
@@ -73,6 +79,18 @@ function App() {
     return () => clearInterval(conversationsInterval.current);
   };
 
+  const getLoggedUsersBaskets = async (accessToken) => {
+    const getBaskets = async () => {
+      const res = await fetchBaskets(accessToken);
+      if (res.error) console.log(res.error);
+      if (res.baskets) setLoggedUsersBaskets(res.baskets.reverse());
+    };
+    getBaskets();
+    const interval = setInterval(async () => getBaskets(), 5000);
+    basketsInterval.current = interval;
+    return () => clearInterval(basketsInterval.current);
+  };
+
   return (
     <BrowserRouter basename={process.env.PUBLIC_URL}>
       <Header
@@ -81,6 +99,7 @@ function App() {
         loggedUser={loggedUser}
         loggedUsersPokes={loggedUsersPokes}
         loggedUsersConversations={loggedUsersConversations}
+        loggedUsersBaskets={loggedUsersBaskets}
       />
       <main>
         <Switch>
@@ -145,7 +164,11 @@ function App() {
             exact
             render={() =>
               accessToken ? (
-                <Me accessToken={accessToken} loggedUser={loggedUser} />
+                <Me
+                  accessToken={accessToken}
+                  loggedUser={loggedUser}
+                  loggedUsersBaskets={loggedUsersBaskets}
+                />
               ) : (
                 <Redirect to="/" />
               )
@@ -206,10 +229,16 @@ function App() {
             }
           ></Route>
           <Route
-            path="/me/basket"
+            path="/me/baskets"
             render={() =>
               accessToken ? (
-                <MeBaskets accessToken={accessToken} />
+                <MeBaskets
+                  accessToken={accessToken}
+                  loggedUser={loggedUser}
+                  loggedUsersBaskets={loggedUsersBaskets}
+                  getLoggedUsersBaskets={getLoggedUsersBaskets}
+                  basketsInterval={basketsInterval}
+                />
               ) : (
                 <Redirect to="/" />
               )

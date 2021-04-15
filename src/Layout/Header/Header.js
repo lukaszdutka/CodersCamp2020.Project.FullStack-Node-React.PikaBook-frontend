@@ -7,7 +7,8 @@ const Header = ({
   accessToken,
   loggedUser,
   loggedUsersPokes,
-  loggedUsersConversations
+  loggedUsersConversations,
+  loggedUsersBaskets
 }) => {
   return (
     <header>
@@ -18,6 +19,7 @@ const Header = ({
           loggedUser={loggedUser}
           loggedUsersPokes={loggedUsersPokes}
           loggedUsersConversations={loggedUsersConversations}
+          loggedUsersBaskets={loggedUsersBaskets}
         />
       )}
     </header>

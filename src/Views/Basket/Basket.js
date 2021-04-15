@@ -21,13 +21,16 @@ const CreateBasket = ({ accessToken }) => {
   const [offeredPage, setOfferedPage] = useState(1);
   const onPageLimit = 10;
   const chosenScrollTo = useRef();
-  const myScrollTo= useRef();
+  const myScrollTo = useRef();
 
   useEffect(() => {
     const getBooks = async () => {
       const res = await searchMyBooks(accessToken);
       if (res.error) console.log(res.error);
-      if (res.books) setMyBooks(res.books);
+      if (res.books) {
+        const bookList = res.books.filter(book => !book.exchanged);
+        setMyBooks(bookList);
+      }
     };
     getBooks();
   }, [accessToken]);

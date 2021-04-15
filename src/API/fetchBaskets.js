@@ -1,5 +1,5 @@
-const fetchPokes = async (accessToken) => {
-  let res = await fetch("https://pikabook.herokuapp.com/api/me/pokes", {
+const fetchBaskets = async (accessToken) => {
+  let res = await fetch("https://pikabook.herokuapp.com/api/me/baskets", {
     method: "get",
     headers: { Authorization: `Bearer ${accessToken}` },
   });
@@ -8,8 +8,8 @@ const fetchPokes = async (accessToken) => {
     return { error: res };
   } else {
     res = await res.json();
-    return { pokes: res };
+    return { baskets: res };
   }
 };
 
-export default fetchPokes;
+export default fetchBaskets;
