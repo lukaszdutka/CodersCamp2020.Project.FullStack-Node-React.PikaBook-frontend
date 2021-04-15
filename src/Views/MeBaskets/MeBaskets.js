@@ -41,7 +41,7 @@ const MeBaskets = ({
   ));
   return (
     <div className="meBaskestsContainer">
-      <h1 ref={scrollTo}>My baskets</h1>
+      <h1 ref={scrollTo} className="basketHeader">My baskets</h1>
       {basketList}
       {loggedUsersBaskets.length > onPageLimit && (
         <Pagination
