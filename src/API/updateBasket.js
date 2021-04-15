@@ -14,7 +14,6 @@ export const updateBasketStatus = async (accessToken, basketStatus, basketId) =>
 
   if (!res.ok) {
     res = await res.text();
-
     return { error: res };
   } else {
     res = await res.json();
