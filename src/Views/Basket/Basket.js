@@ -29,7 +29,6 @@ const CreateBasket = ({ accessToken }) => {
       if (res.error) console.log(res.error);
       if (res.books) {
         const bookList = res.books.filter(book => !book.exchanged);
-        console.log(bookList)
         setMyBooks(bookList);
       }
     };
