@@ -31,8 +31,8 @@ const User = ({ accessToken }) => {
       const res = await searchUsersBooks(id);
       if (res.error) setStatus(res.error);
       if (res.books) {
-        let bookList = res.books.filter((book) => !book.exchanged);
-        bookList = res.books.sort((bookOne, bookTwo) => {
+        let bookList = res.books.filter(book => !book.exchanged);
+        bookList = bookList.sort((bookOne, bookTwo) => {
           return bookOne._id === chosenBookId
             ? -1
             : bookTwo._id === chosenBookId
