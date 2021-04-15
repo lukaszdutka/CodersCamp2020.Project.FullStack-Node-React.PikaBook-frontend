@@ -35,6 +35,21 @@ const SingleBasket = ({
     "failedByTarget",
     "success",
   ];
+
+  const getStatus = () => {
+    switch (status) {
+      case "failedByRequestor":
+        return "failed by requestor";
+      case "failedByTarget":
+        return "failed by target";
+      case "successByRequestor":
+        return "success by requestor";
+      case "successByTarget":
+        return "success by target";
+      default:
+        return status;
+    }
+  };
   return (
     <div
       className={
@@ -50,7 +65,7 @@ const SingleBasket = ({
         </p>
         <p>
           <b>Status: </b>
-          {status}
+          {getStatus()}
         </p>
         <p>
           <b>Co-owner of the basket: </b>
