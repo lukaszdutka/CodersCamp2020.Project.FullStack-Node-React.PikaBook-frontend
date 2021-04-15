@@ -34,3 +34,7 @@ Mentor: [Łukasz Dutka](https://github.com/lukaszdutka)
  - list of all received/sent pokes
  - chat allowing direct communication between users
  - me view with information about the user
+
+ Desktop screens|Mobile screens
+:-------------------------:|:-------------------------:
+![Desktop screens](./readme-images/big.gif)  |  ![Mobile screens](./readme-images/big.gif)
