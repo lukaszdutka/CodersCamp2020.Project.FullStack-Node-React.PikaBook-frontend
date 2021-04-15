@@ -1,23 +1,23 @@
 {
   "files": {
-    "main.css": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/css/main.f0849794.chunk.css",
-    "main.js": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/main.588728b5.chunk.js",
-    "main.js.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/main.588728b5.chunk.js.map",
+    "main.css": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/css/main.6bc0aab7.chunk.css",
+    "main.js": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/main.ad964e43.chunk.js",
+    "main.js.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/main.ad964e43.chunk.js.map",
     "runtime-main.js": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/runtime-main.bfa5b75f.js",
     "runtime-main.js.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/runtime-main.bfa5b75f.js.map",
-    "static/js/2.a48f272c.chunk.js": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.a48f272c.chunk.js",
-    "static/js/2.a48f272c.chunk.js.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.a48f272c.chunk.js.map",
+    "static/js/2.1d019351.chunk.js": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.1d019351.chunk.js",
+    "static/js/2.1d019351.chunk.js.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.1d019351.chunk.js.map",
     "index.html": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/index.html",
-    "static/css/main.f0849794.chunk.css.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/css/main.f0849794.chunk.css.map",
-    "static/js/2.a48f272c.chunk.js.LICENSE.txt": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.a48f272c.chunk.js.LICENSE.txt",
+    "static/css/main.6bc0aab7.chunk.css.map": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/css/main.6bc0aab7.chunk.css.map",
+    "static/js/2.1d019351.chunk.js.LICENSE.txt": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/js/2.1d019351.chunk.js.LICENSE.txt",
     "static/media/index.scss": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/media/books.b2d3a21b.png",
     "static/media/pikabook.d219f79b.png": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/media/pikabook.d219f79b.png",
     "static/media/pikachu.8624571d.png": "/CodersCamp2020.Project.FullStack-Node-React.PikaBook-frontend/static/media/pikachu.8624571d.png"
   },
   "entrypoints": [
     "static/js/runtime-main.bfa5b75f.js",
-    "static/js/2.a48f272c.chunk.js",
-    "static/css/main.f0849794.chunk.css",
-    "static/js/main.588728b5.chunk.js"
+    "static/js/2.1d019351.chunk.js",
+    "static/css/main.6bc0aab7.chunk.css",
+    "static/js/main.ad964e43.chunk.js"
   ]
 }
