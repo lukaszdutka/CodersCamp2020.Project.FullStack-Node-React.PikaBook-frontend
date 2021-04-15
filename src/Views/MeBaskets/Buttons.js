@@ -96,7 +96,7 @@ const Buttons = ({
         <>
           <p>{coOwnerName} stated you delivered your books</p>
           <button
-            name="successByTarget"
+            name="success"
             onClick={handleOnClick}
             className="buttonDark"
           >
@@ -115,7 +115,7 @@ const Buttons = ({
         <>
           <p>{coOwnerName} stated you delivered your books</p>
           <button
-            name="successByRequestor"
+            name="success"
             onClick={handleOnClick}
             className="buttonDark"
           >
