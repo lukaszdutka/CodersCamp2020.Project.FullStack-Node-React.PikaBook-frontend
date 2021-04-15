@@ -6,6 +6,7 @@ const Nav = ({
   loggedUser: { _id },
   loggedUsersPokes,
   loggedUsersConversations,
+  loggedUsersBaskets,
 }) => {
   const handleLogOut = () => {
     setAccessToken("");
@@ -19,10 +20,22 @@ const Nav = ({
   };
 
   const newMessages = () => {
-    return loggedUsersConversations.filter(conversation => {
+    return loggedUsersConversations.filter((conversation) => {
       const { read, recipient } = conversation.messages[0];
       return !read && recipient === _id;
     }).length;
+  };
+
+  const newBaskets = () => {
+    const notReadBaskets = loggedUsersBaskets.filter(basket => !basket.read);
+    const newToRequestor = ["accepted", "rejected", "failedByRequestor", "successByTarget", "success"];
+    const newToTarget = ["pending", "cancelled", "failedByTarget", "successByRequestor", "success"];
+    const createdByLoggedUser = notReadBaskets.filter(
+      (basket) => basket.createdByUserId._id === _id && newToRequestor.includes(basket.status));
+    const createdByOtherUser = notReadBaskets.filter(
+      (basket) => basket.createdByUserId._id !== _id && newToTarget.includes(basket.status)
+    );
+    return createdByLoggedUser.length + createdByOtherUser.length;
   };
 
   return (
@@ -40,9 +53,10 @@ const Nav = ({
         <span>Messages</span>
         {newMessages() > 0 && <div className="alert">{newMessages()}</div>}
       </NavLink>
-      <NavLink className="nav-item" activeClassName="is-active" to="/me/basket">
+      <NavLink className="nav-item" activeClassName="is-active" to="/me/baskets">
         <i className="fas fa-shopping-basket"></i>
         <span>Baskets</span>
+        {newBaskets() > 0 && <div className="alert">{newBaskets()}</div>}
       </NavLink>
       <NavLink className="nav-item" activeClassName="is-active" to="/me" exact>
         <i className="fas fa-user-circle"></i>
@@ -54,7 +68,7 @@ const Nav = ({
       </NavLink>
       <NavLink className="nav-item" activeClassName="is-active" to="/me/pokes">
         <i class="fas fa-bell"></i>
-          {newPokes() > 0 && <div className="alert">{newPokes()}</div>}
+        {newPokes() > 0 && <div className="alert">{newPokes()}</div>}
       </NavLink>
       <NavLink className="nav-item log-out" to="/" onClick={handleLogOut}>
         <i className="fas fa-power-off"></i>
