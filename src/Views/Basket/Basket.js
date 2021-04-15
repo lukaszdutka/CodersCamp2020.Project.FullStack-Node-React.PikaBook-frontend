@@ -28,7 +28,8 @@ const CreateBasket = ({ accessToken }) => {
       const res = await searchMyBooks(accessToken);
       if (res.error) console.log(res.error);
       if (res.books) {
-        const bookList = res.book.filter((book) => !book.exchanged);
+        const bookList = res.books.filter(book => !book.exchanged);
+        console.log(bookList)
         setMyBooks(bookList);
       }
     };
