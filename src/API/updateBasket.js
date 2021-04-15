@@ -23,7 +23,7 @@ export const updateBasketStatus = async (accessToken, basketStatus, basketId) =>
 };
 
 export const updateBasketRead = async (accessToken, id) => {
-  let res = await fetch(`https://pikabook.herokuapp.com/api/read/${id}`, {
+  let res = await fetch(`https://pikabook.herokuapp.com/api/baskets/read/${id}`, {
     method: "put",
     headers: {
       Accept: "application/json, text/plain, */*",

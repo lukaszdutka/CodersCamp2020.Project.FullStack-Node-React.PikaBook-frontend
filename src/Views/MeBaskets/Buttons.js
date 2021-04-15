@@ -19,7 +19,7 @@ const Buttons = ({
   };
 
   return (
-    <div>
+    <div className="buttonsAndStatus">
       {status === "pending" && isUserRequestor && (
         <>
           <p>You made an offer to {coOwnerName}</p>

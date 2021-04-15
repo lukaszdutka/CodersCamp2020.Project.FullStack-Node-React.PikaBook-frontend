@@ -1,6 +1,8 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 
+import newBasketsToLoggedUser from '../../SharedFunctions/filterBaskets';
+
 const Nav = ({
   setAccessToken,
   loggedUser: { _id },
@@ -27,15 +29,7 @@ const Nav = ({
   };
 
   const newBaskets = () => {
-    const notReadBaskets = loggedUsersBaskets.filter(basket => !basket.read);
-    const newToRequestor = ["accepted", "rejected", "failedByRequestor", "successByTarget", "success"];
-    const newToTarget = ["pending", "cancelled", "failedByTarget", "successByRequestor", "success"];
-    const createdByLoggedUser = notReadBaskets.filter(
-      (basket) => basket.createdByUserId._id === _id && newToRequestor.includes(basket.status));
-    const createdByOtherUser = notReadBaskets.filter(
-      (basket) => basket.createdByUserId._id !== _id && newToTarget.includes(basket.status)
-    );
-    return createdByLoggedUser.length + createdByOtherUser.length;
+    return newBasketsToLoggedUser(loggedUsersBaskets, _id).length;
   };
 
   return (

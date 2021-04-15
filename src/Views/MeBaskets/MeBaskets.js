@@ -1,4 +1,10 @@
+import { useEffect, useState, useRef } from "react";
+
 import SingleBasket from "./SingleBasket";
+import newBasketsToLoggedUser from "../../SharedFunctions/filterBaskets";
+import { updateBasketRead } from "../../API/updateBasket";
+import getPagination from "../../SharedFunctions/getPagination";
+import Pagination from "../../SharedComponents/Pagination";
 
 const MeBaskets = ({
   accessToken,
@@ -7,7 +13,23 @@ const MeBaskets = ({
   getLoggedUsersBaskets,
   basketsInterval,
 }) => {
-  const basketList = loggedUsersBaskets.map((basket) => (
+  const [page, setPage] = useState(1);
+  const onPageLimit = 4;
+  const scrollTo = useRef();
+
+  useEffect(() => {
+    const newBaskets = newBasketsToLoggedUser(
+      loggedUsersBaskets,
+      loggedUser._id
+    );
+    const updateRead = async () => {
+      newBaskets.forEach((basket) => updateBasketRead(accessToken, basket._id));
+    };
+    if (newBaskets.length > 0) updateRead();
+  }, [accessToken, loggedUser._id, loggedUsersBaskets]);
+
+  let basketList = getPagination(page, onPageLimit, loggedUsersBaskets);
+  basketList = basketList.map((basket) => (
     <SingleBasket
       key={basket._id}
       basket={basket}
@@ -19,8 +41,17 @@ const MeBaskets = ({
   ));
   return (
     <div className="meBaskestsContainer">
-      <h1>My baskets</h1>
+      <h1 ref={scrollTo}>My baskets</h1>
       {basketList}
+      {loggedUsersBaskets.length > onPageLimit && (
+        <Pagination
+          page={page}
+          setPage={setPage}
+          list={loggedUsersBaskets}
+          limit={onPageLimit}
+          scrollTo={scrollTo}
+        />
+      )}
     </div>
   );
 };

@@ -8,7 +8,6 @@ const SingleBasket = ({
     booksOffered,
     booksRequested,
     status,
-    read,
     createdByUserId,
     targetUserID,
     timeCreated,
@@ -16,7 +15,7 @@ const SingleBasket = ({
   loggedUser,
   accessToken,
   getLoggedUsersBaskets,
-  basketsInterval
+  basketsInterval,
 }) => {
   const isUserRequestor = createdByUserId._id === loggedUser._id;
   const timeOfCreation = new Date(timeCreated).toLocaleString();
@@ -29,30 +28,52 @@ const SingleBasket = ({
   const coOwnersBooksList = coOwnersBooks.map((book) => (
     <Book key={book._id} book={book} />
   ));
+  const inActiveState = [
+    "cancelled",
+    "rejected",
+    "failedByRequestor",
+    "failedByTarget",
+    "success",
+  ];
   return (
-    <div>
-      <div>
-        <p>Time of creation: {timeOfCreation}</p>
-        <p>Status: {status}</p>
-        <p>Co-owner of the basket: {coOwner.name}</p>
+    <div
+      className={
+        inActiveState.includes(status)
+          ? "singleBasket endedBasket"
+          : "singleBasket"
+      }
+    >
+      <div className="basketData">
+        <p>
+          <b>Time of creation: </b>
+          {timeOfCreation}
+        </p>
+        <p>
+          <b>Status: </b>
+          {status}
+        </p>
+        <p>
+          <b>Co-owner of the basket: </b>
+          {coOwner.name}
+        </p>
+        <Buttons
+          accessToken={accessToken}
+          status={status}
+          _id={_id}
+          isUserRequestor={isUserRequestor}
+          coOwnerName={coOwner.name}
+          getLoggedUsersBaskets={getLoggedUsersBaskets}
+          basketsInterval={basketsInterval}
+        />
       </div>
-      <div>
-        <div>My Books</div>
+      <div className="basketBooks">
+        <h1 className="booksHeading">My Books</h1>
         {myBooksList}
       </div>
-      <div>
-        <div>{coOwner.name}'s books</div>
+      <div className="basketBooks">
+        <h1 className="booksHeading">{coOwner.name}'s books</h1>
         {coOwnersBooksList}
       </div>
-      <Buttons
-        accessToken={accessToken}
-        status={status}
-        _id={_id}
-        isUserRequestor={isUserRequestor}
-        coOwnerName={coOwner.name}
-        getLoggedUsersBaskets={getLoggedUsersBaskets}
-        basketsInterval={basketsInterval}
-      />
     </div>
   );
 };

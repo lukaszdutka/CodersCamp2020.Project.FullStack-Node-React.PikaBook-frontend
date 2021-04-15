@@ -84,7 +84,6 @@ function App() {
       const res = await fetchBaskets(accessToken);
       if (res.error) console.log(res.error);
       if (res.baskets) setLoggedUsersBaskets(res.baskets.reverse());
-      console.log(res.baskets);
     };
     getBaskets();
     const interval = setInterval(async () => getBaskets(), 5000);

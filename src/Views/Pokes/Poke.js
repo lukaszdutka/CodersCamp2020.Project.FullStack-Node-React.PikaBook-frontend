@@ -12,12 +12,11 @@ const PokeReceived = ({ bookList, creationDate, sender, read, handleOnClick }) =
             following books in your collection:
           </p>
           <ul>{bookList}</ul>
-          {/* <p>and invited you to browse his/hers collection.</p>{" "} */}
         </>
       ) : (
         <p>
           On {creationDate} <b>{sender.name}</b> showed interest in your
-          collection. {/*and invited you to browse his/hers collection*/}
+          collection. 
         </p>
       )}
       <button className="buttonDark" onClick={handleOnClick}>
@@ -42,12 +41,11 @@ const PokeSent = ({
             <b>{recipient.name}</b>'s collection:
           </p>
           <ul>{bookList}</ul>
-          {/* <p>and invited him/her to browse your collection.</p>{" "} */}
         </>
       ) : (
         <p>
           On {creationDate} you showed interest in <b>{recipient.name}</b>'s'
-          collection. {/*and invited you him/her browse your collection.*/}
+          collection. 
         </p>
       )}
       <button className="buttonDark" onClick={handleOnClick}>
