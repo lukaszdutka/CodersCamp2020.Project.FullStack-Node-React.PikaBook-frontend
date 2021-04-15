@@ -37,4 +37,4 @@ Mentor: [Łukasz Dutka](https://github.com/lukaszdutka)
 
  Desktop screens|Mobile screens
 :-------------------------:|:-------------------------:
-![Desktop screens](./readme-images/big.gif)  |  ![Mobile screens](./readme-images/big.gif)
+![Desktop screens](./readme-images/big.gif)  |  ![Mobile screens](./readme-images/small.gif)
