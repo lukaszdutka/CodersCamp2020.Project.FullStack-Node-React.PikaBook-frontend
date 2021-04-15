@@ -16,10 +16,6 @@
     @include boxshadow;
   }
 
-  .endedBasket {
-    opacity: 70%;
-  }
-
   .singleBasket {
     display: grid;
     grid-template-columns: 1fr 1fr;

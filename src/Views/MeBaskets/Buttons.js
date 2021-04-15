@@ -12,10 +12,8 @@ const Buttons = ({
   const handleOnClick = async (e) => {
     let res = await updateBasketStatus(accessToken, e.target.name, _id);
     if (res.error) console.log(res.error);
-    if (res.baskets) {
       clearTimeout(basketsInterval.current);
       getLoggedUsersBaskets(accessToken);
-    }
   };
 
   return (

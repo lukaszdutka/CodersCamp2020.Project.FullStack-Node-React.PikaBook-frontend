@@ -52,13 +52,11 @@ const SingleBasket = ({
   };
   return (
     <div
-      className={
-        inActiveState.includes(status)
-          ? "singleBasket endedBasket"
-          : "singleBasket"
-      }
+      className="singleBasket"
     >
-      <div className="basketData">
+      <div className={inActiveState.includes(status)
+          ? "basketData endedBasket"
+          : "basketData"}>
         <p>
           <b>Time of creation: </b>
           {timeOfCreation}
